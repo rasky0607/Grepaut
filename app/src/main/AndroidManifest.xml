@@ -8,6 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.SplashTheme">
+        <activity android:name=".ui.SplashActivity"></activity>
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/app_name">
