@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--hay que comprobar los estados de nuestro widget-->
+    <item android:state_pressed="true">
+        <shape> <!--cuando el boton este esta pulsado de hay el "true"-->
+            <solid android:color="@color/colorPrimaryLight"/>
+            <corners android:radius="15dp"/>
+        </shape>
+    </item>
+
+    <item>
+        <!--Cuando no esta pulsado es transparente-->
+        <shape android:tint="@android:color/transparent">
+
+            <corners android:radius="15dp"/>
+        </shape>
+    </item>
+</selector>
+

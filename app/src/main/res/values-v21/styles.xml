@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--Estilos para la API 21-->
+
+    <!--En este caso el stylo para modificar el color del checkbox
+     no estaba disponible hasta la API 21, asi que esta en este fichero a parte para que se aplique
+      este stylo cuando se de tal caso de disposivo con API 21 en adelante-->
+    <style name="CheckBoxLogin">
+        <item name="android:buttonTint">@color/colorPrimaryDark</item>
+    </style>
+</resources>

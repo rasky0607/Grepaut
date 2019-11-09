@@ -10,13 +10,13 @@
 
     <style name="AppTheme.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
 
-
-
     <style name="Widget"/>
     <style name="Widget.Button">
-        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
-        <item name="android:background">@color/colorAccent</item>
     </style>
+
+
+
+
 
 </resources>
