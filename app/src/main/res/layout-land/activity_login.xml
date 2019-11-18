@@ -27,14 +27,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
-    <!--Se puede establecer el color de fondo transparente mediante el atributo android:background="@android:color/transparent" -->
-
-
-    <!--Botones Registrar y  recuerdame que estan en la misma fila-->
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout2"
         android:layout_width="match_parent"

@@ -5,20 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="@dimen/llLoginPadding"
-
     tools:context=".ui.LoginActivity">
-
-    <!-- android:ems="10" para el ancho del editext-->
-
-
-    <!--Botones Registrar y  recuerdame que estan en la misma fila-->
-
-
-    <!--Se puede establecer el color de fondo transparente mediante el atributo android:background="@android:color/transparent" -->
-
-
-    <!--Registros de Google y Facebook-->
-
 
     <TextView
         android:id="@+id/textView"
