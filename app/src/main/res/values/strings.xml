@@ -1,14 +1,27 @@
 <resources>
     <string name="app_name">Grepaut</string>
     <!--Login-->
-    <string name="tvUser">User</string>
+    <string name="tvUser">Email</string>
     <string name="tvPassword">Password</string>
-    <string name="chRemember">Remember me</string>
-    <string name="btSignUp">Sign Up</string>
-    <string name="btSignIn">Sign In</string>
-    <string name="btGoogle">Google</string>
-    <string name="btFacebook">Facebook</string>
-    <string name="btTwitter">Twitter</string>
-    <string name="OrtherSign">Other Sign.</string>
+    <string name="chRecordar">Recordar</string>
+    <string name="btnRegistrar">Registrarse</string>
+    <string name="btnIniciarSesion">Iniciar sesión</string>
+    <string name="btnGoogle">Google</string>
+    <string name="btnFacebook">Facebook</string>
+    <string name="btnTwitter">Twitter</string>
+    <string name="OrtherSign">Registrarse con cuenta</string>
+
+    <!--Registro-->
+    <string name="tepassword">contraseña</string>
+    <string name="tedConfirmPassword">confirmar contraseña</string>
+    <string name="tedNombreEmpresa">Nombre de empresa</string>
+    <string name="tvTipoUsuario">Tipo de usuario:</string>
+    <string name="rdAdministrador">Administrador</string>
+    <string name="rbUsuario">Usuario</string>
+    <string name="btnRegistro">Guardar</string>
+    <string name="tedNombre">Nombre</string>
+    <string name="tedEmail">Email</string>
+    <string name="tilLoginemail">Email</string>
+    <string name="tilpassword">Password</string>
 
 </resources>

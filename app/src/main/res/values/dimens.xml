@@ -11,5 +11,13 @@
     <dimen name="btnSignInWidth">175dp</dimen>
     <dimen name="tvOrtherSign">24dp</dimen>
     <dimen name="tlDashBoardPadding">14dp</dimen>
+    <dimen name="lmTillogin">10dp</dimen>
+    <!--Dimensiones Registro-->
+    <dimen name="clRegisterPadding">20dp</dimen>
+    <dimen name="ltinMargin">20dp</dimen>
+    <dimen name="lmtopBtnRegistro">45dp</dimen>
+    <dimen name="lmBottomBtnRegistro">15dp</dimen>
+    <dimen name="lmTil">20dp</dimen>
+    <dimen name="lmtvToptvTipoUsuario">15dp</dimen>
 
 </resources>

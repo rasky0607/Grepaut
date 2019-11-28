@@ -1,19 +1,42 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Temas base de la aplicacion. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
-    <style name="AppTheme.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar"/>
+    <style name="AppTheme.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textCursorDrawable">@drawable/color_cursor</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 
+    <!--Estilos botones-->
     <style name="Widget"/>
     <style name="Widget.Button">
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
+
+    <!--Estilos TextInputLayout-->
+    <style name="miTil" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="boxStrokeColor">@color/colorPrimaryDark</item>
+        <item name="boxStrokeWidth">50dp</item>
+    </style>
+
+    <!--Estilos RadioButton-->
+    <style name="rdb" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:buttonTint">@color/colorPrimary</item>
+    </style>
+
+
 
 
 
