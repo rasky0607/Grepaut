@@ -8,19 +8,29 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.SplashTheme">
+
         <activity android:name=".ui.SplashActivity" />
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/app_name">
+
+        </activity>
+        <activity android:name=".registerActivity">
+
+        </activity>
+
+        <activity
+            android:name=".ManagerActivity"
+            android:label="@string/title_activity_manager"
+            android:theme="@style/AppTheme.SplashTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".registerActivity">
 
         </activity>
+
     </application>
 
 </manifest>
