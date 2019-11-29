@@ -39,5 +39,13 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
     <string name="menu">Menu</string>
+    <string name="menu_reparaciones">Reparaciones</string>
+    <string name="menu_clientes">Clientes</string>
+    <string name="menu_servicios">Servicios</string>
+    <string name="menu_facturas">Facturas</string>
+    <string name="menu_compartir">Compartir</string>
+    <string name="menu_enviar">Enviar</string>
+    <string name="nav_header_subtitulo">Gestor de reparación de automóviles</string>
+    <string name="perfil">Perfil de usuario</string>
 
 </resources>

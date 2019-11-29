@@ -15,12 +15,12 @@
             android:label="@string/app_name">
 
         </activity>
-        <activity android:name=".registerActivity">
+        <activity android:name=".RegistroActivity">
 
         </activity>
 
         <activity
-            android:name=".ManagerActivity"
+            android:name=".ui.ManagerActivity.ManagerActivity"
             android:label="@string/title_activity_manager"
             android:theme="@style/AppTheme.SplashTheme.NoActionBar">
             <intent-filter>

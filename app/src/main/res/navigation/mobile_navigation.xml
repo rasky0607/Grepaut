@@ -3,41 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_reparaciones">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.pablolopezs.grepaut.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_reparaciones"
+        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.reparacion.FragmentReparacion"
+        android:label="@string/menu_reparaciones"
+        tools:layout="@layout/fragment_reparacion" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.pablolopezs.grepaut.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_clientes"
+        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.cliente.FragmentCliente"
+        android:label="@string/menu_clientes"
+        tools:layout="@layout/fragment_cliente" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.pablolopezs.grepaut.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_servicios"
+        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.servicio.FragmentServicio"
+        android:label="@string/menu_servicios"
+        tools:layout="@layout/fragment_servicio" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.pablolopezs.grepaut.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/nav_facturas"
+        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.factura.FragmentFactura"
+        android:label="@string/menu_facturas"
+        tools:layout="@layout/fragment_factura" />
 
     <fragment
-        android:id="@+id/nav_share"
-        android:name="com.pablolopezs.grepaut.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
+        android:id="@+id/nav_compartir"
+        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.compartir.FragmentCompartir"
+        android:label="@string/menu_compartir"
+        tools:layout="@layout/fragment_compartir" />
 
     <fragment
-        android:id="@+id/nav_send"
-        android:name="com.pablolopezs.grepaut.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
+        android:id="@+id/nav_enviar"
+        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.enviar.FragmentEnviar"
+        android:label="@string/menu_enviar"
+        tools:layout="@layout/fragment_enviar" />
 </navigation>
