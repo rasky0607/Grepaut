@@ -21,6 +21,7 @@
         style="@style/miTil">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tedemail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tilLoginemail"
@@ -40,6 +41,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tedpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tilpassword"
@@ -61,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/chRecordar"
+        android:id="@+id/chrecordar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -70,13 +72,13 @@
         style="@style/CheckBoxLogin"
         android:text="@string/chRecordar"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/btnRegistrarse"
+        app:layout_constraintEnd_toStartOf="@+id/btnregistro"
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
     <Button
-        android:id="@+id/btnRegistrarse"
+        android:id="@+id/btnregistro"
         style="@style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,13 +99,13 @@
         android:padding="@dimen/tvOrtherSign"
         android:text="@string/OrtherSign"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/btGoogle"
+        app:layout_constraintBottom_toTopOf="@+id/btnGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/btGoogle"
+        android:id="@+id/btnGoogle"
         android:layout_width="@dimen/imgButtonLoginWidth"
         android:layout_height="@dimen/imgButtonLoginHeight"
         android:layout_marginBottom="112dp"

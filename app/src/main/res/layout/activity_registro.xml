@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/clRegisterPadding"
-    tools:context=".RegistroActivity">
+    tools:context=".ui.RegistroActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +80,7 @@
         app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tedConfirmPassword"
+            android:id="@+id/tedconfirmpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tedConfirmPassword"
@@ -97,7 +97,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tilConfirmPassword">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tedNombreEmpresa"
+            android:id="@+id/tednombreempresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/tedNombreEmpresa"
@@ -127,7 +127,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTipoUsuario">
 
         <RadioButton
-            android:id="@+id/rdAdministrador"
+            android:id="@+id/rbAdministrador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rdAdministrador"
@@ -143,7 +143,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btnregistro"
+        android:id="@+id/btnguardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/lmtopBtnRegistro"

@@ -13,9 +13,14 @@
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
-        <activity android:name=".RegistroActivity">
+        <activity android:name=".ui.RegistroActivity">
 
         </activity>
 
@@ -23,11 +28,7 @@
             android:name=".ui.ManagerActivity.ManagerActivity"
             android:label="@string/title_activity_manager"
             android:theme="@style/AppTheme.SplashTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
