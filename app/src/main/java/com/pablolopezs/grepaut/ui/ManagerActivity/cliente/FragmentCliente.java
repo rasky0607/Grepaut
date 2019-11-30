@@ -17,17 +17,19 @@ import com.pablolopezs.grepaut.data.model.Cliente;
 
 public class FragmentCliente extends Fragment {
 
-    private Cliente galleryViewModel;
+    public static  String TAG = "Fragmento Cliente";
+    private Cliente cliente;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(Cliente.class);
+        cliente = ViewModelProviders.of(this).get(Cliente.class);
         View root = inflater.inflate(R.layout.fragment_cliente, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(this, new Observer<String>() {
+
+        cliente.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
+                s="Soy el fragment Cliente!";
                 textView.setText(s);
             }
         });

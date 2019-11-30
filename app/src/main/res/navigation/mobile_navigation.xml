@@ -29,15 +29,5 @@
         android:label="@string/menu_facturas"
         tools:layout="@layout/fragment_factura" />
 
-    <fragment
-        android:id="@+id/nav_compartir"
-        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.compartir.FragmentCompartir"
-        android:label="@string/menu_compartir"
-        tools:layout="@layout/fragment_compartir" />
 
-    <fragment
-        android:id="@+id/nav_enviar"
-        android:name="com.pablolopezs.grepaut.ui.ManagerActivity.enviar.FragmentEnviar"
-        android:label="@string/menu_enviar"
-        tools:layout="@layout/fragment_enviar" />
 </navigation>

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_reparaciones"
@@ -28,10 +29,6 @@
                 android:id="@+id/nav_compartir"
                 android:icon="@drawable/ic_menu_share"
                 android:title="@string/menu_compartir" />
-            <item
-                android:id="@+id/nav_enviar"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/menu_enviar" />
         </menu>
     </item>
 
