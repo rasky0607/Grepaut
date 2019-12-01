@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
@@ -40,7 +41,8 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
     private AppBarConfiguration mAppBarConfiguration;
     private  DrawerLayout drawer=null;
-    private Fragment fragment_content_manager;
+    private Fragment mifragment;
+
 
 
     @Override
@@ -54,7 +56,14 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         //Final DrawerLayout drawer drawer = findViewById(R.id.drawer_layout);
          drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        //Probando lo de Niko------------------------------------
+        ActionBar supportActionBar=getSupportActionBar();
+        if(supportActionBar!=null){
+            supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            supportActionBar.setDisplayHomeAsUpEnabled(true);
 
+        }
+//----------------------------------------
         setSupportActionBar(toolbar);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,16 +78,21 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_reparaciones, R.id.nav_clientes, R.id.nav_servicios,
+                R.id.nav_clientes, R.id.nav_reparaciones, R.id.nav_servicios,
                 R.id.nav_facturas, R.id.nav_compartir).setDrawerLayout(drawer).build();
 
         //NavController Obtine de (mobile_navigation.xml) el primer fragmen que va arrancar la activity en este caso es el fragmentReparacion
         NavController navController = Navigation.findNavController(this, R.id.nav_contenedor_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        FragmentManager fragmentManager = getSupportFragmentManager();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
+
+        fragmentTransaction.add(R.id.nav_contenedor_fragment, new FragmentReparacion());
+        fragmentTransaction.commit();
 
 
 
@@ -156,10 +170,10 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     }
 
     //Para la actionbar donde encontramos el menu despleagable a la derecha
-   /* @Override
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
 
     //Manejo de menu
@@ -167,35 +181,37 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
-        int title=-1;
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-
-        fragment_content_manager= fragmentManager.findFragmentByTag(FragmentContentManager.TAG);
+        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
 
         switch ((id)) {
             case R.id.nav_reparaciones:
                 Log.d("PRUEBA", "PULSASTE REPARCIONES");
-               fragmentManager.beginTransaction().replace(R.id.nav_contenedor_fragment,new FragmentReparacion()).commit();
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment, new FragmentReparacion());
+                fragmentTransaction.commit();
 
 
                 break;
 
             case R.id.nav_clientes:
                 Log.d("PRUEBA", "PULSASTE CLIENTES");
-                fragmentManager.beginTransaction().replace(R.id.nav_contenedor_fragment,new FragmentCliente()).commit();
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentCliente());
+                fragmentTransaction.commit();
 
                 break;
 
             case R.id.nav_servicios:
                 Log.d("PRUEBA", "PULSASTE SERVICIOS");
-                fragmentManager.beginTransaction().replace(R.id.nav_contenedor_fragment,new FragmentServicio()).commit();
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentServicio());
+                fragmentTransaction.commit();
 
                 break;
 
             case R.id.nav_facturas:
                 Log.d("PRUEBA", "PULSASTE FACTURAS");
-                fragmentManager.beginTransaction().replace(R.id.nav_contenedor_fragment,new FragmentFactura()).commit();;
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentFactura());
+                fragmentTransaction.commit();
 
 
                 break;
@@ -206,9 +222,11 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 break;
         }
 
+
+
         //Creeamos el navegador desplegable
         drawer.closeDrawer(GravityCompat.START);
 
-        return false;
+        return true;
     }
 }

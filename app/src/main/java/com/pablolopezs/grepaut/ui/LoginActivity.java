@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Usuario;
 import com.pablolopezs.grepaut.ui.ManagerActivity.ManagerActivity;
+import com.pablolopezs.grepaut.ui.ManagerActivity.reparacion.FragmentReparacion;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (ManagerActivity)
                 Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
+
+
                 startActivity(intent);
                 finish();//Terminamos esta activity, ya que una vez dentro no va voler a Login
             }
