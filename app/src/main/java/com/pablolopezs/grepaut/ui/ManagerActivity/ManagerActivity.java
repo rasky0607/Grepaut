@@ -41,8 +41,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
     private AppBarConfiguration mAppBarConfiguration;
     private  DrawerLayout drawer=null;
-    private Fragment mifragment;
-
 
 
     @Override
@@ -50,21 +48,35 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);//enlazamos la barra de la toolbar
         FloatingActionButton fab = findViewById(R.id.fab);
         //Componentes para enlazar la barra de navegacion y cada una de sus opciones.
         //Final DrawerLayout drawer drawer = findViewById(R.id.drawer_layout);
          drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        //Probando lo de Niko------------------------------------
+
+        setSupportActionBar(toolbar);//cargamos la toolbar
+
+        /*Consejo de Niko a la solucion que tenia aplicada yo respecto al inflado de los fragment de forma manual en el (fragment_content_manager),
+        Inflando el boton que desplega el menu lateral (conocido como hamburguer)*/
+        /*----------------------------------------------------------------------*/
         ActionBar supportActionBar=getSupportActionBar();
         if(supportActionBar!=null){
             supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
 
         }
-//----------------------------------------
-        setSupportActionBar(toolbar);
+        /*----------------------------------------------------------------------*/
+
+        /*Evento Click del boton superior izquierdo para desplegar el menu lateral(conocido como boton hamburguer)*/
+        /*----------------------------------------------------------------------*/
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawer.openDrawer(GravityCompat.START);
+            }
+        });
+        /*----------------------------------------------------------------------*/
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,71 +98,21 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        /*Inicializamos el listener para onNavigationItemSelected(@NonNull MenuItem item).
+         Tambien podriamos haberlo realizado con navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() */
         navigationView.setNavigationItemSelectedListener(this);
 
+        //Inicializamos el fragmento con el que se va ha iniciar la actividad
+        /*----------------------------------------------------------------------*/
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
 
         fragmentTransaction.add(R.id.nav_contenedor_fragment, new FragmentReparacion());
         fragmentTransaction.commit();
+        /*----------------------------------------------------------------------*/
 
 
 
-        //PRueba AÑADIDO POr mi
-       /* navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                int id = item.getItemId();
-                int title=-1;
-
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
-
-                switch ((id)) {
-                    case R.id.nav_reparaciones:
-                        Log.d("PRUEBA", "PULSASTE REPARCIONES");
-                            fragmentTransaction.replace(R.id.nav_contenedor_fragment, new FragmentReparacion());
-                            fragmentTransaction.commit();
-
-
-                        break;
-
-                    case R.id.nav_clientes:
-                        Log.d("PRUEBA", "PULSASTE CLIENTES");
-                        fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentCliente());
-                        fragmentTransaction.commit();
-
-                        break;
-
-                    case R.id.nav_servicios:
-                        Log.d("PRUEBA", "PULSASTE SERVICIOS");
-                        fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentServicio());
-                        fragmentTransaction.commit();
-
-                        break;
-
-                    case R.id.nav_facturas:
-                        Log.d("PRUEBA", "PULSASTE FACTURAS");
-                        fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentFactura());
-                        fragmentTransaction.commit();
-
-
-                        break;
-                    case R.id.nav_compartir:
-
-                         Log.d("PRUEBA", "PULSASTE COMPARTIR");
-
-                        break;
-                }
-
-
-
-                //Creeamos el navegador desplegable
-                drawer.closeDrawer(GravityCompat.START);
-                    return true;
-            }
-        });*/
     }
 
     @Override
@@ -161,13 +123,6 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 
-    //Maneja el click en el boton superior izquierdo(conocido como hamburguer) que desplega la barra de navegacion lateral
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_contenedor_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
 
     //Para la actionbar donde encontramos el menu despleagable a la derecha
     @Override
@@ -176,7 +131,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     }
 
 
-    //Manejo de menu
+    /*Manejo de menu lateral (navigation Drawer) donde se indicara la logica, o las tareas a llevar a cabo segun la opcion seleccionada*/
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -230,3 +185,14 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 }
+
+
+//Metodos posiblemente incesarios ( o candidatos a limpieza)
+
+/*  //Maneja el click en el boton superior izquierdo(conocido como hamburguer) que desplega la barra de navegacion lateral //Todo este metodo aun no termina de quedarme claro
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_contenedor_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    } */
