@@ -18,21 +18,14 @@ import com.pablolopezs.grepaut.data.model.Cliente;
 public class FragmentCliente extends Fragment {
 
     public static  String TAG = "Fragmento Cliente";
-    private Cliente cliente;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        cliente = ViewModelProviders.of(this).get(Cliente.class);
-        View root = inflater.inflate(R.layout.fragment_cliente, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
 
-        cliente.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                s="Soy el fragment Cliente!";
-                textView.setText(s);
-            }
-        });
-        return root;
+        View view = inflater.inflate(R.layout.fragment_cliente, container, false);
+        final TextView textView = view.findViewById(R.id.text_gallery);
+        textView.setText("Soy el fragmento Clientes");
+
+        return view;
     }
 }

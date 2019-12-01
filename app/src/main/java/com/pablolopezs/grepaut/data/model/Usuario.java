@@ -2,63 +2,74 @@ package com.pablolopezs.grepaut.data.model;
 
 public class Usuario {
 
-    String _email;
-    String _password;
-    String _nombre;
-    String _tipoUsuario;
-    boolean _tienePermiso; //Si es de tipo "Administrador", tiene permisos, si es de tipo "Usuario" debe darselo un administrador.(Solo puede haber un administrador en principio)
+    String email;
+    String password;
+    String nombre;
+    String tipoUsuario;
+    boolean tienePermiso; //Si es de tipo "Administrador", tiene permisos, si es de tipo "Usuario" debe darselo un administrador.(Solo puede haber un administrador en principio)
+    String empresa;//Empresa a la que pertenece este servicio (es una FK de la tabla Empresa)
 
     //region Propiedades
-    public String get_email() {
-        return _email;
+    public String getEmail() {
+        return email;
     }
 
-    public void set_email(String _email) {
-        this._email = _email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String get_password() {
-        return _password;
+    public String getPassword() {
+        return password;
     }
 
-    public void set_password(String _password) {
-        this._password = _password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String get_nombre() {
-        return _nombre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void set_nombre(String _nombre) {
-        this._nombre = _nombre;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String get_tipoUsuario() {
-        return _tipoUsuario;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void set_tipoUsuario(String _tipoUsuario) {
-        this._tipoUsuario = _tipoUsuario;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
-    public boolean is_tienePermiso() {
-        return _tienePermiso;
+    public boolean isTienePermiso() {
+        return tienePermiso;
     }
 
-    public void set_tienePermiso(boolean _tienePermiso) {
-        this._tienePermiso = _tienePermiso;
+    public void setTienePermiso(boolean tienePermiso) {
+        this.tienePermiso = tienePermiso;
     }
+
+    public String getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(String empresa) {
+        this.empresa = empresa;
+    }
+
     //endregion
 
 
     //region Constructores
 
-    public Usuario(String _email, String _password, String _nombre, String _tipoUsuario, boolean _tienePermiso) {
-        this._email = _email;
-        this._password = _password;
-        this._nombre = _nombre;
-        this._tipoUsuario = _tipoUsuario;
-        this._tienePermiso = _tienePermiso;
+    public Usuario(String email, String password, String nombre, String tipoUsuario, boolean tienePermiso,String empresa) {
+        this.email = email;
+        this.password = password;
+        this.nombre = nombre;
+        this.tipoUsuario = tipoUsuario;
+        this.tienePermiso = tienePermiso;
+        this.empresa = empresa;
     }
 
     public Usuario() {

@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Guardamos el usuario
                 //TODO si el usuario tiene permiso a true puede ver los registros(si es administrador lo tendra a true desde la creaciom, si es Usuario a false)
-                Usuario miUsuario = new Usuario(tedemail.getText().toString(),tedpassword.getText().toString(),null,null,true);
+                Usuario miUsuario = new Usuario(tedemail.getText().toString(),tedpassword.getText().toString(),null,null,true,null);
 
                 Log.d("PRUEBA","Datos -> "+tedemail.getText().toString()+" "+tedpassword.getText().toString());
 

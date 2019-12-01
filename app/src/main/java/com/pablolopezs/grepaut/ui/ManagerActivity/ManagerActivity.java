@@ -34,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Toast;
 
 import java.nio.file.OpenOption;
 
@@ -81,8 +82,9 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
+                Toast.makeText(ManagerActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -109,6 +111,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
         fragmentTransaction.add(R.id.nav_contenedor_fragment, new FragmentReparacion());
         fragmentTransaction.commit();
+        setTitle(R.string.menu_reparaciones);
         /*----------------------------------------------------------------------*/
 
 
@@ -145,6 +148,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 Log.d("PRUEBA", "PULSASTE REPARCIONES");
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment, new FragmentReparacion());
                 fragmentTransaction.commit();
+                setTitle(R.string.menu_reparaciones);
 
 
                 break;
@@ -153,6 +157,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 Log.d("PRUEBA", "PULSASTE CLIENTES");
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentCliente());
                 fragmentTransaction.commit();
+                setTitle(R.string.menu_clientes);
 
                 break;
 
@@ -160,6 +165,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 Log.d("PRUEBA", "PULSASTE SERVICIOS");
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentServicio());
                 fragmentTransaction.commit();
+                setTitle(R.string.menu_servicios);
 
                 break;
 
@@ -167,12 +173,13 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 Log.d("PRUEBA", "PULSASTE FACTURAS");
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentFactura());
                 fragmentTransaction.commit();
+                setTitle(R.string.menu_facturas);
 
 
                 break;
             case R.id.nav_compartir:
 
-                Log.d("PRUEBA", "PULSASTE COMPARTIR");
+                Toast.makeText(ManagerActivity.this,"Pulsaste compartir!",Toast.LENGTH_SHORT).show();
 
                 break;
         }

@@ -17,21 +17,15 @@ import com.pablolopezs.grepaut.data.model.Factura;
 
 public class FragmentFactura extends Fragment {
 
-    private Factura toolsViewModel;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(Factura.class);
+
         View view = inflater.inflate(R.layout.fragment_factura, container, false);
         final TextView textView = view.findViewById(R.id.text_tools);
         textView.setText("Soy el fragmento Facturas");
-        /*toolsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
         return view;
     }
 }

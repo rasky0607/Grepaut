@@ -17,21 +17,14 @@ import com.pablolopezs.grepaut.data.model.Servicio;
 
 public class FragmentServicio extends Fragment {
 
-    private Servicio slideshowViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(Servicio.class);
+
         View view = inflater.inflate(R.layout.fragment_servicio, container, false);
         final TextView textView = view.findViewById(R.id.text_slideshow);
         textView.setText("Soy el fragmento Servicios");
-        /*slideshowViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
         return view;
     }
 }
