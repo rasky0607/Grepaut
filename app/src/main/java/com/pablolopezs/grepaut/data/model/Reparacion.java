@@ -9,7 +9,7 @@ public class Reparacion extends ViewModel {
 
     //region Campos
     int numeroReparacion;
-    Date fecha;
+    String fecha;
     int idcliente;
     String matriculaCoche;
     String nombreServicio;
@@ -28,11 +28,11 @@ public class Reparacion extends ViewModel {
         this.numeroReparacion = numeroReparacion;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -94,7 +94,7 @@ public class Reparacion extends ViewModel {
     //endregion
 
     //region Constructores
-    public Reparacion(int numeroReparacion, Date fecha, int idcliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario, String nombreEmpresa) {
+    public Reparacion(int numeroReparacion, String fecha, int idcliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario, String nombreEmpresa) {
         this.numeroReparacion = numeroReparacion;
         this.fecha = fecha;
         this.idcliente = idcliente;

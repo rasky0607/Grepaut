@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Libreria externa de 'com.github.ivbaranov:materiallettericon:0.2.3'-->
+    <com.github.ivbaranov.mli.MaterialLetterIcon
+        android:id="@+id/icon"
+        android:layout_width="@dimen/letter_icon_size"
+        android:layout_height="@dimen/letter_icon_size"
+        android:layout_margin="8dp"
+        app:mli_letter="S"
+        app:mli_letter_color="@color/white"
+        app:mli_letters_number="1"
+        app:mli_shape_type="circle"
+        app:mli_shape_color="@color/colorPrimary"
+        />
+
+    <TextView
+        android:id="@+id/tvServicio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Servicio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+        android:id="@+id/tvNomCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre cliente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+        android:id="@+id/tvMatriculaCoche"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Matricula"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+    <TextView
+        android:id="@+id/tvFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fecha"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+
+</LinearLayout>
