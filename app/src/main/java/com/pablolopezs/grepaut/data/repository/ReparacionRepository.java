@@ -1,5 +1,7 @@
 package com.pablolopezs.grepaut.data.repository;
 
+import android.util.Log;
+
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.text.SimpleDateFormat;

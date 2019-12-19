@@ -7,9 +7,10 @@
     tools:context=".ui.ManagerActivity.ManagerActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarNavigationDrawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.SplashTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"

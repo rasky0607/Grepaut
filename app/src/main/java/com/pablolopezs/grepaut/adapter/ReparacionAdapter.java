@@ -23,8 +23,9 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
 
     //Constructor
     public  ReparacionAdapter(){
+
         listReparacion = (ArrayList<Reparacion>) ReparacionRepository.getInstance().getList();
-        Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0));
+        Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0).getNombreEmpresa());
 
     }
 
@@ -33,15 +34,16 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reparacion_item,parent,false);
+        Log.d("PRUEBA", "ADAPTER: onCreateViewHolder()");
         return new ViewHolder(v);
     }
-//TODO Pendiente de revision, no da error, pero tampoco m uestra el recicler view
+//TODO Pendiente de revision, no da error, pero tampoco muestra el recicler view
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.icon.setLetter(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
         holder.tvServicio.setText(listReparacion.get(position).getNombreServicio());
-        holder.tvNomCliente.setText(listReparacion.get(position).getIdcliente());
+        holder.tvNomCliente.setText(Integer.toString(listReparacion.get(position).getIdcliente()));
         holder.tvMatriculaCoche.setText(listReparacion.get(position).getMatriculaCoche());
         holder.tvFecha.setText(listReparacion.get(position).getFecha());
         Log.d("PRUEBA", "ADAPTER: onBindViewHolder()"+ holder.tvFecha.getText());
@@ -50,7 +52,7 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listReparacion.size();
     }
 
     //Clase intertna

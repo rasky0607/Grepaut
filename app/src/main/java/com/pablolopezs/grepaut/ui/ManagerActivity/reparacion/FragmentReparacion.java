@@ -38,27 +38,31 @@ public class FragmentReparacion extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvReparacion=view.findViewById(R.id.rvReparacion);
-        initRvDependency();
-        Log.d("PRUEBA", "FragmentReparacion: onViewCreated ");
+        initRvReparacion();
+        rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
+        Log.d("PRUEBA", "FragmentReparacion: onViewCreated() ");
+
+
 
     }
 
     /*
-    Método que inicializa el RecyclerView que muestra todas las dependencias
+    Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones
     */
-    private void initRvDependency() {
+    public void initRvReparacion() {
 
         //1. Crear adapter
         reparacionAdapter = new ReparacionAdapter();
 
 
         //2. Crear diseño del RecyclerView
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+       // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
 
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT, RecyclerView.VERTICAL, false);
-        rvReparacion.setLayoutManager(linearLayoutManager);
+        //rvReparacion.setLayoutManager(linearLayoutManager);
 
         //3. Vincular la vista al modelo (RecyclerView al Adapter)
         rvReparacion.setAdapter(reparacionAdapter);
+        Log.d("PRUEBA", "FragmentReparacion: initRvReparacion() ");
     }
 }
