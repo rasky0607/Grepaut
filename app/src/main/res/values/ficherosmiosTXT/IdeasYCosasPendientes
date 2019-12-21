@@ -1,0 +1,6 @@
+//Todo Añadir scrollview a la ventana ladeada(horizontal) del login, y crear la ladeada del registro con este scrollview
+//Todo Crear ventan land (o ladeada) para el fragment de reparaciones
+//Todo Revisar boton de añadir, el cual en las versiones de la API 19, se ve extaño
+//Todo Redimensionar las fuentes (se ven demasiado grandes)
+//Todo Combrobar la estructura de la pantalla de login en tabler, ya que parece estar destructurada
+//Todo Añadido ImagenButton en el listado de reparaciones(este parece solo cuando una reparacion ha sido facturada), y permitira ir hasta una descripciono vista de esta factura.

@@ -4,7 +4,11 @@
     <color name="colorPrimaryLight">#5e92f3</color>
     <color name="colorPrimaryDark">#003c8f</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="otro">#FF5722</color>
+    <color name="colorReparacionNoFacturarada">#F1BB88</color>
+    <color name="colorReparacionSiFacturada">#BCF597</color>
+    <color name="colorReparacionNoFinalizada">#EE7166</color>
+    <color name="colorReparacionFinalizada">#42A52E</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorPrimary</color>
     <color name="white">#FFFFFF</color>
+    <color name="separadorgris">#DDD9D9</color>
 </resources>

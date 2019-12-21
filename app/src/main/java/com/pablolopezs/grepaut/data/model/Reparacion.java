@@ -2,8 +2,6 @@ package com.pablolopezs.grepaut.data.model;
 
 import androidx.lifecycle.ViewModel;
 
-import java.util.Date;
-
 public class Reparacion extends ViewModel {
 
 
@@ -14,7 +12,7 @@ public class Reparacion extends ViewModel {
     String matriculaCoche;
     String nombreServicio;
     boolean estadoReparacion;// En funcion de si es true o false se escribira un string determinado u otro (En curso, Finalizada)
-    boolean estadoFacturacdo;// En funcion de si es true o false se escribira un string determinado u otro (Facturado, No Facturado)
+    boolean estadoFacturado;// En funcion de si es true o false se escribira un string determinado u otro (Facturado, No Facturado)
     String emailUsuario;
     String nombreEmpresa;
     //endregion
@@ -60,7 +58,7 @@ public class Reparacion extends ViewModel {
         this.nombreServicio = nombreServicio;
     }
 
-    public boolean isEstadoReparacion() {
+    public boolean getEstadoReparacion() {
         return estadoReparacion;
     }
 
@@ -68,12 +66,12 @@ public class Reparacion extends ViewModel {
         this.estadoReparacion = estadoReparacion;
     }
 
-    public boolean isEstadoFacturacdo() {
-        return estadoFacturacdo;
+    public boolean getEstadoFacturado() {
+        return estadoFacturado;
     }
 
-    public void setEstadoFacturacdo(boolean estadoFacturacdo) {
-        this.estadoFacturacdo = estadoFacturacdo;
+    public void setEstadoFacturado(boolean estadoFacturado) {
+        this.estadoFacturado = estadoFacturado;
     }
 
     public String getEmailUsuario() {
@@ -91,6 +89,10 @@ public class Reparacion extends ViewModel {
     public void setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
     }
+
+
+
+
     //endregion
 
     //region Constructores
@@ -101,7 +103,7 @@ public class Reparacion extends ViewModel {
         this.matriculaCoche = matriculaCoche;
         this.nombreServicio = nombreServicio;
         this.estadoReparacion = estadoReparacion;
-        this.estadoFacturacdo = estadoFacturacdo;
+        this.estadoFacturado = estadoFacturacdo;
         this.emailUsuario = emailUsuario;
         this.nombreEmpresa = nombreEmpresa;
     }

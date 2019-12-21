@@ -47,5 +47,6 @@
     <string name="menu_enviar">Enviar</string>
     <string name="nav_header_subtitulo">Gestor de reparación de automóviles</string>
     <string name="perfil">Perfil de usuario</string>
+    <string name="SplashDelLogo">Imagen del logo de la app</string>
 
 </resources>
