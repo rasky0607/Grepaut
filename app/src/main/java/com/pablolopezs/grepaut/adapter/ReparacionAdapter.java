@@ -45,7 +45,7 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
         Log.d("PRUEBA", "ADAPTER: onCreateViewHolder()");
         return new ViewHolder(v);
     }
-//TODO Pendiente de revision, no da error, pero tampoco muestra el recicler view
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 

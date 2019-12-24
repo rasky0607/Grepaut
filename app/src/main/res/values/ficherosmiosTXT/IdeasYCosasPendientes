@@ -1,6 +1,11 @@
-//Todo Añadir scrollview a la ventana ladeada(horizontal) del login, y crear la ladeada del registro con este scrollview
-//Todo Crear ventan land (o ladeada) para el fragment de reparaciones
-//Todo Revisar boton de añadir, el cual en las versiones de la API 19, se ve extaño
-//Todo Redimensionar las fuentes (se ven demasiado grandes)
-//Todo Combrobar la estructura de la pantalla de login en tabler, ya que parece estar destructurada
-//Todo Añadido ImagenButton en el listado de reparaciones(este parece solo cuando una reparacion ha sido facturada), y permitira ir hasta una descripciono vista de esta factura.
+Todo: 1- Añadir scrollview a la ventana ladeada(horizontal) del login, y crear la ladeada del registro con este scrollview
+Todo: 2- Crear ventan land (o ladeada) para el fragment de reparaciones
+Todo: 3- Revisar boton de añadir, el cual en las versiones de la API 19, se ve extaño
+Todo: 4- Redimensionar las fuentes (se ven demasiado grandes)
+Todo: 5- Combrobar la estructura de la pantalla de login en tabler, ya que parece estar destructurada
+Todo: 6- Añadido ImagenButton en el listado de reparaciones(este parece solo cuando una reparacion ha sido facturada), y permitira ir hasta una descripciono vista de esta factura.
+
+    Todo: 7- PETA al "GIRARLA la pantalla en el navigationDrawer mostrando el recicler de Reparaciones", pero no al arrancar la aplicacion de lado del tiron,
+    Todo es solo al pasar de horizontal a vertical..de modo que si empieza en horizontal no pasa nada, pero en cuanto se realice el cambio si.*/
+
+Todo:

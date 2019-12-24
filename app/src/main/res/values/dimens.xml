@@ -6,8 +6,8 @@
     <!--Dimensiones login-->
     <dimen name="llLoginPadding">24dp</dimen><!--ll = linealayout-->
     <dimen name="textViewLoginMarginTop">24dp</dimen>
-    <dimen name="imgButtonLoginWidth">40dp</dimen>
-    <dimen name="imgButtonLoginHeight">40dp</dimen>
+    <dimen name="imgButtonLoginWidth">55dp</dimen>
+    <dimen name="imgButtonLoginHeight">55dp</dimen>
     <dimen name="btnSignInWidth">175dp</dimen>
     <dimen name="tvOrtherSign">24dp</dimen>
     <dimen name="tlDashBoardPadding">14dp</dimen>

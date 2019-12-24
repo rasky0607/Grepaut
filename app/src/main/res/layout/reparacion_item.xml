@@ -46,17 +46,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.053" />
 
+    <!--La idea es que una vez  pulsado este boton ,lleve directamente
+al usuario a una descripcion de la factura completa de esa reparacion y todas
+las realizadas ese dia para ese vehiculo-->
+
+
+    <ImageButton
+        android:id="@+id/estadoFacturado"
+        android:layout_width="51dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="12dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNumeroReparacion"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.236" />
+
     <TextView
         android:id="@+id/tvFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="136dp"
         android:text="Fecha: "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
         app:layout_constraintStart_toEndOf="@+id/estadoFacturado"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18dp"/>
 
     <TextView
         android:id="@+id/tvMatriculaCoche"
@@ -65,12 +84,12 @@
         android:layout_margin="10dp"
         android:text="Matricula: "
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.231"
         app:layout_constraintStart_toEndOf="@+id/estadoFacturado"
-        app:layout_constraintTop_toBottomOf="@+id/tvFecha"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tvFecha" />
 
     <View
         android:id="@+id/divider2"
@@ -83,21 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
-    <!--La idea es que una vez  pulsado este boton ,lleve directamente
-    al usuario a una descripcion de la factura completa de esa reparacion y todas
-    las realizadas ese dia para ese vehiculo-->
-    <ImageButton
-        android:id="@+id/estadoFacturado"
-        android:layout_width="51dp"
-        android:layout_height="35dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181"
-        android:visibility="invisible"
-        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

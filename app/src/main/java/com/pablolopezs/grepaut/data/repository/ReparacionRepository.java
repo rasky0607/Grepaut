@@ -44,6 +44,11 @@ public class ReparacionRepository {
         listReparaciones.add(new Reparacion(2, "10/07/2018",1,"9712ROG","Cambio de carburador",false,false,"email1@gmail.com","RepaAuto S.L."));
         listReparaciones.add(new Reparacion(3, "10/07/2018",1,"9712ROG","Cambio de reporductor MP3",false,false,"email1@gmail.com","RepaAuto S.L."));
         listReparaciones.add(new Reparacion(4, "10/07/2018",1,"9712ROG","Purga de deposito",true,true,"email1@gmail.com","RepaAuto S.L."));
+
+        listReparaciones.add(new Reparacion(1, "11/07/2018",2,"9712ROG","Cambio de bujias",true,true,"email1@gmail.com","RepaAuto S.L."));
+        listReparaciones.add(new Reparacion(2, "11/07/2018",2,"9712ROG","Cambio de carburador",false,false,"email1@gmail.com","RepaAuto S.L."));
+        listReparaciones.add(new Reparacion(3, "11/07/2018",2,"9712ROG","Cambio de reporductor MP3",false,false,"email1@gmail.com","RepaAuto S.L."));
+        listReparaciones.add(new Reparacion(4, "11/07/2018",2,"9712ROG","Purga de deposito",true,true,"email1@gmail.com","RepaAuto S.L."));
     }
 
     public List<Reparacion>getList(){

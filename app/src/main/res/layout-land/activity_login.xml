@@ -7,21 +7,15 @@
     android:padding="@dimen/llLoginPadding"
     tools:context=".ui.LoginActivity">
 
-
-
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilemail"
+        style="@style/miTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/tilpassword"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="@dimen/lmTillogin"
-        app:layout_constraintHorizontal_bias="0.386"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
-        style="@style/miTil">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tedemail"
@@ -32,15 +26,13 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilpassword"
+        style="@style/miTil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/lmTillogin"
-        android:layout_marginBottom="76dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnIniciarSesion"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/miTil">
+        app:layout_constraintTop_toBottomOf="@+id/tilemail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tedpassword"
@@ -51,31 +43,29 @@
 
     <Button
         android:id="@+id/btnIniciarSesion"
-        android:layout_width="@dimen/btnSignInWidth"
+        android:layout_width="117dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/selector_round_corner"
         android:text="@string/btnIniciarSesion"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/tvRegistrarConCuenta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilpassword" />
 
     <CheckBox
         android:id="@+id/chrecordar"
         style="@style/CheckBoxLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:text="@string/chRecordar"
+
         android:textColor="@color/colorPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/btnregistro"
-        app:layout_constraintHorizontal_bias="0.805"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
@@ -84,42 +74,41 @@
         style="@style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="216dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
         android:background="@drawable/selector_round_signup"
         android:text="@string/btnRegistrar"
         android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion"
-       />
+        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarSesion" />
 
     <TextView
         android:id="@+id/tvRegistrarConCuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/OrtherSign"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/btnGoogle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnregistro" />
 
     <ImageButton
         android:id="@+id/btnGoogle"
         android:layout_width="@dimen/imgButtonLoginWidth"
         android:layout_height="@dimen/imgButtonLoginHeight"
 
+        android:layout_marginTop="12dp"
         android:background="@drawable/ic_icongoogle"
         android:text="@string/btnGoogle"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRegistrarConCuenta" />
 
     <!--Registros de Google y Facebook-->
 
