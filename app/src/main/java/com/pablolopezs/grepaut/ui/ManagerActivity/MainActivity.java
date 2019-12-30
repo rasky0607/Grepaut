@@ -3,7 +3,6 @@ package com.pablolopezs.grepaut.ui.ManagerActivity;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,9 +10,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
@@ -23,10 +20,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
-import com.pablolopezs.grepaut.ui.ManagerActivity.cliente.FragmentCliente;
-import com.pablolopezs.grepaut.ui.ManagerActivity.factura.FragmentFactura;
-import com.pablolopezs.grepaut.ui.ManagerActivity.reparacion.FragmentReparacion;
-import com.pablolopezs.grepaut.ui.ManagerActivity.servicio.FragmentServicio;
+import com.pablolopezs.grepaut.ui.ManagerActivity.clientelist.ClienteListView;
+import com.pablolopezs.grepaut.ui.ManagerActivity.facturalist.FacturaListView;
+import com.pablolopezs.grepaut.ui.ManagerActivity.reparacionlist.ReparacionListView;
+import com.pablolopezs.grepaut.ui.ManagerActivity.serviciolist.ServicioListView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -36,9 +33,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-import java.nio.file.OpenOption;
-
-public class ManagerActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private  DrawerLayout drawer=null;
@@ -47,7 +42,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manager);
+        setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);//enlazamos la barra de la toolbar
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -56,27 +51,27 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
          drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        setSupportActionBar(toolbar);//cargamos la toolbar
+        setSupportActionBar(toolbar);// Seteamos o cargamos la toolbar
 
-        /*Consejo de Niko a la solucion que tenia aplicada yo respecto al inflado de los fragment de forma manual en el (fragment_content_manager),
+        /*Consejo de Niko a la solucion que tenia aplicada yo respecto al inflado de los fragment de forma manual en el (fragment_content_main),
         Inflando el boton que desplega el menu lateral (conocido como hamburguer)*/
         /*----------------------------------------------------------------------*/
-        ActionBar supportActionBar=getSupportActionBar();
+       /* ActionBar supportActionBar=getSupportActionBar();
         if(supportActionBar!=null){
             supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
             supportActionBar.setDisplayHomeAsUpEnabled(true);
 
-        }
+        }*/
         /*----------------------------------------------------------------------*/
 
-        /*Evento Click del boton superior izquierdo para desplegar el menu lateral(conocido como boton hamburguer)*/
+        /*Evento Click del boton superior izquierdo  de la toolbar para desplegar el menu lateral(conocido como boton hamburguer)*/
         /*----------------------------------------------------------------------*/
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+       /* toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawer.openDrawer(GravityCompat.START);
             }
-        });
+        });*/
         /*----------------------------------------------------------------------*/
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +79,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-                Toast.makeText(ManagerActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -109,7 +104,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.nav_contenedor_fragment, new FragmentReparacion());
+        fragmentTransaction.add(R.id.nav_contenedor_fragment, new ReparacionListView());
         fragmentTransaction.commit();
         setTitle(R.string.menu_reparaciones);
         /*----------------------------------------------------------------------*/
@@ -121,8 +116,8 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //Infla la barra de accion o menu y añade los componentes que habra en este
-        getMenuInflater().inflate(R.menu.manager, menu);
+        //Infla la barra de accion o menu y añade los componentes que habra en este indicados en el XML menu_de_app_bar.xml
+        getMenuInflater().inflate(R.menu.menu_de_app_bar, menu);
         return true;
     }
 
@@ -146,7 +141,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
         switch ((id)) {
             case R.id.nav_reparaciones:
                 Log.d("PRUEBA", "PULSASTE REPARCIONES");
-                fragmentTransaction.replace(R.id.nav_contenedor_fragment, new FragmentReparacion());
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment, new ReparacionListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_reparaciones);
 
@@ -155,7 +150,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
             case R.id.nav_clientes:
                 Log.d("PRUEBA", "PULSASTE CLIENTES");
-                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentCliente());
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new ClienteListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_clientes);
 
@@ -163,7 +158,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
             case R.id.nav_servicios:
                 Log.d("PRUEBA", "PULSASTE SERVICIOS");
-                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentServicio());
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new ServicioListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_servicios);
 
@@ -171,7 +166,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
 
             case R.id.nav_facturas:
                 Log.d("PRUEBA", "PULSASTE FACTURAS");
-                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FragmentFactura());
+                fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FacturaListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_facturas);
 
@@ -179,7 +174,7 @@ public class ManagerActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_compartir:
 
-                Toast.makeText(ManagerActivity.this,"Pulsaste compartir!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Pulsaste compartir!",Toast.LENGTH_SHORT).show();
 
                 break;
         }

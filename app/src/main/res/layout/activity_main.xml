@@ -10,13 +10,16 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <!-- app:headerLayout="@layout/nav_header_main" para indicar rque va tener una cabecera
-   app:menu="@menu/activity_main_drawer" Para el la lista del menu que va mostrar
+    <!-- app:headerLayout="@layout/nav_drawer_header_main" para indicar que va tener una cabecera
+   app:menu="@menu/menu_nav_drawer_main" Para el la lista del menu que va mostrar
 -->
+
+<!--Dentro de app_bar realizamos el include de  fragment_content_main para que la app bar  se oculte o muestre segun el scroll-->
     <include
-        layout="@layout/app_bar_manager"
+        layout="@layout/app_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -24,8 +27,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_manager"
-        app:menu="@menu/activity_manager_drawer"
+        app:headerLayout="@layout/nav_drawer_header_main"
+        app:menu="@menu/menu_nav_drawer_main"
         />
 
 </androidx.drawerlayout.widget.DrawerLayout>

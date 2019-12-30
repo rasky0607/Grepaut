@@ -1,16 +1,10 @@
 package com.pablolopezs.grepaut.adapter;
 
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +12,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pablolopezs.grepaut.R;
-import com.github.ivbaranov.mli.MaterialLetterIcon;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repository.ReparacionRepository;
 
@@ -41,7 +34,7 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reparacion_item,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reparacion_list_view,parent,false);
         Log.d("PRUEBA", "ADAPTER: onCreateViewHolder()");
         return new ViewHolder(v);
     }
@@ -112,7 +105,7 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
         //Constructor
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            //Asignamos/Asociamos componentes del reparacion_item al holder del recyclerView fragment_reparacion
+            //Asignamos/Asociamos componentes del item_reparacion_list_view al holder del recyclerView fragment_reparacion_list_view
             //icon = itemView.findViewById(R.id.icon);
             //tvServicio=itemView.findViewById(R.id.tvServicio);
             //tvNomCliente=itemView.findViewById(R.id.tvNomCliente);

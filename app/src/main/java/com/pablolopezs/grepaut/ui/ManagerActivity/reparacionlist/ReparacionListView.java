@@ -1,25 +1,21 @@
-package com.pablolopezs.grepaut.ui.ManagerActivity.reparacion;
+package com.pablolopezs.grepaut.ui.ManagerActivity.reparacionlist;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.ReparacionAdapter;
-import com.pablolopezs.grepaut.data.model.Reparacion;
 
-public class FragmentReparacion extends Fragment {
+public class ReparacionListView extends Fragment {
 
     public static  String TAG = "Fragmento Reparaciones";
     private ReparacionAdapter reparacionAdapter;
@@ -28,9 +24,9 @@ public class FragmentReparacion extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_reparacion, container, false);
+        View view = inflater.inflate(R.layout.fragment_reparacion_list_view, container, false);
 
-        Log.d("PRUEBA", "FragmentReparacion: onCreateView ");
+        Log.d("PRUEBA", "ReparacionListView: onCreateView ");
         return view;
     }
 
@@ -40,7 +36,7 @@ public class FragmentReparacion extends Fragment {
         rvReparacion=view.findViewById(R.id.rvReparacion);
         initRvReparacion();
         rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
-        Log.d("PRUEBA", "FragmentReparacion: onViewCreated() ");
+        Log.d("PRUEBA", "ReparacionListView: onViewCreated() ");
 
 
 
@@ -63,6 +59,6 @@ public class FragmentReparacion extends Fragment {
 
         //3. Vincular la vista al modelo (RecyclerView al Adapter)
         rvReparacion.setAdapter(reparacionAdapter);
-        Log.d("PRUEBA", "FragmentReparacion: initRvReparacion() ");
+        Log.d("PRUEBA", "ReparacionListView: initRvReparacion() ");
     }
 }

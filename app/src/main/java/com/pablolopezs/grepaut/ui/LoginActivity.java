@@ -1,26 +1,21 @@
 package com.pablolopezs.grepaut.ui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Usuario;
-import com.pablolopezs.grepaut.ui.ManagerActivity.ManagerActivity;
-import com.pablolopezs.grepaut.ui.ManagerActivity.reparacion.FragmentReparacion;
+import com.pablolopezs.grepaut.ui.ManagerActivity.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         /**
-         * Guardamos el usuario que inicio sesion y nos dirigimos a la Activity del menu Navegation Drawer llamada--> (ManagerActivity)*/
+         * Guardamos el usuario que inicio sesion y nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)*/
         btnIniciasSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,8 +59,8 @@ public class LoginActivity extends AppCompatActivity {
 
                 Log.d("PRUEBA","Datos -> "+tedemail.getText().toString()+" "+tedpassword.getText().toString());
 
-                //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (ManagerActivity)
-                Intent intent = new Intent(LoginActivity.this, ManagerActivity.class);
+                //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
 
                 startActivity(intent);
