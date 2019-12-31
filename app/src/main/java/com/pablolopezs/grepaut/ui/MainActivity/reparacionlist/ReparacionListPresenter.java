@@ -2,7 +2,7 @@ package com.pablolopezs.grepaut.ui.MainActivity.reparacionlist;
 
 import android.util.Log;
 
-import com.pablolopezs.grepaut.data.repository.ReparacionRepositories;
+import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 public class ReparacionListPresenter implements ReparacionListContract.Presenter {
 

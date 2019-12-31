@@ -1,9 +1,8 @@
-package com.pablolopezs.grepaut.data.repository;
+package com.pablolopezs.grepaut.data.repositories;
 
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ReparacionRepositories {
 

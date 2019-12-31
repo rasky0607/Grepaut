@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Reparacion;
-import com.pablolopezs.grepaut.data.repository.ReparacionRepositories;
 
 import java.util.ArrayList;
 
