@@ -15,7 +15,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Usuario;
-import com.pablolopezs.grepaut.ui.ManagerActivity.MainActivity;
+import com.pablolopezs.grepaut.ui.MainActivity.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
 

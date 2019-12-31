@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui.ManagerActivity.facturalist;
+package com.pablolopezs.grepaut.ui.MainActivity.facturalist;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

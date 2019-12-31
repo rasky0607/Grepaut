@@ -28,7 +28,7 @@
         </activity>
 
         <activity
-            android:name=".ui.ManagerActivity.MainActivity"
+            android:name=".ui.MainActivity.MainActivity"
             android:label="@string/title_activity_manager"
             android:theme="@style/AppTheme.SplashTheme.NoActionBar">
 

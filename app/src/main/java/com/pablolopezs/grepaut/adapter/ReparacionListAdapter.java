@@ -13,21 +13,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Reparacion;
-import com.pablolopezs.grepaut.data.repository.ReparacionRepository;
+import com.pablolopezs.grepaut.data.repository.ReparacionRepositories;
 
 import java.util.ArrayList;
 
-public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.ViewHolder> {
+public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
 
 
     private ArrayList<Reparacion>listReparacion;
 
     //Constructor
-    public  ReparacionAdapter(){
+    public ReparacionListAdapter(){
 
-        listReparacion = (ArrayList<Reparacion>) ReparacionRepository.getInstance().getList();
-        Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0).getNombreEmpresa());
+        this.listReparacion = new ArrayList<Reparacion>();
+        //this.listReparacion = (ArrayList<Reparacion>) ReparacionRepositories.getInstance().getList();
+       // Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0).getNombreEmpresa());
 
+
+    }
+
+    public void add(Reparacion reparacion){
+        this.listReparacion.add(reparacion);
+    }
+
+    public void addAll(ArrayList<Reparacion> list)
+    {
+        this.listReparacion.addAll(list);
     }
 
     //Inflamos la vista y la convertimos en ViewHolder(Es decir un bloque del listado del recyclerView
@@ -97,7 +108,8 @@ public class ReparacionAdapter extends RecyclerView.Adapter<ReparacionAdapter.Vi
         TextView tvNumeroReparacion;
         TextView tvMatriculaCoche;
         TextView tvFecha;
-        ImageButton estadoFacturado;//TODO la idea es que este ImgenButtom tenga un evento click el cual si se lanza llevará al usuario al la información de esa factura(todas las reparaciones de ese dia para ese vehiculo)
+        //TODO la idea es que este ImgenButtom tenga un evento click el cual si se lanza llevará al usuario al la información de esa factura(todas las reparaciones de ese dia para ese vehiculo)
+        ImageButton estadoFacturado;
         ConstraintLayout listReparacionItem;
 
 

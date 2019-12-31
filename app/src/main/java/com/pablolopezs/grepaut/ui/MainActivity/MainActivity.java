@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui.ManagerActivity;
+package com.pablolopezs.grepaut.ui.MainActivity;
 
 import android.os.Bundle;
 
@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,10 +19,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
-import com.pablolopezs.grepaut.ui.ManagerActivity.clientelist.ClienteListView;
-import com.pablolopezs.grepaut.ui.ManagerActivity.facturalist.FacturaListView;
-import com.pablolopezs.grepaut.ui.ManagerActivity.reparacionlist.ReparacionListView;
-import com.pablolopezs.grepaut.ui.ManagerActivity.serviciolist.ServicioListView;
+import com.pablolopezs.grepaut.ui.MainActivity.clientelist.ClienteListView;
+import com.pablolopezs.grepaut.ui.MainActivity.facturalist.FacturaListView;
+import com.pablolopezs.grepaut.ui.MainActivity.reparacionlist.ReparacionListPresenter;
+import com.pablolopezs.grepaut.ui.MainActivity.reparacionlist.ReparacionListView;
+import com.pablolopezs.grepaut.ui.MainActivity.serviciolist.ServicioListView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private AppBarConfiguration mAppBarConfiguration;
     private  DrawerLayout drawer=null;
+
+    private  ReparacionListView fragmentReparacionListView;
+    private ReparacionListPresenter presenterReparacion;
 
 
     @Override
@@ -99,17 +102,33 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          Tambien podriamos haberlo realizado con navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() */
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Inicializamos el fragmento con el que se va ha iniciar la actividad
+        //Inicializamos el fragmento que va mostrar el navigationDrawer por defecto al iniciar su actividad
         /*----------------------------------------------------------------------*/
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction= fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.nav_contenedor_fragment, new ReparacionListView());
-        fragmentTransaction.commit();
+        Inicializar();
+
+        /*----------------------------------------------------------------------*/
+
+
+
+    }
+
+    /*Inicializamos el fragmento*/
+    private void Inicializar(){
+        fragmentReparacionListView =(ReparacionListView)getSupportFragmentManager().findFragmentByTag(ReparacionListView.TAG);
+        if(fragmentReparacionListView==null)
+        {
+            fragmentReparacionListView= ReparacionListView.newInstance(null);
+            getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
+
+        }
+        presenterReparacion= new ReparacionListPresenter(fragmentReparacionListView);
+        fragmentReparacionListView.setPresenter(presenterReparacion);
+
+        Log.d("PRUEBA", "PULSASTE REPARCIONES");
+                 /*fragmentTransaction.replace(R.id.nav_contenedor_fragment, new ReparacionListView());
+                fragmentTransaction.commit();*/
         setTitle(R.string.menu_reparaciones);
-        /*----------------------------------------------------------------------*/
-
-
 
     }
 
@@ -121,13 +140,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
     //Para la actionbar donde encontramos el menu despleagable a la derecha
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-
 
     /*Manejo de menu lateral (navigation Drawer) donde se indicara la logica, o las tareas a llevar a cabo segun la opcion seleccionada*/
     @Override
@@ -140,12 +157,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch ((id)) {
             case R.id.nav_reparaciones:
-                Log.d("PRUEBA", "PULSASTE REPARCIONES");
-                fragmentTransaction.replace(R.id.nav_contenedor_fragment, new ReparacionListView());
-                fragmentTransaction.commit();
+                fragmentReparacionListView =(ReparacionListView)getSupportFragmentManager().findFragmentByTag(ReparacionListView.TAG);
+                if(fragmentReparacionListView==null)
+                {
+                    fragmentReparacionListView= ReparacionListView.newInstance(null);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
+                }
+                presenterReparacion= new ReparacionListPresenter(fragmentReparacionListView);
+                fragmentReparacionListView.setPresenter(presenterReparacion);
+               Log.d("PRUEBA", "PULSASTE REPARCIONES");
                 setTitle(R.string.menu_reparaciones);
-
-
                 break;
 
             case R.id.nav_clientes:
@@ -153,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment,new ClienteListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_clientes);
-
                 break;
 
             case R.id.nav_servicios:
@@ -161,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment,new ServicioListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_servicios);
-
                 break;
 
             case R.id.nav_facturas:
@@ -169,13 +188,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentTransaction.replace(R.id.nav_contenedor_fragment,new FacturaListView());
                 fragmentTransaction.commit();
                 setTitle(R.string.menu_facturas);
-
-
                 break;
             case R.id.nav_compartir:
-
                 Toast.makeText(MainActivity.this,"Pulsaste compartir!",Toast.LENGTH_SHORT).show();
-
                 break;
         }
 
@@ -187,14 +202,3 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 }
-
-
-//Metodos posiblemente incesarios ( o candidatos a limpieza)
-
-/*  //Maneja el click en el boton superior izquierdo(conocido como hamburguer) que desplega la barra de navegacion lateral //Todo este metodo aun no termina de quedarme claro
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_contenedor_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-    } */

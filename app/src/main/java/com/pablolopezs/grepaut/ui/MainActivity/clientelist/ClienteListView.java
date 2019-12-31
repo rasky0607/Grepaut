@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui.ManagerActivity.clientelist;
+package com.pablolopezs.grepaut.ui.MainActivity.clientelist;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

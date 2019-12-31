@@ -1,4 +1,4 @@
 package com.pablolopezs.grepaut.data.repository;
 
-public class UsuarioRepository {
+public class ClienteRepositories {
 }

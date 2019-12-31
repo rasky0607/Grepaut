@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui.ManagerActivity.serviciolist;
+package com.pablolopezs.grepaut.ui.MainActivity.serviciolist;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
