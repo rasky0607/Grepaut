@@ -47,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         tedpassword=findViewById(R.id.tedpassword);
 
 
+
+
         /**
          * Guardamos el usuario que inicio sesion y nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)*/
         btnIniciasSesion.setOnClickListener(new View.OnClickListener() {

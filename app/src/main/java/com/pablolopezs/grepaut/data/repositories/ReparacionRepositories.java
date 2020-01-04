@@ -66,9 +66,13 @@ public class ReparacionRepositories {
         }
     }
     /*Elimina una reparacion, siempre que no este facturada*/
-    public void delete(Reparacion reparacion) {
+    /*public void delete(Reparacion reparacion) {
         if(!reparacion.getEstadoFacturado())
             this.listReparaciones.remove(reparacion);
+    }*/
+
+    public void delete(int  pos) {
+            this.listReparaciones.remove(pos);
     }
 
 

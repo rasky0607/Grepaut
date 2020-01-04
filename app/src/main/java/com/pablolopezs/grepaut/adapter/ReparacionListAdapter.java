@@ -13,18 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Reparacion;
+import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 import java.util.ArrayList;
 
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
 
-
     private ArrayList<Reparacion>listReparacion;
-
+    private  manipularDatos manipularDatos;
     //Constructor
-    public ReparacionListAdapter(){
+    public ReparacionListAdapter(manipularDatos manipularDatos){
 
         this.listReparacion = new ArrayList<Reparacion>();
+        this.manipularDatos=manipularDatos;
         //this.listReparacion = (ArrayList<Reparacion>) ReparacionRepositories.getInstance().getList();
        // Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0).getNombreEmpresa());
 
@@ -40,6 +41,9 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         this.listReparacion.addAll(list);
     }
 
+
+
+
     //Inflamos la vista y la convertimos en ViewHolder(Es decir un bloque del listado del recyclerView
     @NonNull
     @Override
@@ -49,8 +53,9 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         return new ViewHolder(v);
     }
 
+    /*Inyectamos los datos a cada ViewHolder*/
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         //holder.icon.setLetter(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
         //holder.tvServicio.setText(listReparacion.get(position).getNombreServicio());
@@ -92,6 +97,29 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
         Log.d("PRUEBA", "ADAPTER: onBindViewHolder()"+ holder.tvFecha.getText());
 
+        /*Con el click editamos un elemento(Aun que reparaciones no tiene permitido editarse, pero se enviara u n mensaje al usuario de recordatorio)*/
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manipularDatos.miClick("NO se puede editar una reparación, eliminela y cree una nueva.");
+            }
+        });
+
+        /*Con el  long click eliminamos un elemento*/
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //Si el imagenButton llamado "estadoFacturado" NO esta visible, es que esa reapracion no esta facturada, por lo que puede ser eliminada
+                if(holder.estadoFacturado.getVisibility()!= View.VISIBLE) {
+                    //Eliminamos el elemento de la lista de del Adapter
+                    listReparacion.remove(holder.getAdapterPosition());
+                    //Eliminamos el elemento de la lista del Repositorio
+                    manipularDatos.miOnLOngClick(holder.getAdapterPosition());
+                    Log.d("PRUEBA", "ADAPTER: clic LARGO posicion " + holder.getAdapterPosition());
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -129,6 +157,12 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
         }
 
+    }
+
+    /*Interfaz implementadas para los metodos que necesitamos ejecutar en el evento onClick o onLongClick de el Adapter*/
+    public  interface manipularDatos{
+        void miOnLOngClick(int posicion);
+        void miClick(String msg);//Envia un mensaje informando de que no puede editarse un regiistro de reparacion.
     }
 
 }

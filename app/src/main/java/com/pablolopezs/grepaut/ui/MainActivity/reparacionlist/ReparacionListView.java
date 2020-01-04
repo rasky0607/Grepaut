@@ -57,6 +57,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
         inicializarRvReparacion();
        presenter.cargarDatos();
         Log.d("PRUEBA", "ReparacionListView: onViewCreated() ");
+
     }
 
     /*
@@ -64,7 +65,24 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     */
     public void inicializarRvReparacion() {
         //1. Crear adapter
-        reparacionListAdapter = new ReparacionListAdapter();
+        reparacionListAdapter = new ReparacionListAdapter(new ReparacionListAdapter.manipularDatos() {
+            @Override
+            public void miOnLOngClick(int posicion) {
+                /*Eliminamos el elemento de la lista del Repositorio*/
+                if(presenter.eliminar(posicion))
+                    Toast.makeText(getContext(),"Registro eliminado",Toast.LENGTH_SHORT);
+                else
+                    Toast.makeText(getContext(),"Un registro Facturado NO puede ser eliminado",Toast.LENGTH_LONG);
+
+                reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
+            }
+            /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
+            @Override
+            public void miClick(String msg) {
+                Toast.makeText(getContext(),msg,Toast.LENGTH_LONG);//TODO no muestra los toast al eliminar algo con exito falla o al intentar editar una reparacion
+            }
+
+        });
         //2. Crear diseño del RecyclerView
        // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT, RecyclerView.VERTICAL, false);

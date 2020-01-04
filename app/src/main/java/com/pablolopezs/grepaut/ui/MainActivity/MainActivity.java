@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private AppBarConfiguration mAppBarConfiguration;
     private  DrawerLayout drawer=null;
-
+    private NavigationView navigationView;
     private  ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
 
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Componentes para enlazar la barra de navegacion y cada una de sus opciones.
         //Final DrawerLayout drawer drawer = findViewById(R.id.drawer_layout);
          drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+         navigationView = findViewById(R.id.nav_view);
 
         setSupportActionBar(toolbar);// Seteamos o cargamos la toolbar
 
