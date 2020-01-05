@@ -1,18 +1,14 @@
 package com.pablolopezs.grepaut.ui.MainActivity.reparacionlist;
 
-import android.view.View;
-
+import com.pablolopezs.grepaut.ui.Base.Base;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
 
-public class ReparacionListContract {
+public class ReparacionListContract{
 
-    public interface View{
-        void hayDatos(ArrayList<Reparacion>list);
-        void mostrarError(String msg);
-        void noDatos();
-        void mensaje(String msg);
+    public interface View extends Base.View {
+        void hayDatos(ArrayList<Reparacion> list);
         void setPresenter(Presenter presenter);
 
     }

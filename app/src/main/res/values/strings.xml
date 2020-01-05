@@ -48,5 +48,11 @@
     <string name="nav_header_subtitulo">Gestor de reparación de automóviles</string>
     <string name="perfil">Perfil de usuario</string>
     <string name="SplashDelLogo">Imagen del logo de la app</string>
+    <string name="nombretvNombreApellidosCliente">Nombre:</string>
+    <string name="tvMatriculaCocheCliente">Matricula:</string>
+    <string name="tvIdCliente">25</string>
+    <string name="tvNumeroReparacion">25</string>
+    <string name="tvFechaReparacion">Fecha:</string>
+    <string name="tvMatriculaCocheReparacion">Matricula:</string>
 
 </resources>

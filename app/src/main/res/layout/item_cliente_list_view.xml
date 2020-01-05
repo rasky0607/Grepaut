@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listReparacionItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/listClienteItem"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
 
     <!--Libreria externa de 'com.github.ivbaranov:materiallettericon:0.2.3'-->
 
@@ -31,11 +32,11 @@
 
 
     <TextView
-        android:id="@+id/tvNumeroReparacion"
+        android:id="@+id/tvIdCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/circulo_lista_repa_ok"
-        android:text="@string/tvNumeroReparacion"
+        android:background="@drawable/circulo_lista_cliente"
+        android:text="@string/tvIdCliente"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/tamnioNumReparacion"
@@ -51,50 +52,33 @@ al usuario a una descripcion de la factura completa de esa reparacion y todas
 las realizadas ese dia para ese vehiculo-->
 
 
-    <ImageButton
-        android:id="@+id/estadoFacturado"
-        android:layout_width="51dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toEndOf="@+id/tvFecha"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
-
     <TextView
-        android:id="@+id/tvFecha"
+        android:id="@+id/tvNombreApellidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="136dp"
-        android:text="@string/tvFechaReparacion"
+        android:text="@string/nombretvNombreApellidosCliente"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.063"
-        app:layout_constraintStart_toEndOf="@+id/tvNumeroReparacion"
+        app:layout_constraintStart_toEndOf="@+id/tvIdCliente"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMatriculaCoche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tvMatriculaCocheReparacion"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="292dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/tvMatriculaCocheCliente"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toEndOf="@+id/tvNumeroReparacion"
-        app:layout_constraintTop_toBottomOf="@+id/tvFecha"
-        app:layout_constraintVertical_bias="0.0" />
-
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNombreApellidos"
+        app:layout_constraintVertical_bias="1.0" />
 
     <View
         android:id="@+id/divider2"
@@ -106,8 +90,6 @@ las realizadas ese dia para ese vehiculo-->
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

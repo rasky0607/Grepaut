@@ -6,20 +6,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.ReparacionListAdapter;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
 
-public class ReparacionListView extends Fragment implements ReparacionListContract.View {
+public class ReparacionListView extends Fragment implements  ReparacionListContract.View {
 
     public static  String TAG = "ReparacionListView";
     private ReparacionListAdapter reparacionListAdapter;
@@ -115,6 +113,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     public void mensaje(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_LONG);
     }
+
 
     @Override
     public void setPresenter(ReparacionListContract.Presenter presenter) {

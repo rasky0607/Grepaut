@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="@color/colorReparacionFinalizada"/>
+            <solid android:color="@color/colorPrimaryLight"/>
             <corners android:bottomRightRadius="185dp"
                 android:topRightRadius="55dp"
                 android:bottomLeftRadius="185dp"
