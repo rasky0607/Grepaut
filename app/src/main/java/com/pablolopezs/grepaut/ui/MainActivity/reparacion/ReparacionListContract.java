@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class ReparacionListContract{
 
-    public interface View extends Base.View {
-        void hayDatos(ArrayList<Reparacion> list);
+    public interface View extends Base.View<Reparacion> {
+
         void setPresenter(ReparacionListContract.Presenter presenter);
 
     }

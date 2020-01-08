@@ -45,14 +45,15 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Para mantener los datos o estado al girar la actividad
-        //setRetainInstance(true);
+
     }
 
     /*Justo despues de crear la vista*/
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //Para mantener los datos o estado al girar la actividad
+        setRetainInstance(true);
         rvReparacion=view.findViewById(R.id.rvReparacionlist);
         inicializarRvReparacion();
        presenter.cargarDatos();

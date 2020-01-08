@@ -96,12 +96,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.id.nav_clientes, R.id.nav_reparaciones, R.id.nav_servicios,
                 R.id.nav_facturas, R.id.nav_compartir).setDrawerLayout(drawer).build();
 
-        //NavController Obtine de (mobile_navigation.xml) el primer fragmen que va arrancar la activity en este caso es el fragmentReparacion
-        //TODO En duda???
-        NavController navController = Navigation.findNavController(this, R.id.nav_contenedor_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-
         /*Inicializamos el listener para onNavigationItemSelected(@NonNull MenuItem item).
          Tambien podriamos haberlo realizado con navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() */
         navigationView.setNavigationItemSelectedListener(this);
@@ -204,6 +198,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     //Cuando se hace click sobre la lista de reparaciones para abrir una nueva vista con todos los datos de esta
