@@ -97,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.id.nav_facturas, R.id.nav_compartir).setDrawerLayout(drawer).build();
 
         //NavController Obtine de (mobile_navigation.xml) el primer fragmen que va arrancar la activity en este caso es el fragmentReparacion
+        //TODO En duda???
         NavController navController = Navigation.findNavController(this, R.id.nav_contenedor_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);

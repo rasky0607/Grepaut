@@ -9,6 +9,7 @@
         <item name="android:textCursorDrawable">@drawable/color_cursor</item>
 
     </style>
+    <!--Atributo para menos de la 21 para hace rla status bar transparente <item name="android:statusBarColor"@android/color/transparent</item>-->
 
     <style name="AppTheme.SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>

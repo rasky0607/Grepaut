@@ -53,7 +53,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvReparacion=view.findViewById(R.id.rvReparacion);
+        rvReparacion=view.findViewById(R.id.rvReparacionlist);
         inicializarRvReparacion();
        presenter.cargarDatos();
         Log.d("PRUEBA", "ReparacionListView: onViewCreated() ");

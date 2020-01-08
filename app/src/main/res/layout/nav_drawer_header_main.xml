@@ -11,10 +11,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin">
 
+    <!--Imagen perfil del NavigationDrawer-->
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgvUser"
         android:layout_width="94dp"
-        android:layout_height="77dp"
+        android:layout_height="74dp"
         android:layout_gravity="top"
         android:contentDescription="@string/nav_header_desc"
         android:layout_marginTop="10dp"
@@ -22,6 +23,7 @@
         app:srcCompat="@drawable/logov3" />
 
     <TextView
+        android:id="@+id/tvemailUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -30,12 +32,13 @@
         android:textColor="@color/white"/>
 
     <TextView
+        android:id="@+id/tvnombreEmpresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_marginLeft="15dp"
         android:text="@string/nav_header_subtitulo"
-        android:textSize="12dp"
+        android:textSize="10dp"
         android:textColor="@color/white"/>
 
 </LinearLayout>
