@@ -15,7 +15,9 @@ import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
 
@@ -101,7 +103,9 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                manipularDatos.miClick("NO se puede editar una reparación, eliminela y cree una nueva.");
+               //manipularDatos.miClick(listReparacion.get(holder.getAdapterPosition()));
+                manipularDatos.miClick();
+                //manipularDatos.miClick("NO se puede editar una reparación, eliminela y cree una nueva.");
             }
         });
 
@@ -111,9 +115,9 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             public boolean onLongClick(View v) {
                 //Si el imagenButton llamado "estadoFacturado" NO esta visible, es que esa reapracion no esta facturada, por lo que puede ser eliminada
                 if(holder.estadoFacturado.getVisibility()!= View.VISIBLE) {
-                    //Eliminamos el elemento de la lista de del Adapter
+                    //Eliminamos el elemento de la lista del Adapter
                     listReparacion.remove(holder.getAdapterPosition());
-                    //Eliminamos el elemento de la lista del Repositorio
+                    //Pasamos la posicion del elemento en la lista para eliminar el elemento de la lista del Repositorio
                     manipularDatos.miOnLOngClick(holder.getAdapterPosition());
                     Log.d("PRUEBA", "ADAPTER: clic LARGO posicion " + holder.getAdapterPosition());
                 }
@@ -162,7 +166,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     /*Interfaz implementadas para los metodos que necesitamos ejecutar en el evento onClick o onLongClick de el Adapter*/
     public  interface manipularDatos{
         void miOnLOngClick(int posicion);
-        void miClick(String msg);//Envia un mensaje informando de que no puede editarse un regiistro de reparacion.
+        void miClick();//Envia un mensaje informando de que no puede editarse un regiistro de reparacion.
     }
 
 }

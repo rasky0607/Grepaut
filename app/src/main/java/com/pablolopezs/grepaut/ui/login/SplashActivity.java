@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui;
+package com.pablolopezs.grepaut.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -41,7 +41,7 @@ public class SplashActivity extends AppCompatActivity {
 
      /* Este metodo arranca la siguiente activity*/
     private void InitLogin() {
-        Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
+        Intent intent=new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(intent);
         /*
          * Esta activida  va ejecutar OnDestroy al llamar a finish()

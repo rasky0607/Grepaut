@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui;
+package com.pablolopezs.grepaut.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Usuario;
 import com.pablolopezs.grepaut.ui.MainActivity.MainActivity;
+import com.pablolopezs.grepaut.ui.login.register.RegistroActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         btnregistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(LoginActivity.this,RegistroActivity.class);
+                Intent intent =new Intent(LoginActivity.this, RegistroActivity.class);
                 startActivity(intent);//A diferencia del caso anterior, no finalizamos la activity login , ya que una vez registrado se le devolvera al login.
             }
         });

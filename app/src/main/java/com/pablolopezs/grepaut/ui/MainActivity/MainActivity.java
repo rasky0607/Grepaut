@@ -19,11 +19,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
-import com.pablolopezs.grepaut.ui.MainActivity.clientelist.ClienteListView;
-import com.pablolopezs.grepaut.ui.MainActivity.facturalist.FacturaListView;
-import com.pablolopezs.grepaut.ui.MainActivity.reparacionlist.ReparacionListPresenter;
-import com.pablolopezs.grepaut.ui.MainActivity.reparacionlist.ReparacionListView;
-import com.pablolopezs.grepaut.ui.MainActivity.serviciolist.ServicioListView;
+import com.pablolopezs.grepaut.data.model.Reparacion;
+import com.pablolopezs.grepaut.ui.MainActivity.cliente.ClienteListView;
+import com.pablolopezs.grepaut.ui.MainActivity.factura.FacturaListView;
+import com.pablolopezs.grepaut.ui.MainActivity.reparacion.ReparacionDetailView;
+import com.pablolopezs.grepaut.ui.MainActivity.reparacion.ReparacionListPresenter;
+import com.pablolopezs.grepaut.ui.MainActivity.reparacion.ReparacionListView;
+import com.pablolopezs.grepaut.ui.MainActivity.servicio.ServicioListView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -33,13 +35,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private  DrawerLayout drawer=null;
     private NavigationView navigationView;
     private  ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
+    private ReparacionDetailView fragmentReparacionDetailView;
 
 
     @Override
@@ -200,5 +203,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    //Cuando se hace click sobre la lista de reparaciones para abrir una nueva vista con todos los datos de esta
+    @Override
+    public void clickVerReparacionListener() {
+
+        Log.d("CAMBIO","ENTRO a cambiar la vista");
+        //Bundle b = null;
+        fragmentReparacionDetailView = (ReparacionDetailView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailView.TAG);
+        fragmentReparacionDetailView= new ReparacionDetailView();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.nav_contenedor_fragment,fragmentReparacionDetailView,ReparacionDetailView.TAG).addToBackStack(null)
+                .commit();
+        setTitle("Detalles de la Reparación.");
+        Log.d("CAMBIO","SE creo la nueva VISTA??");
+
     }
 }

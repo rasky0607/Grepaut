@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui;
+package com.pablolopezs.grepaut.ui.login.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
+import com.pablolopezs.grepaut.ui.login.LoginActivity;
 
 public class RegistroActivity extends AppCompatActivity {
 
@@ -64,7 +64,7 @@ public class RegistroActivity extends AppCompatActivity {
 
 
                 //Dirigirse al Login de nuevo
-                Intent intent = new Intent(RegistroActivity.this,LoginActivity.class);
+                Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();//Esta activity quedara finalizada al guaradar, ya que no se volvera esta de nuevo(como norma general).
             }

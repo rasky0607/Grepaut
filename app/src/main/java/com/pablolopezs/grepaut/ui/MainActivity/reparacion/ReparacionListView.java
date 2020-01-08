@@ -1,5 +1,6 @@
-package com.pablolopezs.grepaut.ui.MainActivity.reparacionlist;
+package com.pablolopezs.grepaut.ui.MainActivity.reparacion;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     private ReparacionListAdapter reparacionListAdapter;
     private  RecyclerView rvReparacion;
     ReparacionListContract.Presenter presenter;
+    clickVerReparacionListener clickVerReparacionListener;
 
     /*Crear una unica instancia de clase*/
     public static ReparacionListView  newInstance(Bundle args){
@@ -44,7 +46,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Para mantener los datos o estado al girar la actividad
-        setRetainInstance(true);
+        //setRetainInstance(true);
     }
 
     /*Justo despues de crear la vista*/
@@ -58,26 +60,44 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
 
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        clickVerReparacionListener=(clickVerReparacionListener)context;//TODO POR QUE?? (No entiendo la funcion de onAttach)
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        clickVerReparacionListener=null;//TODO POR QUE?? (No entiendo la funcion de onDetach)
+    }
+
     /*
-    Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones
-    */
+            Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones
+            */
     public void inicializarRvReparacion() {
         //1. Crear adapter
+
+        //Cuando se hace click en el ReciclerView
         reparacionListAdapter = new ReparacionListAdapter(new ReparacionListAdapter.manipularDatos() {
             @Override
             public void miOnLOngClick(int posicion) {
                 /*Eliminamos el elemento de la lista del Repositorio*/
-                if(presenter.eliminar(posicion))
+                presenter.eliminar(posicion);
+               /* if(presenter.eliminar(posicion))
                     Toast.makeText(getContext(),"Registro eliminado",Toast.LENGTH_SHORT);
                 else
-                    Toast.makeText(getContext(),"Un registro Facturado NO puede ser eliminado",Toast.LENGTH_LONG);
+                    Toast.makeText(getContext(),"Un registro Facturado NO puede ser eliminado",Toast.LENGTH_LONG);*/
 
                 reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
             }
+
             /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
             @Override
-            public void miClick(String msg) {
-                Toast.makeText(getContext(),msg,Toast.LENGTH_LONG);//TODO no muestra los toast al eliminar algo con exito falla o al intentar editar una reparacion
+            public void miClick() {
+                Log.d("CAMBIO","ENTRO a cambiar la vista");
+               clickVerReparacionListener.clickVerReparacionListener();
+                //Todo inflamos aqui otro fragment que muestrel detalle de esta reparacion??????
             }
 
         });
@@ -96,28 +116,33 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     public void hayDatos(ArrayList<Reparacion> list) {
      reparacionListAdapter.addAll(list);
      reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
-     Toast.makeText(getContext(),"Correcto",Toast.LENGTH_LONG);
     }
 
     @Override
     public void mostrarError(String msg) {
-        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG);
+        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void noDatos() {
-        Toast.makeText(getContext(),"NO hay datos",Toast.LENGTH_LONG);
+        Toast.makeText(getContext(),"NO hay datos",Toast.LENGTH_LONG).show();;
     }
 
     @Override
     public void mensaje(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG);
+        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
     }
 
 
     @Override
     public void setPresenter(ReparacionListContract.Presenter presenter) {
         this.presenter=presenter;
+    }
+
+    /*Interfaz que implementamos como escuchador para a la hora de clicar en un elemento de la vista, mostrar la vista de edicion con los datos de el elemento selecionado*/
+    public  interface clickVerReparacionListener{
+        void clickVerReparacionListener();
+
     }
     //endregion
 }

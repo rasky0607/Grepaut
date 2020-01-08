@@ -1,9 +1,7 @@
-package com.pablolopezs.grepaut.ui.MainActivity.reparacionlist;
+package com.pablolopezs.grepaut.ui.MainActivity.reparacion;
 
 import android.util.Log;
-import android.view.View;
 
-import com.pablolopezs.grepaut.adapter.ReparacionListAdapter;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
@@ -19,13 +17,14 @@ public class ReparacionListPresenter implements ReparacionListContract.Presenter
     @Override
     public void cargarDatos() {
         Log.d("PRUEBA", "ReparacionListPresenter: cargarDatos() ");
-        view.mensaje("Cargando datos...");
         if(ReparacionRepositories.getInstance().getList().isEmpty()) {
             view.noDatos();
             Log.d("PRUEBA", "ReparacionListPresenter: cargarDatos() VACIO ");
         }
-        else
+        else{
             view.hayDatos(ReparacionRepositories.getInstance().getList());
+            view.mensaje("Datos cargados.");
+        }
 
     }
 
@@ -36,10 +35,19 @@ public class ReparacionListPresenter implements ReparacionListContract.Presenter
         if(!reparacion.getEstadoFacturado())//Si esta reparacion NO esta facturada, podra eliminarse, de lo contrario no podra ser eliminada y se devolvera false.
         {
             ReparacionRepositories.getInstance().getList().remove(posicion);
+            view.mensaje("Reparacion eliminada con exito.");
             return true;
         }
-        else
+        else {
+            view.mensaje("Esta reparacion no puede eliminarse por que ya esta facturada.");
             return false;
+        }
+    }
+    //Muestra un elemento seleccionado en detalle
+    @Override
+    public void editar(Reparacion reparacion) {
+
+
     }
 
     @Override

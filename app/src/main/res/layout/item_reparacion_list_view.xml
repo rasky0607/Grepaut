@@ -87,6 +87,7 @@ las realizadas ese dia para ese vehiculo-->
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"
