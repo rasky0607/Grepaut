@@ -3,8 +3,6 @@ package com.pablolopezs.grepaut.data.model;
 import androidx.lifecycle.ViewModel;
 
 public class Reparacion extends ViewModel {
-
-
     //region Campos
     int numeroReparacion;
     String fecha;

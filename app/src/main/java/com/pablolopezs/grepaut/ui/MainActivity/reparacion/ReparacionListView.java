@@ -31,7 +31,6 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         ReparacionListView fragment = new ReparacionListView();
         fragment.setArguments(args);
         return fragment;
-
     }
 
     /*Crea/iInfla la vista*/
@@ -85,19 +84,15 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
             public void miOnLOngClick(int posicion) {
                 /*Eliminamos el elemento de la lista del Repositorio*/
                 presenter.eliminar(posicion);
-               /* if(presenter.eliminar(posicion))
-                    Toast.makeText(getContext(),"Registro eliminado",Toast.LENGTH_SHORT);
-                else
-                    Toast.makeText(getContext(),"Un registro Facturado NO puede ser eliminado",Toast.LENGTH_LONG);*/
 
                 reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
             }
 
             /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
             @Override
-            public void miClick() {
+            public void miClick(ArrayList<Reparacion> list) {//TODO POR AQUI!
                 Log.d("CAMBIO","ENTRO a cambiar la vista");
-               clickVerReparacionListener.clickVerReparacionListener();
+               clickVerReparacionListener.clickVerReparacionListener(list);
                 //Todo inflamos aqui otro fragment que muestrel detalle de esta reparacion??????
             }
 
@@ -142,7 +137,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
 
     /*Interfaz que implementamos como escuchador para a la hora de clicar en un elemento de la vista, mostrar la vista de edicion con los datos de el elemento selecionado*/
     public  interface clickVerReparacionListener{
-        void clickVerReparacionListener();
+        void clickVerReparacionListener(ArrayList<Reparacion> list);
 
     }
     //endregion

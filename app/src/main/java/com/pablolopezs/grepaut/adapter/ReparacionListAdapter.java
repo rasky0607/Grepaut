@@ -21,36 +21,35 @@ import java.util.Objects;
 
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
 
-    private ArrayList<Reparacion>listReparacion;
-    private  manipularDatos manipularDatos;
+    private ArrayList<Reparacion> listReparacion;
+    private manipularDatos manipularDatos;
+    private ArrayList<Reparacion> listRepaMismoCliyFecha;//Listado de reparacion recibidas por un cliente en una fecha sobre un vehiculo concreto
+
     //Constructor
-    public ReparacionListAdapter(manipularDatos manipularDatos){
+    public ReparacionListAdapter(manipularDatos manipularDatos) {
 
         this.listReparacion = new ArrayList<Reparacion>();
-        this.manipularDatos=manipularDatos;
+        this.manipularDatos = manipularDatos;
         //this.listReparacion = (ArrayList<Reparacion>) ReparacionRepositories.getInstance().getList();
-       // Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0).getNombreEmpresa());
+        // Log.d("PRUEBA", "ADAPTER: Construcor "+listReparacion.get(0).getNombreEmpresa());
 
 
     }
 
-    public void add(Reparacion reparacion){
+    public void add(Reparacion reparacion) {
         this.listReparacion.add(reparacion);
     }
 
-    public void addAll(ArrayList<Reparacion> list)
-    {
+    public void addAll(ArrayList<Reparacion> list) {
         this.listReparacion.addAll(list);
     }
-
-
 
 
     //Inflamos la vista y la convertimos en ViewHolder(Es decir un bloque del listado del recyclerView
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reparacion_list_view,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_reparacion_list_view, parent, false);
         Log.d("PRUEBA", "ADAPTER: onCreateViewHolder()");
         return new ViewHolder(v);
     }
@@ -63,22 +62,19 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         //holder.tvServicio.setText(listReparacion.get(position).getNombreServicio());
         //holder.tvNomCliente.setText(Integer.toString(listReparacion.get(position).getIdcliente()));
         holder.tvNumeroReparacion.setText(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
-        holder.tvFecha.setText("Fecha: "+listReparacion.get(position).getFecha());
-        holder.tvMatriculaCoche.setText("Matricula: "+listReparacion.get(position).getMatriculaCoche());
+        holder.tvFecha.setText("Fecha: " + listReparacion.get(position).getFecha());
+        holder.tvMatriculaCoche.setText("Matricula: " + listReparacion.get(position).getMatriculaCoche());
 
 
         /*Segun si esta factura o no, el fondo tendra ImagenButtom visible o invisible
          facturada= true -> visible
          facturada  = false -> invisible */
-        if(listReparacion.get(position).getEstadoFacturado())
-        {
+        if (listReparacion.get(position).getEstadoFacturado()) {
             //holder.listReparacionItem.setBackgroundResource(R.color.colorReparacionSiFacturada);
             holder.estadoFacturado.setVisibility(View.VISIBLE);
             holder.estadoFacturado.setBackgroundResource(R.drawable.ic_facturado);
 
-        }
-        else
-        {
+        } else {
             //holder.listReparacionItem.setBackgroundResource(R.color.colorReparacionNoFacturarada);
             holder.estadoFacturado.setVisibility(View.INVISIBLE);
         }
@@ -86,25 +82,35 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
          /*Segun si esta finalizada la reparacion o no,el fondo de el circulito que indica el numero de reparacion tendra un color
          estadoDeReparacion= true -> color verde, es decir (finalizada)
          estadoDeReparacion  = false -> color rojo (en curso o sin finalizar)*/
-        if(listReparacion.get(position).getEstadoReparacion())
-        {
+        if (listReparacion.get(position).getEstadoReparacion()) {
             //holder.icon.setShapeColor(R.color.colorReparacionFinalizada);
             holder.tvNumeroReparacion.setBackgroundResource(R.drawable.circulo_lista_repa_ok);
 
-        }
-        else{
+        } else {
             //holder.icon.setShapeColor(R.color.colorReparacionNoFinalizada);
             holder.tvNumeroReparacion.setBackgroundResource(R.drawable.ciruclo_lista_repa_no_ok);
         }
 
-        Log.d("PRUEBA", "ADAPTER: onBindViewHolder()"+ holder.tvFecha.getText());
+        Log.d("PRUEBA", "ADAPTER: onBindViewHolder()" + holder.tvFecha.getText());
 
         /*Con el click editamos un elemento(Aun que reparaciones no tiene permitido editarse, pero se enviara u n mensaje al usuario de recordatorio)*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //manipularDatos.miClick(listReparacion.get(holder.getAdapterPosition()));
-                manipularDatos.miClick();
+                //manipularDatos.miClick(listReparacion.get(holder.getAdapterPosition()));
+                /*-------------POR AQUI------------*/
+                int posReparacionSelecionada = holder.getAdapterPosition();
+                Reparacion reparacionBuscada = listReparacion.get(posReparacionSelecionada);
+                listRepaMismoCliyFecha = new ArrayList<Reparacion>();
+                //Buscamos elementos de la lista con el  mismo Cliente,fecha y matricula de reparacion.
+                for (Reparacion item : listReparacion) {
+                    if (item.getIdcliente() == reparacionBuscada.getIdcliente() && item.getFecha().equals(reparacionBuscada.getFecha()) && item.getMatriculaCoche().equals(reparacionBuscada.getMatriculaCoche())) {
+                        listRepaMismoCliyFecha.add(item);
+                    }
+                }
+
+                manipularDatos.miClick(listRepaMismoCliyFecha);
+                /*-------------------------*/
                 //manipularDatos.miClick("NO se puede editar una reparación, eliminela y cree una nueva.");
             }
         });
@@ -114,7 +120,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             @Override
             public boolean onLongClick(View v) {
                 //Si el imagenButton llamado "estadoFacturado" NO esta visible, es que esa reapracion no esta facturada, por lo que puede ser eliminada
-                if(holder.estadoFacturado.getVisibility()!= View.VISIBLE) {
+                if (holder.estadoFacturado.getVisibility() != View.VISIBLE) {
                     //Eliminamos el elemento de la lista del Adapter
                     listReparacion.remove(holder.getAdapterPosition());
                     //Pasamos la posicion del elemento en la lista para eliminar el elemento de la lista del Repositorio
@@ -132,7 +138,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     }
 
     //Clase intertna
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         //MaterialLetterIcon icon;
         //TextView tvServicio;
         //TextView tvNomCliente;
@@ -144,7 +150,6 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         ConstraintLayout listReparacionItem;
 
 
-
         //Constructor
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -153,10 +158,10 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             //tvServicio=itemView.findViewById(R.id.tvServicio);
             //tvNomCliente=itemView.findViewById(R.id.tvNomCliente);
             tvNumeroReparacion = itemView.findViewById(R.id.tvNumeroReparacion);
-            tvMatriculaCoche=itemView.findViewById(R.id.tvMatriculaCoche);
-            tvFecha=itemView.findViewById(R.id.tvFecha);
+            tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
+            tvFecha = itemView.findViewById(R.id.tvFecha);
             listReparacionItem = itemView.findViewById(R.id.listReparacionItem);
-            estadoFacturado=itemView.findViewById(R.id.estadoFacturado);
+            estadoFacturado = itemView.findViewById(R.id.estadoFacturado);
             Log.d("PRUEBA", "Clase interna ViewHolder");
 
         }
@@ -164,9 +169,10 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     }
 
     /*Interfaz implementadas para los metodos que necesitamos ejecutar en el evento onClick o onLongClick de el Adapter*/
-    public  interface manipularDatos{
+    public interface manipularDatos {
         void miOnLOngClick(int posicion);
-        void miClick();//Envia un mensaje informando de que no puede editarse un regiistro de reparacion.
-    }
 
+        void miClick(ArrayList<Reparacion> list);//Envia al usuario a un listado de las reparaciones con todo detalle que recibio un cliente en una fecha para un vehiculo concreto
+
+    }
 }

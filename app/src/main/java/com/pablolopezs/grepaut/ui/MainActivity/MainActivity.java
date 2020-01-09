@@ -35,6 +35,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -207,8 +209,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Cuando se hace click sobre la lista de reparaciones para abrir una nueva vista con todos los datos de esta
     @Override
-    public void clickVerReparacionListener() {
+    public void clickVerReparacionListener(ArrayList<Reparacion> list) {
 
+        //TODO PENDIENTE DE PASAR LA LISTA AL ADAPTER DE ReparacionDetailListAdapter
         Log.d("CAMBIO","ENTRO a cambiar la vista");
         //Bundle b = null;
         fragmentReparacionDetailView = (ReparacionDetailView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailView.TAG);
@@ -221,4 +224,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("CAMBIO","SE creo la nueva VISTA??");
 
     }
+
 }
