@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui.MainActivity.reparacion;
+package com.pablolopezs.grepaut.ui.reparacion;
 
 import android.util.Log;
 
@@ -26,6 +26,20 @@ public class ReparacionListPresenter implements ReparacionListContract.Presenter
             view.mensaje("Datos cargados.");
         }
 
+    }
+
+    /**Carga los datos de una lista de reparaciones efectuadas sobre un mismo cliente enun mismo dia sobre un mismo vehiculo*/
+    @Override
+    public void cargarDatosDeDetallesDeReparacion() {
+        Log.d("PRUEBA", "ReparacionListPresenter: cargarDatos() ");
+        if(ReparacionRepositories.getInstance().getListReparacionesComunes().isEmpty()) {
+            view.noDatos();
+            Log.d("PRUEBA", "ReparacionListPresenter: cargarDatos() VACIO ");
+        }
+        else{
+            view.hayDatos(ReparacionRepositories.getInstance().getListReparacionesComunes());
+            view.mensaje("Datos cargados.");
+        }
     }
 
     //Elimina la reparacion  de una determinada posicion de la lista de ReparacionRepositories

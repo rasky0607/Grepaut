@@ -6,12 +6,14 @@ public class Reparacion extends ViewModel {
     //region Campos
     int numeroReparacion;
     String fecha;
-    int idcliente;
+    int idCliente;
+    String nombreCliente;
     String matriculaCoche;
     String nombreServicio;
     boolean estadoReparacion;// En funcion de si es true o false se escribira un string determinado u otro (En curso, Finalizada)
     boolean estadoFacturado;// En funcion de si es true o false se escribira un string determinado u otro (Facturado, No Facturado)
     String emailUsuario;
+    String nombreUsuario;
     String nombreEmpresa;
     //endregion
 
@@ -32,12 +34,20 @@ public class Reparacion extends ViewModel {
         this.fecha = fecha;
     }
 
-    public int getIdcliente() {
-        return idcliente;
+    public int getIdCliente() {
+        return idCliente;
     }
 
-    public void setIdcliente(int idcliente) {
-        this.idcliente = idcliente;
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
 
     public String getMatriculaCoche() {
@@ -80,6 +90,14 @@ public class Reparacion extends ViewModel {
         this.emailUsuario = emailUsuario;
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
     public String getNombreEmpresa() {
         return nombreEmpresa;
     }
@@ -94,16 +112,18 @@ public class Reparacion extends ViewModel {
     //endregion
 
     //region Constructores
-    public Reparacion(int numeroReparacion, String fecha, int idcliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario, String nombreEmpresa) {
+    public Reparacion(int numeroReparacion, String fecha,int idCliente, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario, String nombreEmpresa) {
         this.numeroReparacion = numeroReparacion;
         this.fecha = fecha;
-        this.idcliente = idcliente;
+        this.idCliente = idCliente;
+        this.nombreCliente = nombreCliente;
         this.matriculaCoche = matriculaCoche;
         this.nombreServicio = nombreServicio;
         this.estadoReparacion = estadoReparacion;
         this.estadoFacturado = estadoFacturacdo;
         this.emailUsuario = emailUsuario;
         this.nombreEmpresa = nombreEmpresa;
+        this.nombreUsuario=nombreUsuario;
     }
 
     public  Reparacion() {

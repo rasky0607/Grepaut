@@ -1,4 +1,4 @@
-package com.pablolopezs.grepaut.ui.MainActivity.reparacion;
+package com.pablolopezs.grepaut.ui.reparacion;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -90,9 +90,9 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
 
             /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
             @Override
-            public void miClick(ArrayList<Reparacion> list) {//TODO POR AQUI!
+            public void miClick() {//TODO POR AQUI!
                 Log.d("CAMBIO","ENTRO a cambiar la vista");
-               clickVerReparacionListener.clickVerReparacionListener(list);
+               clickVerReparacionListener.clickVerReparacionListener();
                 //Todo inflamos aqui otro fragment que muestrel detalle de esta reparacion??????
             }
 
@@ -137,7 +137,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
 
     /*Interfaz que implementamos como escuchador para a la hora de clicar en un elemento de la vista, mostrar la vista de edicion con los datos de el elemento selecionado*/
     public  interface clickVerReparacionListener{
-        void clickVerReparacionListener(ArrayList<Reparacion> list);
+        void clickVerReparacionListener();
 
     }
     //endregion

@@ -15,9 +15,7 @@ import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
 
@@ -60,7 +58,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
         //holder.icon.setLetter(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
         //holder.tvServicio.setText(listReparacion.get(position).getNombreServicio());
-        //holder.tvNomCliente.setText(Integer.toString(listReparacion.get(position).getIdcliente()));
+        //holder.tvNomCliente.setText(Integer.toString(listReparacion.get(position).getNombreCliente()));
         holder.tvNumeroReparacion.setText(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
         holder.tvFecha.setText("Fecha: " + listReparacion.get(position).getFecha());
         holder.tvMatriculaCoche.setText("Matricula: " + listReparacion.get(position).getMatriculaCoche());
@@ -98,18 +96,21 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             @Override
             public void onClick(View v) {
                 //manipularDatos.miClick(listReparacion.get(holder.getAdapterPosition()));
-                /*-------------POR AQUI------------*/
+                /*-------------Todo POR AQUI------------*/
                 int posReparacionSelecionada = holder.getAdapterPosition();
                 Reparacion reparacionBuscada = listReparacion.get(posReparacionSelecionada);
                 listRepaMismoCliyFecha = new ArrayList<Reparacion>();
                 //Buscamos elementos de la lista con el  mismo Cliente,fecha y matricula de reparacion.
                 for (Reparacion item : listReparacion) {
-                    if (item.getIdcliente() == reparacionBuscada.getIdcliente() && item.getFecha().equals(reparacionBuscada.getFecha()) && item.getMatriculaCoche().equals(reparacionBuscada.getMatriculaCoche())) {
+                    if (item.getNombreCliente() == reparacionBuscada.getNombreCliente() && item.getFecha().equals(reparacionBuscada.getFecha()) && item.getMatriculaCoche().equals(reparacionBuscada.getMatriculaCoche())) {
                         listRepaMismoCliyFecha.add(item);
                     }
                 }
-
-                manipularDatos.miClick(listRepaMismoCliyFecha);
+                if(listRepaMismoCliyFecha.size()>0) {
+                    //Cargamos esta lista de reparaciones concretas de un cliente en una determinada fecha sobre un mismo vehiculo en repository para recogerla conReparacionDetailListAdapter
+                    ReparacionRepositories.getInstance().setListReparacionesComunes(listRepaMismoCliyFecha);
+                }
+                manipularDatos.miClick();
                 /*-------------------------*/
                 //manipularDatos.miClick("NO se puede editar una reparación, eliminela y cree una nueva.");
             }
@@ -147,7 +148,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         TextView tvFecha;
         //TODO la idea es que este ImgenButtom tenga un evento click el cual si se lanza llevará al usuario al la información de esa factura(todas las reparaciones de ese dia para ese vehiculo)
         ImageButton estadoFacturado;
-        ConstraintLayout listReparacionItem;
+
 
 
         //Constructor
@@ -160,7 +161,6 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             tvNumeroReparacion = itemView.findViewById(R.id.tvNumeroReparacion);
             tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
             tvFecha = itemView.findViewById(R.id.tvFecha);
-            listReparacionItem = itemView.findViewById(R.id.listReparacionItem);
             estadoFacturado = itemView.findViewById(R.id.estadoFacturado);
             Log.d("PRUEBA", "Clase interna ViewHolder");
 
@@ -172,7 +172,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     public interface manipularDatos {
         void miOnLOngClick(int posicion);
 
-        void miClick(ArrayList<Reparacion> list);//Envia al usuario a un listado de las reparaciones con todo detalle que recibio un cliente en una fecha para un vehiculo concreto
+        void miClick();//Envia al usuario a un listado de las reparaciones con todo detalle que recibio un cliente en una fecha para un vehiculo concreto
 
     }
 }

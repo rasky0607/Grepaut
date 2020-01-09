@@ -1,9 +1,7 @@
-package com.pablolopezs.grepaut.ui.MainActivity.reparacion;
+package com.pablolopezs.grepaut.ui.reparacion;
 
 import com.pablolopezs.grepaut.ui.Base.Base;
 import com.pablolopezs.grepaut.data.model.Reparacion;
-
-import java.util.ArrayList;
 
 public class ReparacionListContract{
 
@@ -11,10 +9,12 @@ public class ReparacionListContract{
 
         void setPresenter(ReparacionListContract.Presenter presenter);
 
+
     }
 
     public interface Presenter{
         void cargarDatos();
+        void cargarDatosDeDetallesDeReparacion();
         boolean eliminar(int posicion);
         void editar(Reparacion reparacion);
         void anadir(Reparacion reparacion);

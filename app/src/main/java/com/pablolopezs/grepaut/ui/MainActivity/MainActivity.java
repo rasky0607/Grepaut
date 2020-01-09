@@ -12,20 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
-import com.pablolopezs.grepaut.data.model.Reparacion;
-import com.pablolopezs.grepaut.ui.MainActivity.cliente.ClienteListView;
-import com.pablolopezs.grepaut.ui.MainActivity.factura.FacturaListView;
-import com.pablolopezs.grepaut.ui.MainActivity.reparacion.ReparacionDetailView;
-import com.pablolopezs.grepaut.ui.MainActivity.reparacion.ReparacionListPresenter;
-import com.pablolopezs.grepaut.ui.MainActivity.reparacion.ReparacionListView;
-import com.pablolopezs.grepaut.ui.MainActivity.servicio.ServicioListView;
+import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
+import com.pablolopezs.grepaut.ui.factura.FacturaListView;
+import com.pablolopezs.grepaut.ui.reparacion.ReparacionDetailListView;
+import com.pablolopezs.grepaut.ui.reparacion.ReparacionListPresenter;
+import com.pablolopezs.grepaut.ui.reparacion.ReparacionListView;
+import com.pablolopezs.grepaut.ui.servicio.ServicioListView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -35,8 +31,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -44,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private  ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
-    private ReparacionDetailView fragmentReparacionDetailView;
+    private ReparacionDetailListView fragmentReparacionDetailView;
 
 
     @Override
@@ -209,19 +203,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Cuando se hace click sobre la lista de reparaciones para abrir una nueva vista con todos los datos de esta
     @Override
-    public void clickVerReparacionListener(ArrayList<Reparacion> list) {
+    public void clickVerReparacionListener() {
 
         //TODO PENDIENTE DE PASAR LA LISTA AL ADAPTER DE ReparacionDetailListAdapter
         Log.d("CAMBIO","ENTRO a cambiar la vista");
         //Bundle b = null;
-        fragmentReparacionDetailView = (ReparacionDetailView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailView.TAG);
-        fragmentReparacionDetailView= new ReparacionDetailView();
+        fragmentReparacionDetailView = (ReparacionDetailListView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailListView.TAG);
+        fragmentReparacionDetailView= new ReparacionDetailListView();
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.nav_contenedor_fragment,fragmentReparacionDetailView,ReparacionDetailView.TAG).addToBackStack(null)
+                .replace(R.id.nav_contenedor_fragment,fragmentReparacionDetailView, ReparacionDetailListView.TAG).addToBackStack(null)
                 .commit();
+        presenterReparacion= new ReparacionListPresenter(fragmentReparacionDetailView);
+        fragmentReparacionDetailView.setPresenter(presenterReparacion);
+
         setTitle("Detalles de la Reparación.");
-        Log.d("CAMBIO","SE creo la nueva VISTA??");
+
 
     }
 

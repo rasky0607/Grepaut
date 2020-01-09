@@ -64,8 +64,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
-
                 startActivity(intent);
                 finish();//Terminamos esta activity, ya que una vez dentro no va voler a Login
             }

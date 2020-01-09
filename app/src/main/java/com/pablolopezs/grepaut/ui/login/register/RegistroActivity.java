@@ -62,7 +62,6 @@ public class RegistroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Guardar datos
 
-
                 //Dirigirse al Login de nuevo
                 Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
                 startActivity(intent);
