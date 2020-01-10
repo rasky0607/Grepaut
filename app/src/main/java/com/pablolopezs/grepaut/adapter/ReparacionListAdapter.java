@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
  *  que se mostrara en ReparacionListView*/
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
-
+//TODO pendiente de agregar  RecyclerView.ItemDecoration en las clases Adapter, para poder implementar los eventos de arrastrar hacia los laterales los viewHolder de los recycler
     private ArrayList<Reparacion> listReparacion;
     private manipularDatos manipularDatos;
     private ArrayList<Reparacion> listRepaMismoCliyFecha;//Listado de reparacion recibidas por un cliente en una fecha sobre un vehiculo concreto
@@ -96,8 +96,6 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //manipularDatos.miClick(listReparacion.get(holder.getAdapterPosition()));
-                /*-------------Todo POR AQUI------------*/
                 int posReparacionSelecionada = holder.getAdapterPosition();
                 Reparacion reparacionBuscada = listReparacion.get(posReparacionSelecionada);
                 listRepaMismoCliyFecha = new ArrayList<Reparacion>();
@@ -112,12 +110,10 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
                     ReparacionRepositories.getInstance().setListReparacionesComunes(listRepaMismoCliyFecha);
                 }
                 manipularDatos.miClick();
-                /*-------------------------*/
-                //manipularDatos.miClick("NO se puede editar una reparación, eliminela y cree una nueva.");
             }
         });
 
-        /*Con el  long click eliminamos un elemento*/
+        /*Con el long click eliminamos un elemento(POR AHORA)*/
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -132,6 +128,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
                 return false;
             }
         });
+
     }
 
     @Override
@@ -141,9 +138,6 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
     //Clase intertna
     class ViewHolder extends RecyclerView.ViewHolder {
-        //MaterialLetterIcon icon;
-        //TextView tvServicio;
-        //TextView tvNomCliente;
         TextView tvNumeroReparacion;
         TextView tvMatriculaCoche;
         TextView tvFecha;
@@ -156,15 +150,10 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //Asignamos/Asociamos componentes del item_reparacion_list_view al holder del recyclerView fragment_reparacion_list_view
-            //icon = itemView.findViewById(R.id.icon);
-            //tvServicio=itemView.findViewById(R.id.tvServicio);
-            //tvNomCliente=itemView.findViewById(R.id.tvNomCliente);
             tvNumeroReparacion = itemView.findViewById(R.id.tvNumeroReparacion);
             tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
             tvFecha = itemView.findViewById(R.id.tvFecha);
             estadoFacturado = itemView.findViewById(R.id.estadoFacturado);
-            Log.d("PRUEBA", "Clase interna ViewHolder");
-
         }
 
     }

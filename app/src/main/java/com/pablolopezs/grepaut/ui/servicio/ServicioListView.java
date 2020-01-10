@@ -14,6 +14,12 @@ import com.pablolopezs.grepaut.R;
 public class ServicioListView extends Fragment {
 
     public static final String TAG = "ServicioListView";
+
+    public static ServicioListView newInstance() {
+        ServicioListView fragment = new ServicioListView();
+        return fragment;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

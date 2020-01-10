@@ -16,16 +16,8 @@ import com.pablolopezs.grepaut.R;
 public class ReparacionAdd extends Fragment {
     public static final String TAG="ReparacionAdd";
 
-    public ReparacionAdd() {
-        // Required empty public constructor
-    }
-
     public static ReparacionAdd newInstance() {
         ReparacionAdd fragment = new ReparacionAdd();
-        /*Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);*/
         return fragment;
     }
 

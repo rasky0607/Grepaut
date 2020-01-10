@@ -45,6 +45,7 @@
     <string name="menu_facturas">Facturas</string>
     <string name="menu_compartir">Compartir</string>
     <string name="menu_enviar">Enviar</string>
+    <string name="anadir_reparacion">"Añadir Reparación.</string>
     <string name="nav_header_subtitulo">Developez</string>
     <string name="ajustes">Ajustes</string>
     <string name="SplashDelLogo">Imagen del logo de la app</string>

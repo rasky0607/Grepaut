@@ -66,18 +66,16 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        clickVerReparacionListener=(clickVerReparacionListener)context;//TODO POR QUE?? (No entiendo la funcion de onAttach)
+        clickVerReparacionListener=(clickVerReparacionListener)context;//Ayuda de Adri, pero nola entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onAttach)
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        clickVerReparacionListener=null;//TODO POR QUE?? (No entiendo la funcion de onDetach)
+        clickVerReparacionListener=null;//Ayuda de Adri, pero nola entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onDetach)
     }
 
-    /*
-            Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones
-            */
+    /**Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones*/
     public void inicializarRvReparacion() {
         //1. Crear adapter
 
@@ -110,7 +108,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         Log.d("PRUEBA", "ReparacionListView: initRvReparacion() ");
     }
 
-    //region Metodos implementados por la interfaz View
+    /*region Metodos implementados por la interfaz View*/
     @Override
     public void hayDatos(ArrayList<Reparacion> list) {
      reparacionListAdapter.addAll(list);
@@ -137,7 +135,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     public void setPresenter(ReparacionListContract.Presenter presenter) {
         this.presenter=presenter;
     }
-
+/**-------------------------------------------------------------------------------*/
     /*Interfaz que implementamos como escuchador para a la hora de clicar en un elemento de la vista, mostrar la vista de edicion con los datos de el elemento selecionado*/
     public  interface clickVerReparacionListener{
         void clickVerReparacionListener();
