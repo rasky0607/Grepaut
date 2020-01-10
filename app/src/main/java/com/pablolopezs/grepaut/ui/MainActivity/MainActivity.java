@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -31,6 +32,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.Toast;
+
+import java.util.List;
 
 /**Clase que gestiona las opciones del nuestra barra
  * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
@@ -84,11 +87,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //endregion
 
         /**Abre el fragmento que permite añadir un elemento a la lista, segun en el listado que estamos en este momento*/
-        fabadd.setOnClickListener(new View.OnClickListener() {
+       fabadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();*/
                 Toast.makeText(MainActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
                 String titulo = getTitle().toString();
                 switch (titulo)
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     fragmentReparacionListView= ReparacionListView.newInstance(null);
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).addToBackStack(null).commit();
                 presenterReparacion= new ReparacionListPresenter(fragmentReparacionListView);
                 fragmentReparacionListView.setPresenter(presenterReparacion);
                Log.d("PRUEBA", "PULSASTE REPARCIONES");
@@ -259,6 +260,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onStart() {
         super.onStart();
+    }
+
+    /**Cuando el usuario preciona el boton de back*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        /**Segun el fragmento al que vamos a volver en la pila,
+         *  renombramos el titulo de la toolbar, con el que controlamos el FloatingActionButton de añadir,
+         *  de este modo según en el fragmento de listado que nos encontremos, como ReparacionListView,
+         *  mostraremos un fragmento de añadir o otro.
+         *  Tambien volveremos a mostrar o ocultar el boton de añadir,
+         *  segun si esta en uno de estos listados generales como el anteriormente mencionado o no*/
+        switch (getSupportFragmentManager().getFragments().get(0).getTag())
+        {
+            case ReparacionListView.TAG:
+                setTitle(R.string.menu_reparaciones);
+                break;
+            case ClienteListView.TAG:
+                setTitle(R.string.menu_clientes);
+                break;
+            case ServicioListView.TAG:
+                setTitle(R.string.menu_servicios);
+                break;
+            case FacturaListView.TAG:
+                setTitle(R.string.menu_facturas);
+                break;
+
+        }
+            ocultarMostrarFloatinButtom();
     }
 
     //Cuando se hace click sobre la lista de reparaciones para abrir una nueva vista con todos los datos de esta

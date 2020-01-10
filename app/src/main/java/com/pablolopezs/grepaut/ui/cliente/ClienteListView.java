@@ -13,7 +13,7 @@ import com.pablolopezs.grepaut.R;
 
 public class ClienteListView extends Fragment {
 
-    public static  String TAG = "Fragmento Cliente";
+    public static final String TAG = "ClienteListView";
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cliente_list_view, container, false);

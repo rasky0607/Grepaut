@@ -13,8 +13,7 @@ import com.pablolopezs.grepaut.R;
 
 public class FacturaListView extends Fragment {
 
-
-
+    public static final String TAG = "FacturaListView";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 

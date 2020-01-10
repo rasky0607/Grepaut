@@ -23,7 +23,7 @@ import java.util.ArrayList;
  *  en el sistema de una determinada cuenta*/
 public class ReparacionListView extends Fragment implements  ReparacionListContract.View {
 
-    public static  String TAG = "ReparacionListView";
+    public static final  String TAG = "ReparacionListView";
     private ReparacionListAdapter reparacionListAdapter;
     private  RecyclerView rvReparacion;
     ReparacionListContract.Presenter presenter;
