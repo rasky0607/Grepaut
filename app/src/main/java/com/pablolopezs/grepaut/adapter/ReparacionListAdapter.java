@@ -16,7 +16,8 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 import java.util.ArrayList;
-
+/**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
+ *  que se mostrara en ReparacionListView*/
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
 
     private ArrayList<Reparacion> listReparacion;

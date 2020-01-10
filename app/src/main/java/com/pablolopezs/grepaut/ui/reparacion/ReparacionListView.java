@@ -18,6 +18,9 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
 
+/**Frament que gestiona una lista general
+ *  de todas las reparaciones existentes
+ *  en el sistema de una determinada cuenta*/
 public class ReparacionListView extends Fragment implements  ReparacionListContract.View {
 
     public static  String TAG = "ReparacionListView";

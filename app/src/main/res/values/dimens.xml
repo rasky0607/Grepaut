@@ -21,9 +21,12 @@
     <dimen name="lmtvToptvTipoUsuario">15dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
+
+    <!--Dimensiones de listados-->
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="letter_icon_size">25dp</dimen>
-    <dimen name="tamnioNumReparacion">25dp
-    </dimen><!--Libreria externa de 'com.github.ivbaranov:materiallettericon:0.2.3'-->
+    <dimen name="tamnioNumReparacion">25dp</dimen><!--Libreria externa de 'com.github.ivbaranov:materiallettericon:0.2.3'-->
+    <dimen name="listViewPadding">8dp</dimen>
+    <dimen name="listViewDivider">4dp</dimen>
 
 </resources>

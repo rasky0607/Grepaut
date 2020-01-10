@@ -5,7 +5,8 @@
     android:id="@+id/listReparacionItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <!--Libreria externa de 'com.github.ivbaranov:materiallettericon:0.2.3'-->
 
@@ -28,7 +29,6 @@
         app:mli_shape_color="@color/colorReparacionFinalizada"
         app:mli_shape_type="circle" />
     -->
-
 
     <TextView
         android:id="@+id/tvNumeroReparacion"
@@ -100,15 +100,12 @@ las realizadas ese dia para ese vehiculo-->
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/separadorgris"
+        android:layout_height="@dimen/listViewDivider"
+        android:background="@color/whiteBrokenEgg"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

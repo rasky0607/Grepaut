@@ -17,7 +17,7 @@ import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 import java.util.ArrayList;
 
 /**
- * Esta clase  listara los detalles de las reparaciones realizadas
+ * Esta clase mostrara el fragment que listara los detalles de las reparaciones realizadas
  * a un determinado cliente en una determinada fecha a un determinado vehiculo de este, tras hacer click
  * en una de las reparaciones del listado del layout fragment_reparacion_list_view ejecutado sobre la clase ReparacionListView*/
 public class ReparacionDetailListAdapter extends RecyclerView.Adapter<ReparacionDetailListAdapter.ViewHolder> {

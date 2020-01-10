@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
 import com.pablolopezs.grepaut.ui.factura.FacturaListView;
+import com.pablolopezs.grepaut.ui.reparacion.ReparacionAdd;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionDetailListView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListPresenter;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListView;
@@ -31,14 +32,18 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
+/**Clase que gestiona las opciones del nuestra barra
+ * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
 
     private AppBarConfiguration mAppBarConfiguration;
+    private FloatingActionButton fabadd;
     private  DrawerLayout drawer=null;
     private NavigationView navigationView;
     private  ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
     private ReparacionDetailListView fragmentReparacionDetailView;
+    private ReparacionAdd fragmentoReparacionAdd;
 
 
     @Override
@@ -47,14 +52,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = findViewById(R.id.toolbar);//enlazamos la barra de la toolbar
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fabadd =(FloatingActionButton) findViewById(R.id.fabadd);
         //Componentes para enlazar la barra de navegacion y cada una de sus opciones.
         //Final DrawerLayout drawer drawer = findViewById(R.id.drawer_layout);
          drawer = findViewById(R.id.drawer_layout);
          navigationView = findViewById(R.id.nav_view);
 
-        setSupportActionBar(toolbar);// Seteamos o cargamos la toolbar
+        setSupportActionBar(toolbar);// Seteamos/Cargamos la toolbar
 
+//region Basura que puede que podamos eliminar más tarde
         /*Consejo de Niko a la solucion que tenia aplicada yo respecto al inflado de los fragment de forma manual en el (fragment_content_main),
         Inflando el boton que desplega el menu lateral (conocido como hamburguer)*/
         /*----------------------------------------------------------------------*/
@@ -75,13 +81,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });*/
         /*----------------------------------------------------------------------*/
+//endregion
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        /**Abre el fragmento que permite añadir un elemento a la lista, segun en el listado que estamos en este momento*/
+        fabadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
                 Toast.makeText(MainActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
+                String titulo = getTitle().toString();
+                switch (titulo)
+                {
+                    case "Reparaciones":
+                        //Abrimos fragment añadir de Reparaciones
+                        fragmentoReparacionAdd = (ReparacionAdd) getSupportFragmentManager().findFragmentByTag(fragmentoReparacionAdd.TAG);
+                        fragmentoReparacionAdd= new ReparacionAdd();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.nav_contenedor_fragment,fragmentReparacionDetailView, ReparacionDetailListView.TAG).addToBackStack(null)
+                                .commit();
+
+                        //presenterReparacion= new ReparacionListPresenter(fragmentReparacionDetailView);
+                        //fragmentoReparacionAdd.setPresenter(presenterReparacion);
+                        break;
+                    case "Clientes":
+                        //Abrimos fragment añadir de Cliente
+                        break;
+                    case "Servicios":
+                        //Abrimos fragment añadir de Servicios
+                        break;
+                    case "Facturas":
+                        //Abrimos fragment añadir de Facturas
+                        break;
+
+                }
+                ocultarMostrarFloatinButtom();
             }
         });
 
@@ -126,6 +161,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    private void ocultarMostrarFloatinButtom(){
+        String titulo = getTitle().toString();
+        switch (titulo)
+        {
+            case "Reparaciones":
+               fabadd.show();
+                break;
+            case "Clientes":
+                fabadd.show();
+                break;
+            case "Servicios":
+                fabadd.show();
+                break;
+            case "Facturas":
+                fabadd.show();
+                break;
+             default:
+                 fabadd.hide();
+                 break;
+
+        }
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -155,8 +214,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if(fragmentReparacionListView==null)
                 {
                     fragmentReparacionListView= ReparacionListView.newInstance(null);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
                 presenterReparacion= new ReparacionListPresenter(fragmentReparacionListView);
                 fragmentReparacionListView.setPresenter(presenterReparacion);
                Log.d("PRUEBA", "PULSASTE REPARCIONES");
@@ -192,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Creeamos el navegador desplegable
         drawer.closeDrawer(GravityCompat.START);
+        ocultarMostrarFloatinButtom();
 
         return true;
     }
@@ -207,7 +267,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //TODO PENDIENTE DE PASAR LA LISTA AL ADAPTER DE ReparacionDetailListAdapter
         Log.d("CAMBIO","ENTRO a cambiar la vista");
-        //Bundle b = null;
         fragmentReparacionDetailView = (ReparacionDetailListView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailListView.TAG);
         fragmentReparacionDetailView= new ReparacionDetailListView();
         getSupportFragmentManager()
@@ -218,6 +277,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentReparacionDetailView.setPresenter(presenterReparacion);
 
         setTitle("Detalles de la Reparación.");
+        ocultarMostrarFloatinButtom();
 
 
     }

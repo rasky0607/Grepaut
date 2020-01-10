@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.ui.login.LoginActivity;
 
+/**Activity que controla los registros de nuevos usuaraios*/
 public class RegistroActivity extends AppCompatActivity {
 
     private Button btnguardar;
@@ -29,9 +30,6 @@ public class RegistroActivity extends AppCompatActivity {
     private TextInputEditText tednombreempresa;
     private RadioButton rbAdministrador;
     private RadioButton rbUsuario;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
