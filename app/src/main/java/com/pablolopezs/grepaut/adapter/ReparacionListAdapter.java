@@ -21,7 +21,7 @@ import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 import java.util.ArrayList;
 /**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
  *  que se mostrara en ReparacionListView*/
-public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> {
+public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac {
 //TODO pendiente de agregar  RecyclerView.ItemDecoration en las clases Adapter, para poder implementar los eventos de arrastrar hacia los laterales los viewHolder de los recycler
     private ArrayList<Reparacion> listReparacion;
     private manipularDatos manipularDatos;
@@ -106,14 +106,14 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             @Override
             public boolean onLongClick(View v) {
                 //Si el imagenButton llamado "estadoFacturado" NO esta visible, es que esa reapracion no esta facturada, por lo que puede ser eliminada
-                if (holder.estadoFacturado.getVisibility() != View.VISIBLE) {
+              /* if (holder.estadoFacturado.getVisibility() != View.VISIBLE) {
                     //Eliminamos el elemento de la lista del Adapter
                     listReparacion.remove(holder.getAdapterPosition());
                     //Pasamos la posicion del elemento en la lista para eliminar el elemento de la lista del Repositorio
                     manipularDatos.miOnLOngClick(holder.getAdapterPosition());
                     Log.d("PRUEBA", "ADAPTER: clic LARGO posicion " + holder.getAdapterPosition());
-                }
-                return false;
+                }*/
+                return true;
             }
         });
     }
@@ -121,6 +121,16 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     @Override
     public int getItemCount() {
         return listReparacion.size();
+    }
+
+    public void remove(int position){
+        listReparacion.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public boolean isFacturado(int position) {
+        return listReparacion.get(position).getEstadoFacturado();
     }
 
     /*Clase interna en la que definimos nuestro propio ViewHolder*/

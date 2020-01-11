@@ -10,10 +10,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.ReparacionListAdapter;
+import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     private  RecyclerView rvReparacion;
     ReparacionListContract.Presenter presenter;
     clickVerReparacionListener clickVerReparacionListener;
+    private ItemTouchHelper mItemTouchHelperListener;
 
     /*Crear una unica instancia de clase*/
     public static ReparacionListView  newInstance(Bundle args){
@@ -91,6 +94,10 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         //3. Vincular la vista al modelo (RecyclerView al Adapter)
         rvReparacion.setAdapter(reparacionListAdapter);
         rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        TouchCallback callback = new TouchCallback(reparacionListAdapter);
+        mItemTouchHelperListener = new ItemTouchHelper(callback);
+        mItemTouchHelperListener.attachToRecyclerView(rvReparacion);
         Log.d("PRUEBA", "ReparacionListView: initRvReparacion() ");
     }
 

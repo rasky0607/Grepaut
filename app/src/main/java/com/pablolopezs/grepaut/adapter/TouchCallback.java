@@ -1,0 +1,51 @@
+package com.pablolopezs.grepaut.adapter;
+
+import android.graphics.Canvas;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class TouchCallback extends ItemTouchHelper.Callback {
+    private AdapterContrac mAdapter;
+
+    public TouchCallback(AdapterContrac adapter){
+        mAdapter = adapter;
+    }
+
+    //A la hora de efectuar un movimiento con algun item(ya sea desplazar arrastrar etc
+    @Override
+    public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+        final int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
+        int swipeFlags = ItemTouchHelper.ACTION_STATE_IDLE;
+        if(!mAdapter.isFacturado(viewHolder.getAdapterPosition())) {
+            swipeFlags = ItemTouchHelper.LEFT;
+        }
+        return makeMovementFlags(dragFlags, swipeFlags);
+    }
+
+    //Efecto drag
+    @Override
+    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+        return false;
+    }
+//En caso de realizarse onSwiped/deslizamiento DEcide que hacion se toma segun la direcion que le llega
+    @Override
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+        if(direction == ItemTouchHelper.LEFT && !mAdapter.isFacturado(viewHolder.getAdapterPosition()))
+            mAdapter.remove(viewHolder.getAdapterPosition());
+    }
+//Efecto de transicion ocurrido tras efectuar el deslizamientoo el desplazamiento(drag)
+    @Override
+    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        final float ALPHA_FULL = 1.0f;
+        if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+            // Fade out the view as it is swiped out of the parent's bounds
+            final float alpha = ALPHA_FULL - Math.abs(dX) / (float) viewHolder.itemView.getWidth();
+            viewHolder.itemView.setAlpha(alpha);
+            viewHolder.itemView.setTranslationX(dX);
+        } else {
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+        }
+    }
+}
