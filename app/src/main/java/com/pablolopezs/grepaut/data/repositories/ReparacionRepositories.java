@@ -23,7 +23,7 @@ public class ReparacionRepositories {
 
     //Constructor
     public ReparacionRepositories(){
-        listReparaciones = new ArrayList<>();
+        listReparaciones = new ArrayList<Reparacion>();
         inicializa();
     }
 
@@ -78,12 +78,9 @@ public class ReparacionRepositories {
             }
         }
     }
-    /*Elimina una reparacion, siempre que no este facturada*/
-    /*public void delete(Reparacion reparacion) {
-        if(!reparacion.getEstadoFacturado())
-            this.listReparaciones.remove(reparacion);
-    }*/
 
+    /*Elimina una reparacion, siempre que no este facturada
+    (Esto ya esta comprobado en ReparacionListAdapter)*/
     public void delete(int  pos) {
             this.listReparaciones.remove(pos);
     }

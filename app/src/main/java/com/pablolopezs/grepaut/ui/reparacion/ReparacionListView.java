@@ -56,11 +56,42 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         super.onViewCreated(view, savedInstanceState);
         //Para mantener los datos o estado al girar la actividad
         setRetainInstance(true);
-        rvReparacion=view.findViewById(R.id.rvReparacionlist);
+        rvReparacion=view.findViewById(R.id.rvReparacion);
         inicializarRvReparacion();
        presenter.cargarDatos();
         Log.d("PRUEBA", "ReparacionListView: onViewCreated() ");
 
+    }
+
+    /**Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones*/
+    public void inicializarRvReparacion() {
+        //1. Crear adapter
+
+        //Cuando se hace click en el ReciclerView
+        reparacionListAdapter = new ReparacionListAdapter(new ReparacionListAdapter.manipularDatos() {
+            @Override
+            public void miOnLOngClick(int posicion) {
+                /*Eliminamos el elemento de la lista del Repositorio*/
+                presenter.eliminar(posicion);
+                reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
+            }
+
+            /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
+            @Override
+            public void miClick() {
+                Log.d("CAMBIO","ENTRO a cambiar la vista");
+               clickVerReparacionListener.clickVerReparacionListener();
+            }
+
+        });
+        //2. Crear diseño del RecyclerView
+       // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+        //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT, RecyclerView.VERTICAL, false);
+        //rvReparacion.setLayoutManager(linearLayoutManager);
+        //3. Vincular la vista al modelo (RecyclerView al Adapter)
+        rvReparacion.setAdapter(reparacionListAdapter);
+        rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
+        Log.d("PRUEBA", "ReparacionListView: initRvReparacion() ");
     }
 
     @Override
@@ -75,38 +106,6 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         clickVerReparacionListener=null;//Ayuda de Adri, pero nola entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onDetach)
     }
 
-    /**Método que inicializa el RecyclerView que muestra todas el adapter de Reparaciones*/
-    public void inicializarRvReparacion() {
-        //1. Crear adapter
-
-        //Cuando se hace click en el ReciclerView
-        reparacionListAdapter = new ReparacionListAdapter(new ReparacionListAdapter.manipularDatos() {
-            @Override
-            public void miOnLOngClick(int posicion) {
-                /*Eliminamos el elemento de la lista del Repositorio*/
-                presenter.eliminar(posicion);
-
-                reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
-            }
-
-            /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
-            @Override
-            public void miClick() {//TODO POR AQUI!
-                Log.d("CAMBIO","ENTRO a cambiar la vista");
-               clickVerReparacionListener.clickVerReparacionListener();
-                //Todo inflamos aqui otro fragment que muestrel detalle de esta reparacion??????
-            }
-
-        });
-        //2. Crear diseño del RecyclerView
-       // LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-        //GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT, RecyclerView.VERTICAL, false);
-        //rvReparacion.setLayoutManager(linearLayoutManager);
-        //3. Vincular la vista al modelo (RecyclerView al Adapter)
-        rvReparacion.setAdapter(reparacionListAdapter);
-        rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
-        Log.d("PRUEBA", "ReparacionListView: initRvReparacion() ");
-    }
 
     /*region Metodos implementados por la interfaz View*/
     @Override
@@ -116,13 +115,8 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
     }
 
     @Override
-    public void mostrarError(String msg) {
-        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void noDatos() {
-        Toast.makeText(getContext(),"NO hay datos",Toast.LENGTH_LONG).show();;
+        Toast.makeText(getContext(),"NO hay datos",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -130,6 +124,10 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void mostrarError(String msg) {
+        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+    }
 
     @Override
     public void setPresenter(ReparacionListContract.Presenter presenter) {

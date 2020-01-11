@@ -6,18 +6,11 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 public class ReparacionListContract{
 
     public interface View extends Base.View<Reparacion> {
-
-        void setPresenter(ReparacionListContract.Presenter presenter);
-
-
+        void setPresenter(Presenter presenter);
     }
 
-    public interface Presenter{
-        void cargarDatos();
+    public interface Presenter extends Base.Presenter<Reparacion>{
         void cargarDatosDeDetallesDeReparacion();
-        boolean eliminar(int posicion);
-        void editar(Reparacion reparacion);
-        void anadir(Reparacion reparacion);
     }
 
 

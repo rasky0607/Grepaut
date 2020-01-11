@@ -75,6 +75,13 @@ public class Cliente {
         this.email = email;
     }
 
+    public  Cliente(int id,String matriculaCoche,String nombre,String apellidos){
+        this.id = id;
+        this.matriculaCoche = matriculaCoche;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+    }
+
     public  Cliente(){
 
     }

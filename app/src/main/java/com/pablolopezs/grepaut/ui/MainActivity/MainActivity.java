@@ -10,13 +10,11 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
+import com.pablolopezs.grepaut.ui.cliente.ClienteListPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
 import com.pablolopezs.grepaut.ui.factura.FacturaListView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionAdd;
@@ -33,8 +31,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.Toast;
 
-import java.util.List;
-
 /**Clase que gestiona las opciones del nuestra barra
  * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
@@ -45,9 +41,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
-    private ReparacionDetailListView fragmentReparacionDetailView;
-    private ReparacionAdd fragmentoReparacionAdd;
-    private ClienteListView fragmenClienteListView;
+    private ReparacionDetailListView fragmentReparacionDetailView;//Ver Reparacion
+    private ReparacionAdd fragmentReparacionAdd;
+    private ClienteListView fragmentClienteListView;
+    private ClienteListPresenter presenterCliente;
     private ServicioListView fragmentServicioListView;
     private FacturaListView fragmentFacturaListView;
 
@@ -56,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);//enlazamos la barra de la toolbar
         fabadd =(FloatingActionButton) findViewById(R.id.fabadd);
         //Componentes para enlazar la barra de navegacion y cada una de sus opciones.
@@ -98,18 +94,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (titulo)
                 {
                     case "Reparaciones":
-                        fragmentoReparacionAdd = (ReparacionAdd) getSupportFragmentManager().findFragmentByTag(fragmentoReparacionAdd.TAG);
-                        if(fragmentoReparacionAdd==null)
+                        fragmentReparacionAdd = (ReparacionAdd) getSupportFragmentManager().findFragmentByTag(fragmentReparacionAdd.TAG);
+                        if(fragmentReparacionAdd ==null)
                         {
-                            fragmentoReparacionAdd= ReparacionAdd.newInstance();
+                            fragmentReparacionAdd = ReparacionAdd.newInstance();
                         }
                         getSupportFragmentManager()
                                 .beginTransaction()
-                                .replace(R.id.nav_contenedor_fragment,fragmentoReparacionAdd, ReparacionAdd.TAG).addToBackStack(null)
+                                .replace(R.id.nav_contenedor_fragment, fragmentReparacionAdd, ReparacionAdd.TAG).addToBackStack(null)
                                 .commit();
                         setTitle(R.string.anadir_reparacion);
-                        //presenterReparacion= new ReparacionListPresenter(fragmentReparacionDetailView);
-                        //fragmentoReparacionAdd.setPresenter(presenterReparacion);
                         break;
                     case "Clientes":
                         //Abrimos fragment añadir de Cliente
@@ -224,20 +218,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
                 presenterReparacion= new ReparacionListPresenter(fragmentReparacionListView);
                 fragmentReparacionListView.setPresenter(presenterReparacion);
-               Log.d("PRUEBA", "PULSASTE REPARCIONES");
                 setTitle(R.string.menu_reparaciones);
                 break;
 
             case R.id.nav_clientes:
-                fragmenClienteListView = (ClienteListView) getSupportFragmentManager().findFragmentByTag(fragmenClienteListView.TAG);
-                if(fragmenClienteListView==null)
+                fragmentClienteListView = (ClienteListView) getSupportFragmentManager().findFragmentByTag(fragmentClienteListView.TAG);
+                if(fragmentClienteListView ==null)
                 {
-                    fragmenClienteListView= ClienteListView.newInstance();
+                    fragmentClienteListView = ClienteListView.newInstance(null);
                 }
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.nav_contenedor_fragment,fragmenClienteListView, ClienteListView.TAG)
+                        .replace(R.id.nav_contenedor_fragment, fragmentClienteListView, ClienteListView.TAG)
                         .commit();
+                presenterCliente = new ClienteListPresenter(fragmentClienteListView);
+                fragmentClienteListView.setPresenter(presenterCliente);
                 setTitle(R.string.menu_clientes);
                 break;
 
@@ -274,7 +269,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Cerramos el navegador desplegable
         drawer.closeDrawer(GravityCompat.START);
         ocultarMostrarFloatinButtom();
-
         return true;
     }
 
@@ -313,7 +307,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ocultarMostrarFloatinButtom();
     }
 
-    //Cuando se hace click sobre la lista de reparaciones para abrir una nueva vista con todos los datos de esta
+    /*Cuando se hace click sobre la lista de reparaciones
+     para abrir un nuevo fragmento con todos los datos de esta*/
     @Override
     public void clickVerReparacionListener() {
         fragmentReparacionDetailView = (ReparacionDetailListView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailListView.TAG);
@@ -327,8 +322,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setTitle("Detalles de la Reparación.");
         ocultarMostrarFloatinButtom();
-
-
     }
 
 }

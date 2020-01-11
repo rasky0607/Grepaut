@@ -9,7 +9,7 @@
     android:background="@color/whiteBrokenEgg">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvReparacionlist"
+        android:id="@+id/rvReparacion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
