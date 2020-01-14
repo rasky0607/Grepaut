@@ -11,6 +11,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ClienteListPresenter presenterCliente;
     private ServicioListView fragmentServicioListView;
     private FacturaListView fragmentFacturaListView;
+    private static int idItemNvDrawerSelect =-1;//id de la opciond e menu Drawer selecionada
 
 
     @Override
@@ -142,17 +144,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+    protected void onSaveInstanceState(Bundle saveInstanceState) {
+        super.onSaveInstanceState(saveInstanceState);
 
-        Log.e("AQUI","Estoy en onSaveInstanceState");
     }
 
+    /*Restauramos la visa , segun la ultima opcion selecionada*/
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+        Log.e("AQUI","Estoy en onRestoreInstanceState :"+idItemNvDrawerSelect);
+          pintarFragmentSelecioando(idItemNvDrawerSelect);
 
-        Log.e("AQUI","Estoy en onRestoreInstanceState");
     }
 
     /*Inicializamos el fragmento*/
@@ -174,54 +177,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    /**Muestra o oculta el boton flotante de añadir,
-     *  segun en el titulo de la toolbar el cual identifica el fragmento*/
-    private void ocultarMostrarFloatinButtom(){
-        String titulo = getTitle().toString();
-        switch (titulo)
-        {
-            case "Reparaciones":
-               fabadd.show();
-                break;
-            case "Clientes":
-                fabadd.show();
-                break;
-            case "Servicios":
-                fabadd.show();
-                break;
-            case "Facturas":
-                fabadd.show();
-                break;
-             default:
-                 fabadd.hide();
-                 break;
+    private void pintarFragmentSelecioando(int itemSeleciolado){
 
-        }
-
-    }
-
-    /**Infla las opciones del menu superior derechod e la toolbar*/
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //Infla la barra de accion o menu y añade los componentes que habra en este indicados en el XML menu_de_app_bar.xml
-        getMenuInflater().inflate(R.menu.menu_de_app_bar, menu);
-        return true;
-    }
-
-    //Para la actionbar donde encontramos el menu despleagable a la derecha
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    /*Manejo de menu lateral (navigation Drawer) donde se indicara la logica, o las tareas a llevar a cabo segun la opcion seleccionada*/
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        int id = item.getItemId();
-
-        switch ((id)) {
+        switch ((itemSeleciolado)) {
             case R.id.nav_reparaciones:
                 fragmentReparacionListView =(ReparacionListView)getSupportFragmentManager().findFragmentByTag(ReparacionListView.TAG);
                 if(fragmentReparacionListView==null)
@@ -279,6 +237,57 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this,"Pulsaste compartir!",Toast.LENGTH_SHORT).show();
                 break;
         }
+
+    }
+
+    /**Muestra o oculta el boton flotante de añadir,
+     *  segun en el titulo de la toolbar el cual identifica el fragmento*/
+    private void ocultarMostrarFloatinButtom(){
+        String titulo = getTitle().toString();
+        switch (titulo)
+        {
+            case "Reparaciones":
+               fabadd.show();
+                break;
+            case "Clientes":
+                fabadd.show();
+                break;
+            case "Servicios":
+                fabadd.show();
+                break;
+            case "Facturas":
+                fabadd.show();
+                break;
+             default:
+                 fabadd.hide();
+                 break;
+
+        }
+
+    }
+
+    /**Infla las opciones del menu superior derechod e la toolbar*/
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //Infla la barra de accion o menu y añade los componentes que habra en este indicados en el XML menu_de_app_bar.xml
+        getMenuInflater().inflate(R.menu.menu_de_app_bar, menu);
+        return true;
+    }
+
+    //Para la actionbar donde encontramos el menu despleagable a la derecha
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*Manejo de menu lateral (navigation Drawer) donde se indicara la logica, o las tareas a llevar a cabo segun la opcion seleccionada*/
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+         idItemNvDrawerSelect = item.getItemId();
+        Log.e("AQUI","Estoy en onNavigationItemSelected :"+idItemNvDrawerSelect);
+        pintarFragmentSelecioando(idItemNvDrawerSelect);
         //Cerramos el navegador desplegable
         drawer.closeDrawer(GravityCompat.START);
         ocultarMostrarFloatinButtom();
@@ -290,8 +299,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
     }
 
-    /**Cuando el usuario preciona el boton de back*/
-    @Override
+    /**Cuando el usuario presiona el boton de back*/
+   @Override
     public void onBackPressed() {
         super.onBackPressed();
         //Todo no me gusta ese numero magico getSupportFragmentManager().getFragments().get(0).getTag()
@@ -301,23 +310,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          *  mostraremos un fragmento de añadir o otro.
          *  Tambien volveremos a mostrar o ocultar el boton de añadir,
          *  segun si esta en uno de estos listados generales como el anteriormente mencionado o no*/
-        switch (getSupportFragmentManager().getFragments().get(0).getTag())
-        {
-            case ReparacionListView.TAG:
-                setTitle(R.string.menu_reparaciones);
-                break;
-            case ClienteListView.TAG:
-                setTitle(R.string.menu_clientes);
-                break;
-            case ServicioListView.TAG:
-                setTitle(R.string.menu_servicios);
-                break;
-            case FacturaListView.TAG:
-                setTitle(R.string.menu_facturas);
-                break;
+        if(getSupportFragmentManager().getFragments()!=null) {
+            switch (getSupportFragmentManager().getFragments().get(0).getTag()) {
+                case ReparacionListView.TAG:
+                    setTitle(R.string.menu_reparaciones);
+                    break;
+                case ClienteListView.TAG:
+                    setTitle(R.string.menu_clientes);
+                    break;
+                case ServicioListView.TAG:
+                    setTitle(R.string.menu_servicios);
+                    break;
+                case FacturaListView.TAG:
+                    setTitle(R.string.menu_facturas);
+                    break;
 
-        }
+            }
             ocultarMostrarFloatinButtom();
+        }
     }
 
     /*Cuando se hace click sobre la lista de reparaciones
