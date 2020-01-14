@@ -24,7 +24,7 @@ public class TouchCallback extends ItemTouchHelper.Callback {
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
-    //Efecto drag
+    //Efecto drag(Despazamiento hacia arriba o hacia abajo)
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         return false;

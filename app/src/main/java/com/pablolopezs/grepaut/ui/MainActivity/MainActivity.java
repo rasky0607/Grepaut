@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.ui.AppBarConfiguration;
 
@@ -138,8 +139,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         /*----------------------------------------------------------------------*/
 
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
+        Log.e("AQUI","Estoy en onSaveInstanceState");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        Log.e("AQUI","Estoy en onRestoreInstanceState");
     }
 
     /*Inicializamos el fragmento*/
