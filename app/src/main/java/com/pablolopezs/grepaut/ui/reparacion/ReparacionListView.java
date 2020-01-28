@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.pablolopezs.grepaut.R;
+import com.pablolopezs.grepaut.adapter.AdapterContrac;
 import com.pablolopezs.grepaut.adapter.ReparacionListAdapter;
 import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Reparacion;
@@ -95,6 +96,7 @@ public class ReparacionListView extends Fragment implements  ReparacionListContr
         rvReparacion.setAdapter(reparacionListAdapter);
         rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        //incializamos la clase TouchCallback para realizar el efecto de eleminar al desplazar el dedo hacia la izquierda sobre un elemento
         TouchCallback callback = new TouchCallback(reparacionListAdapter);
         mItemTouchHelperListener = new ItemTouchHelper(callback);
         mItemTouchHelperListener.attachToRecyclerView(rvReparacion);

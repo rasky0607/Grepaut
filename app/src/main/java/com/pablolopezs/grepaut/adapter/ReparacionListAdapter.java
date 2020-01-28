@@ -21,7 +21,7 @@ import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 import java.util.ArrayList;
 /**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
  *  que se mostrara en ReparacionListView*/
-public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac {
+public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac.ContractAdapterReparacion {
 //TODO pendiente de agregar  RecyclerView.ItemDecoration en las clases Adapter, para poder implementar los eventos de arrastrar hacia los laterales los viewHolder de los recycler
     private ArrayList<Reparacion> listReparacion;
     private manipularDatos manipularDatos;
@@ -41,7 +41,6 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     public void addAll(ArrayList<Reparacion> list) {
         this.listReparacion.addAll(list);
     }
-
 
     //Inflamos la vista y la convertimos en ViewHolder(Es decir un bloque del listado del recyclerView
     @NonNull
@@ -123,15 +122,18 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         return listReparacion.size();
     }
 
+    /*Implementado por la interfaz ContractAdapterReparacion */
+    @Override
     public void remove(int position){
         listReparacion.remove(position);
         notifyItemRemoved(position);
     }
 
     @Override
-    public boolean isFacturado(int position) {
+    public boolean estaFacturado(int position) {
         return listReparacion.get(position).getEstadoFacturado();
     }
+    /*--------------------------------------------------------------------*/
 
     /*Clase interna en la que definimos nuestro propio ViewHolder*/
     class ViewHolder extends RecyclerView.ViewHolder {

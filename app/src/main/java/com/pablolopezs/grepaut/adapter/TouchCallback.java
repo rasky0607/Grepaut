@@ -7,10 +7,24 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class TouchCallback extends ItemTouchHelper.Callback {
-    private AdapterContrac mAdapter;
+    private AdapterContrac.ContractAdapterCliente mAdapterCliente= null;
+    private AdapterContrac.ContractAdapterReparacion mAdapterReparacion= null;
+    private AdapterContrac.ContractAdapterServicio mAdapterServicio= null;
 
-    public TouchCallback(AdapterContrac adapter){
-        mAdapter = adapter;
+    public TouchCallback(AdapterContrac.BaseAdapterContract adapter){
+        if(adapter instanceof AdapterContrac.ContractAdapterCliente)
+        {
+            mAdapterCliente = (AdapterContrac.ContractAdapterCliente)adapter;
+        }
+        if(adapter instanceof AdapterContrac.ContractAdapterReparacion)
+        {
+            mAdapterReparacion =(AdapterContrac.ContractAdapterReparacion) adapter;
+        }
+        if(adapter instanceof AdapterContrac.ContractAdapterServicio)
+        {
+            mAdapterServicio =(AdapterContrac.ContractAdapterServicio) adapter;
+        }
+
     }
 
     //A la hora de efectuar un movimiento con algun item(ya sea desplazar arrastrar etc
@@ -18,7 +32,7 @@ public class TouchCallback extends ItemTouchHelper.Callback {
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         final int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         int swipeFlags = ItemTouchHelper.ACTION_STATE_IDLE;
-        if(!mAdapter.isFacturado(viewHolder.getAdapterPosition())) {
+        if(!mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
             swipeFlags = ItemTouchHelper.LEFT;
         }
         return makeMovementFlags(dragFlags, swipeFlags);
@@ -32,8 +46,8 @@ public class TouchCallback extends ItemTouchHelper.Callback {
 //En caso de realizarse onSwiped/deslizamiento DEcide que hacion se toma segun la direcion que le llega
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        if(direction == ItemTouchHelper.LEFT && !mAdapter.isFacturado(viewHolder.getAdapterPosition()))
-            mAdapter.remove(viewHolder.getAdapterPosition());
+        if(direction == ItemTouchHelper.LEFT && !mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition()))
+            mAdapterReparacion.remove(viewHolder.getAdapterPosition());
     }
 //Efecto de transicion ocurrido tras efectuar el deslizamientoo el desplazamiento(drag)
     @Override
