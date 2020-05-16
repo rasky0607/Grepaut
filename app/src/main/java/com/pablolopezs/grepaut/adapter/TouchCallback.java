@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+/*Esta clase controla el deslizamiento de los item del reciclerView y el efecto que conlleva esta accion,
+ en ete caso eliminar el item del reciclerView cuando se desliza el item hacia la izquierda y se confirma la eliminacion*/
 public class TouchCallback extends ItemTouchHelper.Callback {
     private AdapterContrac.ContractAdapterCliente mAdapterCliente= null;
     private AdapterContrac.ContractAdapterReparacion mAdapterReparacion= null;
     private AdapterContrac.ContractAdapterServicio mAdapterServicio= null;
 
+    //Constructor
     public TouchCallback(AdapterContrac.BaseAdapterContract adapter){
         if(adapter instanceof AdapterContrac.ContractAdapterCliente)
         {
@@ -39,9 +41,7 @@ public class TouchCallback extends ItemTouchHelper.Callback {
         final int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         int swipeFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         if(!mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
-
             swipeFlags = ItemTouchHelper.LEFT;
-            Log.d("Prueba","Salto");
         }
         return makeMovementFlags(dragFlags, swipeFlags);
     }

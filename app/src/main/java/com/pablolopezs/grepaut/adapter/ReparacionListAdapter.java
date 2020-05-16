@@ -127,16 +127,17 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         return repaBorrar;
 
     }
-    public void confirmarBorrado(int adapterPosition){
-        manipularDatos.confirmarBorrado(adapterPosition);
+    //Una vez confirmada la eliminacion desde el la ventana que m uestra el alert dialog
+    public void confirmarBorrado(int position){
+        manipularDatos.confirmarBorrado(position);
     }
 
-    //Cuando se le da a "NO" en el alerDialog
+    //Cuando se le da a "NO" en el alerDialog, volvemos a reinsertar el elemento en el reciclerView
     public void cancelacionDeBorrado(int position){
         notifyItemChanged(position);
     }
 
-    //cuando se ha comfirmado el borrado en el alerDialog y se pulsa deshacer del snackbar
+    //cuando se ha comfirmado el borrado en el alerDialog y se pulsa deshacer desde snackbar
     public void deshacerBorrado(int position, Reparacion r){
         listReparacion.add(position,r);
         notifyItemInserted(position);
@@ -172,8 +173,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     public interface manipularDatos {
         void miOnLOngClick(int posicion);
         void miClick();//Envia al usuario a un listado de las reparaciones con todo detalle que recibio un cliente en una fecha para un vehiculo concreto
-        //prueba
-        void confirmarBorrado(int adapterPosition);
+        void confirmarBorrado(int adapterPosition);//Este metodo comunica con  La clase TouchCallback con la clase  ReparacionListView a través de la clase ReparacionListAdapter
     }
 
 

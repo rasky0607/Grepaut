@@ -89,7 +89,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
         //Cuando se hace click en el ReciclerView
         reparacionListAdapter = new ReparacionListAdapter(new ReparacionListAdapter.manipularDatos() {
             @Override
-            public void miOnLOngClick(int posicion) {
+            public void miOnLOngClick(int posicion) {//NO USADO ACTUALMENTE
                 /*Eliminamos el elemento de la lista del Repositorio*/
                 presenter.eliminar(posicion);
                 reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
@@ -102,32 +102,34 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                 clickVerReparacionListener.clickVerReparacionListener();
             }
 
-            //QUEDA ELIMINAR EL ITEM DEL REPOSITORIO A TRAVES DEL PRESENTER NO SOLO DE LA VISTA COMO HASTA AHORA
+            //QUEDA ELIMINAR EL ITEM DEL REPOSITORIO A TRAVES DEL PRESENTER NO SOLO DE LA VISTA COMO HASTA AHORA***********PENDIENTE************
             @Override
             public void confirmarBorrado(final int adapterPosition) {
-                //Dialog
+                //--------------Ventana de AlerDialog----------
                 AlertDialog alerta = new AlertDialog.Builder(getContext()).
                         setMessage("¿Estas seguro de eliminar este elemento?").setTitle("Aviso. ").
                         setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            /*Se ha confirmado el borrado del item en la ventana de AlerDialog y se prodece a mostrar
+                                un scankbar a bajo que permite deshacer esta opcion durante un breve periodo de tiempo antes de convertirla en irreversible*/
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //positivo
+                                //****PENDIENTE**** eliminar el objeto reparacion de la lista del Repositiorio a traves del presenter
+                                //Reparacion a eliminada que se va ha restaurar
                                final Reparacion r = reparacionListAdapter.remove(adapterPosition);
-
-                                //----Deshacer eliminacion
+                                //----------Deshacer eliminacion------------
                                 Snackbar snackbar = Snackbar
                                         .make(getActivity().findViewById(R.id.contenedorPadre), r.getFecha() + " Deshacer el borrrado", Snackbar.LENGTH_LONG);
                                 snackbar.setAction("Deshacer", new View.OnClickListener() {
+                                    /*Se pulso el boton "Deshacer" del snackbar y
+                                     se restaura el elemento de nuevo en la vista del ReciclerView*/
                                     @Override
                                     public void onClick(View view) {
-
-                                        // undo is selected, restore the deleted item
                                         reparacionListAdapter.deshacerBorrado(adapterPosition,  r);
                                     }
                                 });
                                 snackbar.setActionTextColor(Color.RED);
                                 snackbar.show();
-                                //---Fin de barra de deshacer
+                                //---------Fin de barra de Deshacer------------
 
                             }
                         }).
@@ -139,7 +141,9 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                             }
                         }).create();
                 alerta.show();
+                //--------------FIN Ventana de AlerDialog----------
             }
+
 
         });
         //2. Crear diseño del RecyclerView
