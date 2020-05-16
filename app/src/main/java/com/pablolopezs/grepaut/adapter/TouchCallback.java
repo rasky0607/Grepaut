@@ -1,10 +1,16 @@
 package com.pablolopezs.grepaut.adapter;
 
+
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
 
 public class TouchCallback extends ItemTouchHelper.Callback {
     private AdapterContrac.ContractAdapterCliente mAdapterCliente= null;
@@ -33,7 +39,9 @@ public class TouchCallback extends ItemTouchHelper.Callback {
         final int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         int swipeFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         if(!mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
+
             swipeFlags = ItemTouchHelper.LEFT;
+            Log.d("Prueba","Salto");
         }
         return makeMovementFlags(dragFlags, swipeFlags);
     }
@@ -43,11 +51,17 @@ public class TouchCallback extends ItemTouchHelper.Callback {
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         return false;
     }
-//En caso de realizarse onSwiped/deslizamiento DEcide que hacion se toma segun la direcion que le llega
+//En caso de realizarse onSwiped/deslizamiento DEcide que acion se toma segun la direcion que le llega
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        if(direction == ItemTouchHelper.LEFT && !mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition()))
-            mAdapterReparacion.remove(viewHolder.getAdapterPosition());
+
+        //Hacia la izquierda borramos el elemento
+        if(direction == ItemTouchHelper.LEFT && !mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
+           //mAdapterReparacion.remove(viewHolder.getAdapterPosition());
+            mAdapterReparacion.confirmarBorrado(viewHolder.getAdapterPosition());
+
+        }
+
     }
 //Efecto de transicion ocurrido tras efectuar el deslizamientoo el desplazamiento(drag)
     @Override
@@ -62,4 +76,6 @@ public class TouchCallback extends ItemTouchHelper.Callback {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
         }
     }
+
+
 }

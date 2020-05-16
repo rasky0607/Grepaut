@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Grepaut.iml" filepath="$PROJECT_DIR$/Grepaut.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/Grepaut-app.iml" filepath="$PROJECT_DIR$/app/Grepaut-app.iml" group="Grepaut/app" />
+      <module fileurl="file://$PROJECT_DIR$/PoryectosAndroid-Grepaut.iml" filepath="$PROJECT_DIR$/PoryectosAndroid-Grepaut.iml" group="Grepaut" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1,7 +1,6 @@
 package com.pablolopezs.grepaut.adapter;
 
 import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +8,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Reparacion;
@@ -124,9 +120,26 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
     /*Implementado por la interfaz ContractAdapterReparacion */
     @Override
-    public void remove(int position){
+    public Reparacion remove(int position){
+        Reparacion repaBorrar= listReparacion.get(position);//Obtenemos el objeto que vamos a borrar para devolverlo
         listReparacion.remove(position);
         notifyItemRemoved(position);
+        return repaBorrar;
+
+    }
+    public void confirmarBorrado(int adapterPosition){
+        manipularDatos.confirmarBorrado(adapterPosition);
+    }
+
+    //Cuando se le da a "NO" en el alerDialog
+    public void cancelacionDeBorrado(int position){
+        notifyItemChanged(position);
+    }
+
+    //cuando se ha comfirmado el borrado en el alerDialog y se pulsa deshacer del snackbar
+    public void deshacerBorrado(int position, Reparacion r){
+        listReparacion.add(position,r);
+        notifyItemInserted(position);
     }
 
     @Override
@@ -159,6 +172,8 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     public interface manipularDatos {
         void miOnLOngClick(int posicion);
         void miClick();//Envia al usuario a un listado de las reparaciones con todo detalle que recibio un cliente en una fecha para un vehiculo concreto
+        //prueba
+        void confirmarBorrado(int adapterPosition);
     }
 
 

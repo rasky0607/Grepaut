@@ -2,8 +2,9 @@ package com.pablolopezs.grepaut.adapter;
 
 public class AdapterContrac {
 
-    public interface BaseAdapterContract{
-        void remove(int position);
+    public interface BaseAdapterContract<T>{
+        T remove(int position);
+        void confirmarBorrado(int adapterPosition);
     }
 
     public interface ContractAdapterReparacion extends BaseAdapterContract {
@@ -17,7 +18,9 @@ public class AdapterContrac {
     public interface ContractAdapterServicio extends BaseAdapterContract {
         boolean estaEnUnaReparacion(int position);
     }
-    //IMPORTANTE:las facturasno pueden ser anuladas
+
+
+    //IMPORTANTE:las facturas no pueden ser anuladas
 
 
 }
