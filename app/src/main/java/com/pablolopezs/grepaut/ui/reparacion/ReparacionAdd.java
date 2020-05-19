@@ -16,6 +16,7 @@ import com.pablolopezs.grepaut.R;
 public class ReparacionAdd extends Fragment {
     public static final String TAG="ReparacionAdd";
 
+
     public static ReparacionAdd newInstance() {
         ReparacionAdd fragment = new ReparacionAdd();
         return fragment;

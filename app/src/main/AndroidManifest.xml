@@ -33,6 +33,7 @@
             android:theme="@style/AppTheme.SplashTheme.NoActionBar">
 
 
+
         </activity>
 
     </application>

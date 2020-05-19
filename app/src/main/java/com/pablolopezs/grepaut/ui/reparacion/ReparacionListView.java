@@ -118,7 +118,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                final Reparacion r = reparacionListAdapter.remove(adapterPosition);
                                 //----------Deshacer eliminacion------------
                                 Snackbar snackbar = Snackbar
-                                        .make(getActivity().findViewById(R.id.contenedorPadre), r.getFecha() + " Deshacer el borrrado", Snackbar.LENGTH_LONG);
+                                        .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ r.getNombreCliente() + " Deshacer el borrrado", Snackbar.LENGTH_LONG);
                                 snackbar.setAction("Deshacer", new View.OnClickListener() {
                                     /*Se pulso el boton "Deshacer" del snackbar y
                                      se restaura el elemento de nuevo en la vista del ReciclerView*/
@@ -127,10 +127,9 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                         reparacionListAdapter.deshacerBorrado(adapterPosition,  r);
                                     }
                                 });
-                                snackbar.setActionTextColor(Color.RED);
+                                snackbar.setActionTextColor(Color.WHITE);
                                 snackbar.show();
                                 //---------Fin de barra de Deshacer------------
-
                             }
                         }).
                         setNegativeButton("No", new DialogInterface.OnClickListener() {
