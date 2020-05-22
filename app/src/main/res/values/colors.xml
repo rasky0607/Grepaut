@@ -8,6 +8,8 @@
     <color name="colorReparacionSiFacturada">#BCF597</color>
     <color name="colorReparacionNoFinalizada">#EE7166</color>
     <color name="colorReparacionFinalizada">#42A52E</color>
+    <color name="colorAnadirOtroServicioAlaReparacion">#AAE369</color>
+    <color name="colorSelecionarFechaReparacionAdd">#F1BB88</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/colorPrimary</color>
     <color name="whiteBrokenEgg">#EBEAEA</color>
     <color name="white">#FFFFFF</color>

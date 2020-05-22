@@ -27,7 +27,6 @@ import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
-
 import androidx.appcompat.app.AlertDialog;
 
 
@@ -46,7 +45,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     private ItemTouchHelper mItemTouchHelperListener;
 
 
-    /*Crear una unica instancia de clase*/
+    /*Constructor que crear una unica instancia de clase*/
     public static ReparacionListView newInstance(Bundle args) {
         ReparacionListView fragment = new ReparacionListView();
         fragment.setArguments(args);

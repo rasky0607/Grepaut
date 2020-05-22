@@ -96,7 +96,6 @@ las realizadas ese dia para ese vehiculo-->
         app:layout_constraintVertical_bias="0.0" />
 
 
-
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"

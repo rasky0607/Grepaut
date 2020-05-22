@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--Este efecto de boton redondeado se ha realizado para el boton de
+    [Añadir otro servicio a una reparacion que estamos creando] para diferencia el boton de otros-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<!--hay que comprobar los estados de nuestro widget-->
+<item android:state_pressed="true">
+    <shape> <!--Marca del check  cuando el este esta marcado de hay el "true"-->
+        <solid android:color="@color/colorPrimaryLight"/>
+        <corners android:radius="15dp"/>
+    </shape>
+</item>
+
+<item>
+    <shape>
+        <solid android:color="@color/colorAnadirOtroServicioAlaReparacion"/>
+        <corners android:radius="15dp"/>
+    </shape>
+</item>
+</selector>

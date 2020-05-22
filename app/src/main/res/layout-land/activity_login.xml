@@ -46,9 +46,8 @@
         android:layout_width="117dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:background="@drawable/selector_round_corner"
         android:text="@string/btnIniciarSesion"
-        android:textColor="@android:color/white"
+        style="@style/botonesBase_FormaYColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilpassword" />
@@ -101,10 +100,10 @@
         android:id="@+id/btnGoogle"
         android:layout_width="@dimen/imgButtonLoginWidth"
         android:layout_height="@dimen/imgButtonLoginHeight"
-
         android:layout_marginTop="12dp"
         android:background="@drawable/ic_icongoogle"
         android:text="@string/btnGoogle"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"

@@ -29,4 +29,7 @@
     <dimen name="listViewPadding">8dp</dimen>
     <dimen name="listViewDivider">4dp</dimen>
 
+    <!--Dimensiones de Inserciones o Añadir-->
+    <dimen name="cabecerasCampos">14dp</dimen>
+
 </resources>

@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Este es el estilo base de los botones de toda la aplicacion,
- aun que podemos encontrar otros especificos como los de añadir reparacion-->
+<!--Esto es aplicado a los botones que no queramos que tengan fondo
+ y sean totalmente transparente excepto cuando se pulsan-->
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!--hay que comprobar los estados de nuestro widget-->
     <item android:state_pressed="true">
-        <shape> <!--Marca del check  cuando el este esta marcado de hay el "true"-->
+        <shape> <!--cuando el boton este esta pulsado de hay el "true"-->
             <solid android:color="@color/colorPrimaryLight"/>
             <corners android:radius="15dp"/>
         </shape>
     </item>
 
     <item>
-        <shape>
-            <solid android:color="@color/colorPrimaryDark"/>
+        <!--Cuando no esta pulsado es transparente-->
+        <shape android:tint="@android:color/transparent">
+
             <corners android:radius="15dp"/>
         </shape>
     </item>
