@@ -23,7 +23,7 @@ public class ClienteRepositories {
     }
 
     private void inicializa(){
-        this.listClientes.add(new Cliente(1,"3456PG","Juan","Martin Dominguez","632220105","email1@gmail.com"));
+        this.listClientes.add(new Cliente(1,"5794GPL","Juan","Martin Dominguez","632220105","email1@gmail.com"));
         this.listClientes.add(new Cliente(1,"ER8921","Juan","Martin Dominguez","637022175","email1@gmail.com"));
         this.listClientes.add(new Cliente(2,"APL4729","Daniel","Martin Perez","637426144","email1@gmail.com"));
         this.listClientes.add(new Cliente(2,"3456PG","Daniel","Martin Perez","637620185","email1@gmail.com"));

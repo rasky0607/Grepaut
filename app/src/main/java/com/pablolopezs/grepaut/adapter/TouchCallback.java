@@ -42,9 +42,16 @@ public class TouchCallback extends ItemTouchHelper.Callback {
         final int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         int swipeFlags = ItemTouchHelper.ACTION_STATE_IDLE;
 
-        if(mAdapterReparacion instanceof AdapterContrac.BaseAdapterContract.ContractAdapterReparacion)
-        if(!mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
-            swipeFlags = ItemTouchHelper.LEFT;
+        //permite el desplazamiento de un item hacia la izquierda
+        if(mAdapterReparacion instanceof AdapterContrac.BaseAdapterContract.ContractAdapterReparacion) {
+            if (!mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
+                swipeFlags = ItemTouchHelper.LEFT;
+            }
+        }
+        if(mAdapterCliente instanceof AdapterContrac.BaseAdapterContract.ContractAdapterCliente){
+            if(!mAdapterCliente.tieneReparacion(viewHolder.getAdapterPosition())) {
+                swipeFlags = ItemTouchHelper.LEFT;
+            }
         }
         return makeMovementFlags(dragFlags, swipeFlags);
     }
@@ -59,10 +66,17 @@ public class TouchCallback extends ItemTouchHelper.Callback {
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
 
         //Hacia la izquierda borramos el elemento
-        if(direction == ItemTouchHelper.LEFT && !mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
-           //mAdapterReparacion.remove(viewHolder.getAdapterPosition());
-            mAdapterReparacion.confirmarBorrado(viewHolder.getAdapterPosition());
-
+        if( mAdapterReparacion instanceof AdapterContrac.BaseAdapterContract.ContractAdapterReparacion) {
+            if (direction == ItemTouchHelper.LEFT) {
+                mAdapterReparacion.confirmarBorrado(viewHolder.getAdapterPosition());
+            }
+        }
+        //POR AQUI(POR PROBAR)
+        if( mAdapterCliente instanceof AdapterContrac.BaseAdapterContract.ContractAdapterCliente) {
+            //Si el cliente no tiene  una reparacion ya creada, podra borrarse, de lo contrario, NO podrá
+            if (direction == ItemTouchHelper.LEFT) {
+                mAdapterCliente.confirmarBorrado(viewHolder.getAdapterPosition());
+            }
         }
 
     }

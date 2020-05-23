@@ -69,5 +69,10 @@ public class ReparacionListPresenter implements ReparacionListContract.Presenter
 
     }
 
+    @Override
+    public void anadirPorPos(int pos,Reparacion objeto) {
+        ReparacionRepositories.getInstance().getList().add(pos,objeto);
+    }
+
 
 }

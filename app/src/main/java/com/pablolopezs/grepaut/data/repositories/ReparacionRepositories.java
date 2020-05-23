@@ -31,19 +31,19 @@ public class ReparacionRepositories {
     private  void inicializa(){
 
         this.listReparaciones.add(new Reparacion(1, "10/05/2018",1,"Juan","5794GPL","Cambio de aceite",false,false,"email1@gmail.com","Carlos","RepaAuto S.L."));
-        this.listReparaciones.add(new Reparacion(2, "10/05/2018",1,"Juan","5794GPL","Cambio de luces",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(2, "10/05/2018",1,"Juan","5794GPL","Cambio de luces",false,false,"email1@gmail.com","Carlos","RepaAuto S.L."));
         this.listReparaciones.add(new Reparacion(3, "10/05/2018",1,"Juan","5794GPL","Cambio de neumaticos",false,false,"email1@gmail.com","Carlos","RepaAuto S.L."));
         this.listReparaciones.add(new Reparacion(4, "10/05/2018",1,"Juan","5794GPL","Cambio de correa de distribucion",false,false,"email1@gmail.com","Carlos","RepaAuto S.L."));
 
-        this.listReparaciones.add(new Reparacion(1, "10/07/2018",1,"Juan","9712ROG","Cambio de bujias",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
-        this.listReparaciones.add(new Reparacion(2, "10/07/2018",1,"Juan","9712ROG","Cambio de carburador",false,false,"email1@gmail.com","Carlos","RepaAuto S.L."));
-        this.listReparaciones.add(new Reparacion(3, "10/07/2018",1,"Juan","9712ROG","Cambio de reporductor MP3",false,false,"email1@gmail.com","Carlos","RepaAuto S.L."));
-        this.listReparaciones.add(new Reparacion(4, "10/07/2018",1,"Juan","9712ROG","Purga de deposito",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(1, "10/07/2018",2,"Juan","9712ROG","Cambio de bujias",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(2, "10/07/2018",2,"Juan","9712ROG","Cambio de carburador",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(3, "10/07/2018",2,"Juan","9712ROG","Cambio de reporductor MP3",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(4, "10/07/2018",2,"Juan","9712ROG","Purga de deposito",true,true,"email1@gmail.com","Carlos","RepaAuto S.L."));
 
-        this.listReparaciones.add(new Reparacion(1, "11/07/2018",2,"Manolo","9712ROG","Cambio de bujias",true,true,"email1@gmail.com","Oscar","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(1, "11/07/2018",2,"Manolo","9712ROG","Cambio de bujias",false,false,"email1@gmail.com","Oscar","RepaAuto S.L."));
         this.listReparaciones.add(new Reparacion(2, "11/07/2018",2,"Manolo","9712ROG","Cambio de carburador",false,false,"email1@gmail.com","Oscar","RepaAuto S.L."));
         this.listReparaciones.add(new Reparacion(3, "11/07/2018",2,"Manolo","9712ROG","Cambio de reporductor MP3",false,false,"email1@gmail.com","Oscar","RepaAuto S.L."));
-        this.listReparaciones.add(new Reparacion(4, "11/07/2018",2,"Manolo","9712ROG","Purga de deposito",true,true,"email1@gmail.com","Oscar","RepaAuto S.L."));
+        this.listReparaciones.add(new Reparacion(4, "11/07/2018",2,"Manolo","9712ROG","Purga de deposito",false,false,"email1@gmail.com","Oscar","RepaAuto S.L."));
     }
 
     public ArrayList<Reparacion>getList(){

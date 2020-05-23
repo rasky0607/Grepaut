@@ -1,7 +1,5 @@
 package com.pablolopezs.grepaut.ui.reparacion;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -14,7 +12,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -84,24 +81,22 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
      */
     public void inicializarRvReparacion() {
         //1. Crear adapter
-
-        //Cuando se hace click en el ReciclerView
         reparacionListAdapter = new ReparacionListAdapter(new ReparacionListAdapter.manipularDatos() {
-            @Override
+            @Override//NO USADO ACTUALMENTE
             public void miOnLOngClick(int posicion) {//NO USADO ACTUALMENTE
                 /*Eliminamos el elemento de la lista del Repositorio*/
-                presenter.eliminar(posicion);
-                reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
+                /*presenter.eliminar(posicion);
+                reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos*/
             }
 
-            /*Cuando el usuario intenta editar unr egistro de reparación, le infomamos de que no es posible(debe eliminarlo y crear uno nuevo)*/
+            /*Cuando el usuario intenta editar un registro de reparación, le mostramos informacion de todas las reparaciones (de un cliente sobre un coche en una misma fecha)
+             ya que no es posible editarlas,(debe eliminarlo y crear uno nuevo)*/
             @Override
             public void miClick() {
                 Log.d("CAMBIO", "ENTRO a cambiar la vista");
                 clickVerReparacionListener.clickVerReparacionListener();
             }
 
-            //QUEDA ELIMINAR EL ITEM DEL REPOSITORIO A TRAVES DEL PRESENTER NO SOLO DE LA VISTA COMO HASTA AHORA***********PENDIENTE************
             @Override
             public void confirmarBorrado(final int adapterPosition) {
                 //--------------Ventana de AlerDialog----------
@@ -112,11 +107,13 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                 un scankbar a bajo que permite deshacer esta opcion durante un breve periodo de tiempo antes de convertirla en irreversible*/
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //****PENDIENTE**** eliminar el objeto reparacion de la lista del Repositiorio a traves del presenter
-                                //Reparacion a eliminada que se va ha restaurar
-                               final Reparacion r = reparacionListAdapter.remove(adapterPosition);
+                                //Eliminar el objeto reparacion de la lista del Repositiorio a traves del presenter
+                                presenter.eliminar(adapterPosition);
+
+                                //Eliminamos la Reparacion y la guardamos, ya que se puede RESTAURAR antes de 10 segundos con el snackbar
+                               final Reparacion r = reparacionListAdapter.eliminar(adapterPosition);
                                Log.d("Deshacer",Integer.toString(r.getNumeroReparacion()));
-                                //----------Deshacer eliminacion------------
+                                //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
                                         .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ r.getNombreCliente() + " Deshacer el borrrado", 10000);
                                 snackbar.setAction("Deshacer", new View.OnClickListener() {
@@ -125,6 +122,8 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                     @Override
                                     public void onClick(View view) {
                                         reparacionListAdapter.deshacerBorrado(adapterPosition,  r);
+                                        //Añadimos el objeto de nuevo en su posicion original en el repositiorio
+                                        presenter.anadirPorPos(adapterPosition,r);
                                     }
                                 });
                                 snackbar.setActionTextColor(Color.WHITE);
@@ -154,7 +153,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
         rvReparacion.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        //incializamos la clase TouchCallback para realizar el efecto de eleminar al desplazar el dedo hacia la izquierda sobre un elemento
+        //Incializamos la clase TouchCallback para poder realizar el efecto de eleminar al desplazar el dedo hacia la izquierda sobre un elemento
         TouchCallback callback = new TouchCallback(reparacionListAdapter);
         mItemTouchHelperListener = new ItemTouchHelper(callback);
         mItemTouchHelperListener.attachToRecyclerView(rvReparacion);
@@ -174,7 +173,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     }
 
 
-    /*region Metodos implementados por la interfaz View*/
+    //region Metodos implementados por la interfaz View
     @Override
     public void hayDatos(ArrayList<Reparacion> list) {
         reparacionListAdapter.addAll(list);
@@ -200,16 +199,13 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     public void setPresenter(ReparacionListContract.Presenter presenter) {
         this.presenter = presenter;
     }
+    /*------------Fin metodos implementados por la interfaz ReparacionListContract.View ----------------*/
+    //endregion
 
-
-
-    /**
-     * -------------------------------------------------------------------------------
-     */
-    /*Interfaz que implementamos como escuchador para a la hora de clicar en un elemento de la vista, mostrar la vista de edicion con los datos de el elemento selecionado*/
+    /*Interfaz que implementamos como escuchador para a la hora de clicar en un elemento de la vista, mostrar la vista de edicion con los datos de el elemento selecionado
+    (En este caso la lista de datos relacionados de las reparaciones sobre un mismo cliente en una misma fecha sobr eun mismo vehiuculo)*/
     public interface clickVerReparacionListener {
         void clickVerReparacionListener();
-
     }
     //endregion
 }

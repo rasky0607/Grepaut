@@ -6,10 +6,8 @@ public class AdapterContrac {
 
     //Interfaz Base que implementan todos los adapter
     public interface BaseAdapterContract<T> {
-        T remove(int position);
-
+        T eliminar(int position);
         void confirmarBorrado(int adapterPosition);
-
 
         public interface ContractAdapterReparacion extends BaseAdapterContract {
             boolean estaFacturado(int position);

@@ -13,6 +13,7 @@ public class Base {
     public interface Presenter<T>{
         void cargarDatos();
         void anadir(T objeto);
+        void anadirPorPos(int pos,T objeto);
         void editar(T objeto);
         boolean eliminar(int posicion);
     }

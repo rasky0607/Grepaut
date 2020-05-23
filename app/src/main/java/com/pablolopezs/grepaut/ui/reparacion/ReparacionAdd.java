@@ -26,12 +26,6 @@ import java.util.Calendar;
 import java.util.Date;
 //Importada de arsenal android
 
-
-
-
-
-
-
 public class ReparacionAdd extends Fragment {
     public static final String TAG="ReparacionAdd";
 

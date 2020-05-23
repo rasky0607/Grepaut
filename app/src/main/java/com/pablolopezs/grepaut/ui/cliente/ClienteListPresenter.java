@@ -23,7 +23,8 @@ public class ClienteListPresenter implements ClienteListContract.Presenter {
 
     @Override
     public boolean eliminar(int posicion) {
-        return false;
+        ClienteRepositories.getInstance().getList().remove(posicion);
+        return true;
     }
 
     @Override
@@ -33,6 +34,11 @@ public class ClienteListPresenter implements ClienteListContract.Presenter {
 
     @Override
     public void anadir(Cliente cliente) {
+
+    }
+
+    @Override
+    public void anadirPorPos(int pos, Cliente objeto) {
 
     }
 }

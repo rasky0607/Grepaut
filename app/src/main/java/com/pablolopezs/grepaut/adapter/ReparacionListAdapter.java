@@ -75,7 +75,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             holder.tvNumeroReparacion.setBackgroundResource(R.drawable.ciruclo_lista_repa_no_ok);
         }
 
-        /*Con el click editamos un elemento(Aun que reparaciones no tiene permitido editarse, pero se enviara u n mensaje al usuario de recordatorio)*/
+        /*Con el click editamos un elemento(Aun que reparaciones no tiene permitido editarse, por lo que se mostrara al usuario infomacion de todas las reparaciones de ese mismo dia sobre el mismo vehiculo a el mismo cliente)*/
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +85,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
                 //Buscamos elementos de la lista con el  mismo Cliente,fecha y matricula de reparacion.
                 for (Reparacion item : listReparacion) {
                     if (item.getNombreCliente() == reparacionBuscada.getNombreCliente() && item.getFecha().equals(reparacionBuscada.getFecha()) && item.getMatriculaCoche().equals(reparacionBuscada.getMatriculaCoche())) {
-                        listRepaMismoCliyFecha.add(item);
+                        listRepaMismoCliyFecha.add(item);//Lista de reparaciones con mismo cliente en una misma fecha con una misma matricula(es decir reparacion sobre la que mas tarde se emitira una factura)
                     }
                 }
                 if(listRepaMismoCliyFecha.size()>0) {
@@ -118,10 +118,9 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         return listReparacion.size();
     }
 
-    /*Implementado por la interfaz ContractAdapterReparacion */
+    /*Implementado por la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterReparacion */
     @Override
-    public Reparacion remove(int position){
-        //TODO ERROR AL borrar el primer elemento, ya que este al deshacer, no se notifica al rc y no se muestra, pero si se restaura en la lista del adapter
+    public Reparacion eliminar(int position){
         Reparacion repaBorrar= listReparacion.get(position);//Obtenemos el objeto que vamos a borrar para devolverlo
         listReparacion.remove(position);
         notifyItemRemoved(position);
@@ -131,7 +130,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     //Una vez confirmada la eliminacion desde el la ventana que m uestra el alert dialog
     @Override
     public void confirmarBorrado(int position){
-        manipularDatos.confirmarBorrado(position);
+        manipularDatos.confirmarBorrado(position);//Este informa a la vista de que se confirman el borrado
     }
 
     //Cuando se le da a "NO" en el alerDialog, volvemos a reinsertar el elemento en el reciclerView
@@ -175,7 +174,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
     }
 
-    /*Interfaz implementadas para los metodos que necesitamos ejecutar en el evento onClick o onLongClick de el Adapter*/
+    /*Interfaz implementadas para los metodos que necesitamos ejecutar en el evento onClick o onLongClick y confirmacionDeBorrado (para snackbar de la vista que deshace borrados) de el Adapter*/
     public interface manipularDatos {
         void miOnLOngClick(int posicion);
         void miClick();//Envia al usuario a un listado de las reparaciones con todo detalle que recibio un cliente en una fecha para un vehiculo concreto
