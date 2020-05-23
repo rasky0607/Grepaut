@@ -17,7 +17,7 @@ import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 import java.util.ArrayList;
 /**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
  *  que se mostrara en ReparacionListView*/
-public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac.ContractAdapterReparacion {
+public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac.BaseAdapterContract.ContractAdapterReparacion {
 //TODO pendiente de agregar  RecyclerView.ItemDecoration en las clases Adapter, para poder implementar los eventos de arrastrar hacia los laterales los viewHolder de los recycler
     private ArrayList<Reparacion> listReparacion;
     private manipularDatos manipularDatos;
@@ -71,7 +71,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
          estadoDeReparacion  = false -> color rojo (en curso o sin finalizar)*/
         if (listReparacion.get(position).getEstadoReparacion()) {
             holder.tvNumeroReparacion.setBackgroundResource(R.drawable.circulo_lista_repa_ok);
-        } else {
+        } else if(!listReparacion.get(position).getEstadoReparacion()){
             holder.tvNumeroReparacion.setBackgroundResource(R.drawable.ciruclo_lista_repa_no_ok);
         }
 
@@ -121,6 +121,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     /*Implementado por la interfaz ContractAdapterReparacion */
     @Override
     public Reparacion remove(int position){
+        //TODO ERROR AL borrar el primer elemento, ya que este al deshacer, no se notifica al rc y no se muestra, pero si se restaura en la lista del adapter
         Reparacion repaBorrar= listReparacion.get(position);//Obtenemos el objeto que vamos a borrar para devolverlo
         listReparacion.remove(position);
         notifyItemRemoved(position);
@@ -128,6 +129,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
     }
     //Una vez confirmada la eliminacion desde el la ventana que m uestra el alert dialog
+    @Override
     public void confirmarBorrado(int position){
         manipularDatos.confirmarBorrado(position);
     }
@@ -139,8 +141,12 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
 
     //cuando se ha comfirmado el borrado en el alerDialog y se pulsa deshacer desde snackbar
     public void deshacerBorrado(int position, Reparacion r){
+        Log.d("DeshacerBorrado","tamanio antes de restaurar  "+listReparacion.size());
+        Log.d("DeshacerBorrado","Restaurar posicion "+position+" objeto"+ r.getNumeroReparacion());
         listReparacion.add(position,r);
-        notifyItemInserted(position);
+        notifyDataSetChanged();//Arregla el fallo de "notifyItemInserted(position)" de la linea de abajo
+        //notifyItemInserted(position);//TODO  ERROR con esta linea Se restaura pero no se notifica en la vista cuando se elemina el 1º elemento
+        Log.d("DeshacerBorrado","tamanio despues de restaurar  "+listReparacion.size());
     }
 
     @Override

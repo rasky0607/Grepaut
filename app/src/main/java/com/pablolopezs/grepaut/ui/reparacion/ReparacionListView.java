@@ -115,9 +115,10 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                 //****PENDIENTE**** eliminar el objeto reparacion de la lista del Repositiorio a traves del presenter
                                 //Reparacion a eliminada que se va ha restaurar
                                final Reparacion r = reparacionListAdapter.remove(adapterPosition);
+                               Log.d("Deshacer",Integer.toString(r.getNumeroReparacion()));
                                 //----------Deshacer eliminacion------------
                                 Snackbar snackbar = Snackbar
-                                        .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ r.getNombreCliente() + " Deshacer el borrrado", Snackbar.LENGTH_LONG);
+                                        .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ r.getNombreCliente() + " Deshacer el borrrado", 10000);
                                 snackbar.setAction("Deshacer", new View.OnClickListener() {
                                     /*Se pulso el boton "Deshacer" del snackbar y
                                      se restaura el elemento de nuevo en la vista del ReciclerView*/

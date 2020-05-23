@@ -14,23 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 /*Esta clase controla el deslizamiento de los item del reciclerView y el efecto que conlleva esta accion,
  en ete caso eliminar el item del reciclerView cuando se desliza el item hacia la izquierda y se confirma la eliminacion*/
 public class TouchCallback extends ItemTouchHelper.Callback {
-    private AdapterContrac.ContractAdapterCliente mAdapterCliente= null;
-    private AdapterContrac.ContractAdapterReparacion mAdapterReparacion= null;
-    private AdapterContrac.ContractAdapterServicio mAdapterServicio= null;
+    private AdapterContrac.BaseAdapterContract.ContractAdapterCliente mAdapterCliente= null;
+    private AdapterContrac.BaseAdapterContract.ContractAdapterReparacion mAdapterReparacion= null;
+    private AdapterContrac.BaseAdapterContract.ContractAdapterServicio mAdapterServicio= null;
+
 
     //Constructor
     public TouchCallback(AdapterContrac.BaseAdapterContract adapter){
-        if(adapter instanceof AdapterContrac.ContractAdapterCliente)
+        if(adapter instanceof AdapterContrac.BaseAdapterContract.ContractAdapterCliente)
         {
-            mAdapterCliente = (AdapterContrac.ContractAdapterCliente)adapter;
+            mAdapterCliente = (AdapterContrac.BaseAdapterContract.ContractAdapterCliente)adapter;
         }
-        if(adapter instanceof AdapterContrac.ContractAdapterReparacion)
+        if(adapter instanceof AdapterContrac.BaseAdapterContract.ContractAdapterReparacion)
         {
-            mAdapterReparacion =(AdapterContrac.ContractAdapterReparacion) adapter;
+            mAdapterReparacion =(AdapterContrac.BaseAdapterContract.ContractAdapterReparacion) adapter;
         }
-        if(adapter instanceof AdapterContrac.ContractAdapterServicio)
+        if(adapter instanceof AdapterContrac.BaseAdapterContract.ContractAdapterServicio)
         {
-            mAdapterServicio =(AdapterContrac.ContractAdapterServicio) adapter;
+            mAdapterServicio =(AdapterContrac.BaseAdapterContract.ContractAdapterServicio) adapter;
         }
 
     }
@@ -40,6 +41,8 @@ public class TouchCallback extends ItemTouchHelper.Callback {
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         final int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
         int swipeFlags = ItemTouchHelper.ACTION_STATE_IDLE;
+
+        if(mAdapterReparacion instanceof AdapterContrac.BaseAdapterContract.ContractAdapterReparacion)
         if(!mAdapterReparacion.estaFacturado(viewHolder.getAdapterPosition())) {
             swipeFlags = ItemTouchHelper.LEFT;
         }
