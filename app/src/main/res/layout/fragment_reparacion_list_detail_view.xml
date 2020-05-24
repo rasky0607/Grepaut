@@ -14,7 +14,15 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFacturar"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_gravity="bottom|end"
+        android:clickable="true"
+        android:src="@drawable/ic_facturado" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

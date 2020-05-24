@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 public class Reparacion extends ViewModel {
     //region Campos
+    int idReparacion;
     int numeroReparacion;
     String fecha;
     int idCliente;

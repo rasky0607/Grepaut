@@ -10,11 +10,10 @@ public class Factura {
 
     //region Campos
     int numeroFactura;
-    int lineaFactura;
-    Date fechaFacturacion;
+    int lineaFactura; //Suele coincidir con el numero numeroReparacion de la clase Reparacion, pero realmente es el numero de reparaciones asignadas a un mismo numero de factura
+    String fechaFacturacion;
     boolean estadoFactura;// En funcion de si es true o false se escribira un string determinado u otro (Vigente, Anulada)
-    int numeroReparacion;
-    Date fechaReparacion;
+    String fechaReparacion;
     int idClienteRepara;
     String matriculaCocheRepara;
     String emailUsuario;
@@ -38,11 +37,11 @@ public class Factura {
         this.lineaFactura = lineaFactura;
     }
 
-    public Date getFechaFacturacion() {
+    public String getFechaFacturacion() {
         return fechaFacturacion;
     }
 
-    public void setFechaFacturacion(Date fechaFacturacion) {
+    public void setFechaFacturacion(String fechaFacturacion) {
         this.fechaFacturacion = fechaFacturacion;
     }
 
@@ -54,19 +53,11 @@ public class Factura {
         this.estadoFactura = estadoFactura;
     }
 
-    public int getNumeroReparacion() {
-        return numeroReparacion;
-    }
-
-    public void setNumeroReparacion(int numeroReparacion) {
-        this.numeroReparacion = numeroReparacion;
-    }
-
-    public Date getFechaReparacion() {
+    public String getFechaReparacion() {
         return fechaReparacion;
     }
 
-    public void setFechaReparacion(Date fechaReparacion) {
+    public void setFechaReparacion(String fechaReparacion) {
         this.fechaReparacion = fechaReparacion;
     }
 
@@ -105,12 +96,11 @@ public class Factura {
     //endregion
 
     //region Constructor
-    public Factura(int numeroFactura, int lineaFactura, Date fechaFacturacion, boolean estadoFactura, int numeroReparacion, Date fechaReparacion, int idClienteRepara, String matriculaCocheRepara, String emailUsuario, String numeroFacturaAnulada) {
+    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion, int idClienteRepara, String matriculaCocheRepara, String emailUsuario, String numeroFacturaAnulada) {
         this.numeroFactura = numeroFactura;
         this.lineaFactura = lineaFactura;
         this.fechaFacturacion = fechaFacturacion;
         this.estadoFactura = estadoFactura;
-        this.numeroReparacion = numeroReparacion;
         this.fechaReparacion = fechaReparacion;
         this.idClienteRepara = idClienteRepara;
         this.matriculaCocheRepara = matriculaCocheRepara;
@@ -118,6 +108,17 @@ public class Factura {
         this.numeroFacturaAnulada = numeroFacturaAnulada;
     }
 
+    //Costructor sin asginar numero de factura anulada, es decir cuando nuestra factura no hace referencia otra que esta anulada
+    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion, int idClienteRepara, String matriculaCocheRepara, String emailUsuario) {
+        this.numeroFactura = numeroFactura;
+        this.lineaFactura = lineaFactura;
+        this.fechaFacturacion = fechaFacturacion;
+        this.estadoFactura = estadoFactura;
+        this.fechaReparacion = fechaReparacion;
+        this.idClienteRepara = idClienteRepara;
+        this.matriculaCocheRepara = matriculaCocheRepara;
+        this.emailUsuario = emailUsuario;
+    }
     public Factura(){
 
     }

@@ -15,12 +15,13 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Esta clase mostrara el fragment que listara los detalles de las reparaciones realizadas
  * a un determinado cliente en una determinada fecha a un determinado vehiculo de este, tras hacer click
  * en una de las reparaciones del listado del layout fragment_reparacion_list_view ejecutado sobre la clase ReparacionListView*/
-public class ReparacionDetailListAdapter extends RecyclerView.Adapter<ReparacionDetailListAdapter.ViewHolder> {
+public class ReparacionDetailListAdapter extends RecyclerView.Adapter<ReparacionDetailListAdapter.ViewHolder> implements AdapterContrac.BaseAdapterContract.ContractAdapterReparacion {
 
     private ArrayList<Reparacion> list;
 
@@ -80,6 +81,45 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
         return list.size();
     }
 
+    /*Recorre la lista de reparaciones que se estan mostrando en detalle y recoge solo las que NO estan facturadas
+    * Para crear una factura con todas estas reaparaciones*/
+    public ArrayList<Reparacion> reparacionesSinFacturar(){
+        ArrayList<Reparacion> listRepaSinFacturar =new ArrayList<Reparacion>();//Lista de reparaciones sin facturar
+        for(Reparacion item:list){
+            if(!item.getEstadoFacturado())
+                listRepaSinFacturar.add(item);//Guardamnos las reparaciones no facturadas en la nueva lista
+        }
+        return listRepaSinFacturar;
+    }
+    /*Recorre la lista de reparaciones que se estan mostrando en detalle y recoge solo las que NO estan facturadas
+     * Para marcarlas como facturadas y reparacion finalizada*/
+    public void marcarReparaComoFacturadas(){
+        for(Reparacion item:list){
+            if(!item.getEstadoFacturado()) {
+                item.setEstadoReparacion(true);//Marcamos como reparaciones finalizadas
+                item.setEstadoFacturado(true);//marcamos como facturadas las reparaciones que no lo estaban
+            }
+        }
+        notifyDataSetChanged();//Notificamos los cambios al rv
+    }
+
+//region Implementado por la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterReparacion
+    @Override
+    public Object eliminar(int position) {
+        return null;
+    }
+
+    @Override
+    public void confirmarBorrado(int adapterPosition) {
+
+    }
+
+    @Override
+    public boolean estaFacturado(int position) {
+        return false;
+    }
+//----------------FIn implmentacion de interfaz
+//endregion
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNumeroReparacion;
