@@ -37,8 +37,9 @@ public class ClienteListPresenter implements ClienteListContract.Presenter {
 
     }
 
+    //Añadimos el elmento pasado en una posicion concreta, como cuando deshacemos un borrado con el snakbar<
     @Override
     public void anadirPorPos(int pos, Cliente objeto) {
-
+        ClienteRepositories.getInstance().getList().add(pos,objeto);
     }
 }

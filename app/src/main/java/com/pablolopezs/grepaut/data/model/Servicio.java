@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModel;
 public class Servicio {
 
 
-    String nombre;
+    String nombre;//Clave primaria, es decir el nombre es unico
     double precio;
     String descripcion;
+    //SIN USO ACTUALMENTE
     String empresa;//Empresa a la que pertenece este servicio (es una FK de la tabla Empresa)
 
     //region Propiedades
@@ -47,7 +48,17 @@ public class Servicio {
     //endregion
 
     //region Constructores
-    public Servicio(String nombre, double precio, String descripcion, String empresa) {
+    public Servicio(String nombre, double precio, String descripcion ) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.descripcion = descripcion;
+    }
+    public Servicio(String nombre, double precio ) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+    //SIN USO ACTUALMENTE
+    public Servicio(String nombre, double precio, String descripcion,String empresa) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;

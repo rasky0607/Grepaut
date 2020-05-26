@@ -32,4 +32,9 @@
     <!--Dimensiones de Inserciones o Añadir-->
     <dimen name="cabecerasCampos">14dp</dimen>
 
+    <!--Dimensiones list servicios-->
+    <dimen name="nombreServicios">14dp</dimen>
+    <dimen name="margenWidgetListaServicios">10dp</dimen>
+    <dimen name="tamnioNumPrecioServicio">18dp</dimen>
+
 </resources>

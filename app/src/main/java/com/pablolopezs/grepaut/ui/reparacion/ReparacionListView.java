@@ -187,7 +187,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
 
     @Override
     public void mensaje(String msg) {
-        Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
     private ClienteListAdapter clienteListAdapter;
     private RecyclerView rvCliente;
     ClienteListContract.Presenter presenter;
-    ClienteListAdapter.manipularDatos manipularDatos;
+    //ClienteListAdapter.manipularDatos manipularDatos;
     private ItemTouchHelper mItemTouchHelperListener;
 
     public static ClienteListView newInstance(Bundle args) {
@@ -148,13 +148,13 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
 
     @Override
     public void mensaje(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void mostrarError(String msg) {
-        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),"Error "+msg,Toast.LENGTH_LONG).show();
     }
 
     @Override

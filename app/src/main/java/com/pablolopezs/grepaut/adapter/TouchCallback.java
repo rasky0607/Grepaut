@@ -53,6 +53,12 @@ public class TouchCallback extends ItemTouchHelper.Callback {
                 swipeFlags = ItemTouchHelper.LEFT;
             }
         }
+
+        if(mAdapterServicio instanceof AdapterContrac.BaseAdapterContract.ContractAdapterServicio){
+            if(!mAdapterServicio.estaEnUnaReparacion(viewHolder.getAdapterPosition())) {
+                swipeFlags = ItemTouchHelper.LEFT;
+            }
+        }
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
@@ -76,6 +82,12 @@ public class TouchCallback extends ItemTouchHelper.Callback {
             //Si el cliente no tiene  una reparacion ya creada, podra borrarse, de lo contrario, NO podrá
             if (direction == ItemTouchHelper.LEFT) {
                 mAdapterCliente.confirmarBorrado(viewHolder.getAdapterPosition());
+            }
+        }
+        if( mAdapterServicio instanceof AdapterContrac.BaseAdapterContract.ContractAdapterServicio) {
+            //Si el cliente no tiene  una reparacion ya creada, podra borrarse, de lo contrario, NO podrá
+            if (direction == ItemTouchHelper.LEFT) {
+                mAdapterServicio.confirmarBorrado(viewHolder.getAdapterPosition());
             }
         }
 

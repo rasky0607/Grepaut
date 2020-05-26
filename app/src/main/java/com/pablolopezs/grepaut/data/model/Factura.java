@@ -16,6 +16,10 @@ public class Factura {
     String fechaReparacion;
     int idClienteRepara;
     String matriculaCocheRepara;
+    //TODO PENDIENTES DE APLICAR ESTOS DOS CAMPOS
+    String nombreServicio;
+    double precioServicio;
+    //---------------------------//
     String emailUsuario;
     String numeroFacturaAnulada;//Si se crea una nueva factura a raiz de la anulacion de otra, en este campo se hara referencia a la factura anulada a partir de la que se creo la nueva.
     //endregion

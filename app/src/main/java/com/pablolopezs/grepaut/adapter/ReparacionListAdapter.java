@@ -89,7 +89,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
                     }
                 }
                 if(listRepaMismoCliyFecha.size()>0) {
-                    //Cargamos esta lista de reparaciones concretas de un cliente en una determinada fecha sobre un mismo vehiculo en repository para recogerla conReparacionDetailListAdapter
+                    //Cargamos en el repositorio esta lista de reparaciones concretas de un cliente en una determinada fecha sobre un mismo vehiculo en repository para recogerla conReparacionDetailListAdapter
                     ReparacionRepositories.getInstance().setListReparacionesComunes(listRepaMismoCliyFecha);
                 }
                 manipularDatos.miClick();

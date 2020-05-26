@@ -15,6 +15,7 @@ public class Reparacion extends ViewModel {
     boolean estadoFacturado;// En funcion de si es true o false se escribira un string determinado u otro (Facturado, No Facturado)
     String emailUsuario;
     String nombreUsuario;
+    //SIN USO ACTUALMENTE
     String nombreEmpresa;
     //endregion
 
@@ -99,10 +100,11 @@ public class Reparacion extends ViewModel {
         this.nombreUsuario = nombreUsuario;
     }
 
+    //SIN USO ACTUALMENTE
     public String getNombreEmpresa() {
         return nombreEmpresa;
     }
-
+    //SIN USO ACTUALMENTE
     public void setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
     }
@@ -113,6 +115,20 @@ public class Reparacion extends ViewModel {
     //endregion
 
     //region Constructores
+    public Reparacion(int numeroReparacion, String fecha,int idCliente, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario) {
+        this.numeroReparacion = numeroReparacion;
+        this.fecha = fecha;
+        this.idCliente = idCliente;
+        this.nombreCliente = nombreCliente;
+        this.matriculaCoche = matriculaCoche;
+        this.nombreServicio = nombreServicio;
+        this.estadoReparacion = estadoReparacion;
+        this.estadoFacturado = estadoFacturacdo;
+        this.emailUsuario = emailUsuario;
+        this.nombreUsuario=nombreUsuario;
+    }
+
+    //SIN USO ACTUALMENTE por la propiedad nombreEmpresa
     public Reparacion(int numeroReparacion, String fecha,int idCliente, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario, String nombreEmpresa) {
         this.numeroReparacion = numeroReparacion;
         this.fecha = fecha;
@@ -126,6 +142,7 @@ public class Reparacion extends ViewModel {
         this.nombreEmpresa = nombreEmpresa;
         this.nombreUsuario=nombreUsuario;
     }
+
 
     public  Reparacion() {
 

@@ -104,7 +104,7 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
 
     //Cuando se le da a "NO" en el alerDialog, volvemos a reinsertar el elemento en el reciclerView
     public void cancelacionDeBorrado(int position){
-        notifyItemChanged(position);//Notificamos el cambio al recicler para que actualice le elemento donde estaba
+        notifyItemChanged(position);//Notificamos el cambio al recicler para que actualice el elemento (que se desplazo hacia el lado ) donde estaba
     }
 
     //cuando se ha comfirmado el borrado en el alerDialog y se pulsa deshacer desde snackbar

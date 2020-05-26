@@ -23,6 +23,7 @@ import com.pablolopezs.grepaut.ui.reparacion.ReparacionAdd;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionDetailListView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListPresenter;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListView;
+import com.pablolopezs.grepaut.ui.servicio.ServicioListPresenter;
 import com.pablolopezs.grepaut.ui.servicio.ServicioListView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,7 +38,7 @@ import android.widget.Toast;
  * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
 
-    private AppBarConfiguration mAppBarConfiguration;
+    //private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fabadd;
     private  DrawerLayout drawer=null;
     private NavigationView navigationView;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ClienteListView fragmentClienteListView;
     private ClienteListPresenter presenterCliente;
     private ServicioListView fragmentServicioListView;
+    private ServicioListPresenter presenterServicio;
     private FacturaListView fragmentFacturaListView;
     private static int idItemNvDrawerSelect =-1;//id de la opciond e menu Drawer selecionada
 
@@ -124,11 +126,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        //Nos permite inflar los iconos de cada una de las opciones del menu drawer, aunq ue NO SE USA AHORA MISMO ya que las inflamos desde el XML
+        /*mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_clientes, R.id.nav_reparaciones, R.id.nav_servicios,
-                R.id.nav_facturas, R.id.nav_compartir).setDrawerLayout(drawer).build();
+                R.id.nav_facturas, R.id.nav_compartir).setDrawerLayout(drawer).build();*/
 
         /*Inicializamos el listener para onNavigationItemSelected(@NonNull MenuItem item).
          Tambien podriamos haberlo realizado con navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() */
@@ -212,12 +213,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentServicioListView = (ServicioListView) getSupportFragmentManager().findFragmentByTag(fragmentServicioListView.TAG);
                 if(fragmentServicioListView==null)
                 {
-                    fragmentServicioListView= ServicioListView.newInstance();
+                    fragmentServicioListView= ServicioListView.newInstance(null);
                 }
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.nav_contenedor_fragment,fragmentServicioListView, ServicioListView.TAG)
                         .commit();
+                presenterServicio=new ServicioListPresenter(fragmentServicioListView);
+                fragmentServicioListView.setPresenter(presenterServicio);
                 setTitle(R.string.menu_servicios);
                 break;
 
