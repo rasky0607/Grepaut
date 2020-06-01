@@ -28,8 +28,8 @@ public class ClienteListPresenter implements ClienteListContract.Presenter {
     }
 
     @Override
-    public void editar(Cliente cliente) {
-
+    public void editar(int pos, Cliente cliente) {
+        ClienteRepositories.getInstance().getList().add(pos, cliente);
     }
 
     @Override

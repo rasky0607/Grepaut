@@ -163,7 +163,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        clickVerReparacionListener = (clickVerReparacionListener) context;//Ayuda de Adri, pero nola entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onAttach)
+        clickVerReparacionListener = (clickVerReparacionListener) context;//Ayuda de Adri, pero no la entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onAttach)
     }
 
     @Override

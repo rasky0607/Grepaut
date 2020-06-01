@@ -59,7 +59,7 @@ public class ReparacionListPresenter implements ReparacionListContract.Presenter
     }
     //Muestra un elemento seleccionado en detalle
     @Override
-    public void editar(Reparacion reparacion) {
+    public void editar(int pos, Reparacion reparacion) {
 
 
     }

@@ -46,7 +46,7 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.tvNombreServicio.setText(list.get(position).getNombre());
         holder.tvPrecio.setText(Double.toString(list.get(position).getPrecio())+"€");
 
@@ -62,7 +62,9 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return false;
+                Log.d("pulsacion "," posicion "+ holder.getAdapterPosition());
+                manipularDatos.miOnLOngClick(holder.getAdapterPosition());
+                return true;
             }
         });
     }
@@ -101,6 +103,12 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
     //----Fin implementacion de la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterServicio---/
 //endregion
 
+    //Devuelve un elemento concreto de la lista
+    public Servicio getItemList(int pos)
+    {
+        Servicio servicio= list.get(pos);
+        return servicio;
+    }
     //Cuando se le da a "NO" en el alerDialog, volvemos a reinsertar el elemento en el reciclerView
     public void cancelacionDeBorrado(int position){
         notifyItemChanged(position);//Notificamos el cambio al recicler para que actualice el elemento (que se desplazo hacia el lado ) donde estaba

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/clServicioAddEditPadding">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiNombreServicioAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/teNombreServicioAddEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/tiNombreServicioAddEdit" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiPrecioServicioeAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiNombreServicioAddEdit">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tePrecioServicioeAddEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/tiPrecioServicioAddEdit" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiDescripcionServicioAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiPrecioServicioeAddEdit">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/teDescripcionServicioAddEdit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/tiDescripciónClienteAddEdit" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btnGuardarServicio"
+        style="@style/botonesBase_FormaYColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/btnGuardarClienteAddEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiDescripcionServicioAddEdit"
+        app:layout_constraintVertical_bias="0.508" />
+</androidx.constraintlayout.widget.ConstraintLayout>

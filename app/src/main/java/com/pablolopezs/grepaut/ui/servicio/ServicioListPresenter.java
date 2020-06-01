@@ -31,7 +31,7 @@ public class ServicioListPresenter implements ServicioListContract.Presenter {
     }
 
     @Override
-    public void editar(Servicio objeto) {
+    public void editar(int pos, Servicio objeto) {
 
     }
 

@@ -1,5 +1,6 @@
 package com.pablolopezs.grepaut.ui.servicio;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
     //ServicioListAdapter.manipularDatos manipularDatos;
     private ItemTouchHelper mItemTouchHelperListener;
 
+    manipularDatosServicioAddOEdit manipularDatosServicioAddOEdit;
+
     public static ServicioListView newInstance(Bundle args) {
         ServicioListView fragment = new ServicioListView();
         fragment.setArguments(args);
@@ -52,6 +55,11 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        manipularDatosServicioAddOEdit = (manipularDatosServicioAddOEdit) context;//Ayuda de Adri, pero no la entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onAttach)
+    }
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Para mantener los datos o estado al girar la actividad
@@ -65,7 +73,7 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
         servicioListAdapter=new ServicioListAdapter(new ServicioListAdapter.manipularDatos() {
             @Override
             public void miOnLOngClick(int posicion) {
-
+                manipularDatosServicioAddOEdit.fragmentManipularDatosServicioAddOEdit(servicioListAdapter.getItemList(posicion),posicion);
             }
 
             @Override
@@ -88,7 +96,6 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
 
                                 //Eliminamos el Cliente del adapter y lo guardamos, ya que este que se puede  RESTAURAR antes de 10 segundos con el snackbar
                                 final Servicio s =  servicioListAdapter.eliminar(adapterPosition);
-
                                 Log.d("Deshacer",s.getNombre());
                                 //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
@@ -159,6 +166,11 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
     public void setPresenter(ServicioListContract.Presenter presenter) {
         this.presenter=presenter;
     }
+
     //----Fin implementacion de la interfaz ServicioListContract.View---/
     //endregion
+
+    public  interface manipularDatosServicioAddOEdit{
+        void  fragmentManipularDatosServicioAddOEdit(Servicio servicio, int pos); //Pos indica la posicion en la lista de repositorio en la que se debe modificar el objeto
+    }
 }

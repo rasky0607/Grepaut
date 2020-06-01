@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/clClienteAddEditPadding">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/teNombreClienteAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/tiNombreClienteAddEdit"
+        app:layout_constraintBottom_toTopOf="@+id/teApellidosClienteAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/teApellidosClienteAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:hint="@string/tiApellidoClienteAddEdit"
+        app:layout_constraintBottom_toTopOf="@+id/teMatriculaClienteAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/teMatriculaClienteAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:hint="@string/tiMatriculaClienteAddEdit"
+        app:layout_constraintBottom_toTopOf="@+id/tetlfClienteAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/tetlfClienteAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:hint="@string/titlfClienteAddEdit"
+        app:layout_constraintBottom_toTopOf="@+id/teemailClienteAddEdit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/teemailClienteAddEdit"
+        style="@style/miTil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="108dp"
+        android:hint="@string/tiemailClienteAddEdit"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuardarCliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnGuardarCliente"
+        style="@style/botonesBase_FormaYColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="84dp"
+        android:text="@string/btnGuardarServicioAddEdit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

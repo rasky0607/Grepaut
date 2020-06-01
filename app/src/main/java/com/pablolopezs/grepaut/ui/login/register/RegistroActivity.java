@@ -33,8 +33,8 @@ public class RegistroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//Para evitar que concretamente esta activity se gire
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//Para evitar que concretamente esta activity se gire
         setContentView(R.layout.activity_registro);
 
         //Enlace a componentes de Interfaz

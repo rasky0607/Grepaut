@@ -16,6 +16,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
+import com.pablolopezs.grepaut.data.model.Servicio;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
 import com.pablolopezs.grepaut.ui.factura.FacturaListView;
@@ -23,6 +24,8 @@ import com.pablolopezs.grepaut.ui.reparacion.ReparacionAdd;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionDetailListView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListPresenter;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListView;
+import com.pablolopezs.grepaut.ui.servicio.ServicioAddEditPresenter;
+import com.pablolopezs.grepaut.ui.servicio.ServicioAddyEditView;
 import com.pablolopezs.grepaut.ui.servicio.ServicioListPresenter;
 import com.pablolopezs.grepaut.ui.servicio.ServicioListView;
 
@@ -36,7 +39,7 @@ import android.widget.Toast;
 
 /**Clase que gestiona las opciones del nuestra barra
  * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener, ServicioListView.manipularDatosServicioAddOEdit {
 
     //private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fabadd;
@@ -52,7 +55,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ServicioListPresenter presenterServicio;
     private FacturaListView fragmentFacturaListView;
     private static int idItemNvDrawerSelect =-1;//id de la opciond e menu Drawer selecionada
-
+    private ServicioAddyEditView fragmentServicioAddyEditView;
+    private ServicioAddEditPresenter servicioAddEditPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
                     case "Servicios":
                         //Abrimos fragment añadir de Servicios
+                        fragmentManipularDatosServicioAddOEdit(null,-1);//Le pasamos -1 ya que no va editar ningune elemento de la lista de repositorie si no que va añadir un elemento nuevo
                         break;
                     case "Facturas":
                         //Abrimos fragment añadir de Facturas
@@ -333,8 +338,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    /*Cuando se hace click sobre la lista de reparaciones
-     para abrir un nuevo fragmento con todos los datos de esta*/
+    //region Implementado por la interfaz ReparacionListView.clickVerReparacionListener
+      /*Cuando se hace click sobre la lista de reparaciones
+       para abrir un nuevo fragmento con todos los datos de esta*/
     @Override
     public void clickVerReparacionListener() {
         fragmentReparacionDetailView = (ReparacionDetailListView) getSupportFragmentManager().findFragmentByTag(ReparacionDetailListView.TAG);
@@ -349,5 +355,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle("Detalles de la Reparación.");
         ocultarMostrarFloatinButtom();
     }
+  //endregion
 
+    //region Intefaz implementada ServicioAddyEditView.addOEditServicio
+    @Override
+    public void fragmentManipularDatosServicioAddOEdit(Servicio servicio,int pos) {
+        //fragmentServicioAddyEditView
+
+        Log.d("pulsacionMAIN "," posicion "+ pos);
+        fragmentServicioAddyEditView =(ServicioAddyEditView) getSupportFragmentManager().findFragmentByTag(ServicioAddyEditView.TAG);
+        if(fragmentServicioAddyEditView==null)
+        {
+           Bundle bundle= null;
+           if(servicio!=null)
+           {
+               bundle=new Bundle();
+               bundle.putParcelable(Servicio.TAG,servicio);
+           }
+           fragmentServicioAddyEditView= ServicioAddyEditView.newInstance(bundle,pos);
+        }
+        servicioAddEditPresenter= new ServicioAddEditPresenter(fragmentServicioAddyEditView);
+        fragmentServicioAddyEditView.setPresenter(servicioAddEditPresenter);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentServicioAddyEditView,ServicioAddyEditView.TAG).addToBackStack(null).commit();
+
+        setTitle(R.string.anadir_servicios);
+        ocultarMostrarFloatinButtom();
+    }
+    //endregion
 }

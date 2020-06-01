@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">10dp</dimen>
 
     <!--Dimensiones login-->
-    <dimen name="llLoginPadding">24dp</dimen><!--ll = linealayout-->
+    <dimen name="clLoginPadding">24dp</dimen><!--ll = linealayout-->
     <dimen name="textViewLoginMarginTop">24dp</dimen>
     <dimen name="imgButtonLoginWidth">55dp</dimen>
     <dimen name="imgButtonLoginHeight">55dp</dimen>
@@ -36,5 +36,7 @@
     <dimen name="nombreServicios">14dp</dimen>
     <dimen name="margenWidgetListaServicios">10dp</dimen>
     <dimen name="tamnioNumPrecioServicio">18dp</dimen>
+    <dimen name="clClienteAddEditPadding">24dp</dimen>
+    <dimen name="clServicioAddEditPadding">24dp</dimen>
 
 </resources>
