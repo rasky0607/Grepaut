@@ -55,11 +55,6 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        manipularDatosServicioAddOEdit = (manipularDatosServicioAddOEdit) context;//Ayuda de Adri, pero no la entiendo TODO PREGUNTARLE POR QUE?? (No termino de entender la funcion de onAttach)
-    }
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //Para mantener los datos o estado al girar la actividad
@@ -170,6 +165,16 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
     //----Fin implementacion de la interfaz ServicioListContract.View---/
     //endregion
 
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //Inicializamos la interfaz
+        manipularDatosServicioAddOEdit = (manipularDatosServicioAddOEdit) context;
+    }
+
+    //Esta interfaz nos permite comunicar la clase MainActivity que gestiona los fragment y de este modo enviar informacion entre los distintos fragment haciendo uso de Bundle y la interfaz Parcelable
     public  interface manipularDatosServicioAddOEdit{
         void  fragmentManipularDatosServicioAddOEdit(Servicio servicio, int pos); //Pos indica la posicion en la lista de repositorio en la que se debe modificar el objeto
     }

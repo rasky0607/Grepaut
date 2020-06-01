@@ -29,10 +29,10 @@ public class FacturaRepositories {
         int month = cFechaHoy.get(Calendar.MONTH);
         int year = cFechaHoy.get(Calendar.YEAR);
         String fecha=Integer.toString(day)+"/"+Integer.toString(month)+"/"+Integer.toString(year);
-        this.listFactura.add(new Factura(1,1,fecha,true,"10/07/2018",2,"9712ROG","email1@gmail.com"));
-        this.listFactura.add(new Factura(1,2,fecha,true,"10/07/2018",2,"9712ROG","email1@gmail.com"));
-        this.listFactura.add(new Factura(1,3,fecha,true,"10/07/2018",2,"9712ROG","email1@gmail.com"));
-        this.listFactura.add(new Factura(1,4,fecha,true,"10/07/2018",2,"9712ROG","email1@gmail.com"));
+        this.listFactura.add(new Factura(1,1,fecha,true,"10/07/2018","9712ROG","email1@gmail.com"));
+        this.listFactura.add(new Factura(1,2,fecha,true,"10/07/2018","9712ROG","email1@gmail.com"));
+        this.listFactura.add(new Factura(1,3,fecha,true,"10/07/2018","9712ROG","email1@gmail.com"));
+        this.listFactura.add(new Factura(1,4,fecha,true,"10/07/2018","9712ROG","email1@gmail.com"));
 
     }
 

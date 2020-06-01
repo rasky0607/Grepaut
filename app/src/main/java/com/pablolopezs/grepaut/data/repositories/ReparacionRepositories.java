@@ -29,20 +29,20 @@ public class ReparacionRepositories {
     /*Llena la lista de reparaciones*/
     private  void inicializa(){
 
-        this.listReparaciones.add(new Reparacion(1, "10/05/2018",1,"Juan","5794GPL","Cambio de aceite",false,false,"email1@gmail.com","Carlos"));
-        this.listReparaciones.add(new Reparacion(2, "10/05/2018",1,"Juan","5794GPL","Cambio de luces",false,false,"email1@gmail.com","Carlos"));
-        this.listReparaciones.add(new Reparacion(3, "10/05/2018",1,"Juan","5794GPL","Cambio de neumaticos",false,false,"email1@gmail.com","Carlos"));
-        this.listReparaciones.add(new Reparacion(4, "10/05/2018",1,"Juan","5794GPL","Cambio de correa de distribucion",false,false,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(1, "10/05/2018","Juan","5794GPL","Cambio de aceite",false,false,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(2, "10/05/2018","Juan","5794GPL","Cambio de luces",false,false,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(3, "10/05/2018","Juan","5794GPL","Cambio de neumaticos",false,false,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(4, "10/05/2018","Juan","5794GPL","Cambio de correa de distribucion",false,false,"email1@gmail.com","Carlos"));
 
-        this.listReparaciones.add(new Reparacion(1, "10/07/2018",2,"Juan","9712ROG","Cambio de bujias",true,true,"email1@gmail.com","Carlos"));
-        this.listReparaciones.add(new Reparacion(2, "10/07/2018",2,"Juan","9712ROG","Cambio de carburador",true,true,"email1@gmail.com","Carlos"));
-        this.listReparaciones.add(new Reparacion(3, "10/07/2018",2,"Juan","9712ROG","Cambio de reporductor MP3",true,true,"email1@gmail.com","Carlos"));
-        this.listReparaciones.add(new Reparacion(4, "10/07/2018",2,"Juan","9712ROG","Purga de deposito",true,true,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(1, "10/07/2018","Juan","9712ROG","Cambio de bujias",true,true,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(2, "10/07/2018","Juan","9712ROG","Cambio de carburador",true,true,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(3, "10/07/2018","Juan","9712ROG","Cambio de reporductor MP3",true,true,"email1@gmail.com","Carlos"));
+        this.listReparaciones.add(new Reparacion(4, "10/07/2018","Juan","9712ROG","Purga de deposito",true,true,"email1@gmail.com","Carlos"));
 
-        this.listReparaciones.add(new Reparacion(1, "11/07/2018",2,"Manolo","9712ROG","Cambio de bujias",false,false,"email1@gmail.com","Oscar"));
-        this.listReparaciones.add(new Reparacion(2, "11/07/2018",2,"Manolo","9712ROG","Cambio de carburador",false,false,"email1@gmail.com","Oscar"));
-        this.listReparaciones.add(new Reparacion(3, "11/07/2018",2,"Manolo","9712ROG","Cambio de reporductor MP3",false,false,"email1@gmail.com","Oscar"));
-        this.listReparaciones.add(new Reparacion(4, "11/07/2018",2,"Manolo","9712ROG","Purga de deposito",false,false,"email1@gmail.com","Oscar"));
+        this.listReparaciones.add(new Reparacion(1, "11/07/2018","Manolo","9712ROG","Cambio de bujias",false,false,"email1@gmail.com","Oscar"));
+        this.listReparaciones.add(new Reparacion(2, "11/07/2018","Manolo","9712ROG","Cambio de carburador",false,false,"email1@gmail.com","Oscar"));
+        this.listReparaciones.add(new Reparacion(3, "11/07/2018","Manolo","9712ROG","Cambio de reporductor MP3",false,false,"email1@gmail.com","Oscar"));
+        this.listReparaciones.add(new Reparacion(4, "11/07/2018","Manolo","9712ROG","Purga de deposito",false,false,"email1@gmail.com","Oscar"));
     }
 
     public ArrayList<Reparacion>getList(){
@@ -67,10 +67,10 @@ public class ReparacionRepositories {
     }
 
     /*Edita una reparacion*/
-    public void edit(int numeroReparacion,String fecha,int idCliente, String matriculaCoche) {
+    public void edit(int numeroReparacion,String fecha, String matriculaCoche) {
         for(Reparacion item:this.listReparaciones)
         {
-            if(item.getFecha().equals(fecha) && item.getIdCliente()==idCliente && item.getNumeroReparacion()==numeroReparacion && item.getMatriculaCoche().equals(matriculaCoche))
+            if(item.getNumeroReparacion()==numeroReparacion && item.getMatriculaCoche().equals(matriculaCoche))
             {
                 /*IMPORTANTE:En principio una reparacion, no puede ser editada,para ello, se elimina y se crea una nueva,
                 a no ser que sta este facturada, en cuyo caso , no podra ser eliminada, para ello primero habra que anular dicha factura emitida*/

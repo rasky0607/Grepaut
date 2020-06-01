@@ -1,5 +1,6 @@
 package com.pablolopezs.grepaut.ui.cliente;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,6 +35,8 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
     //ClienteListAdapter.manipularDatos manipularDatos;
     private ItemTouchHelper mItemTouchHelperListener;
 
+    manipularDatosClienteAddOEdit manipularDatosClienteAddOEdit;
+
     public static ClienteListView newInstance(Bundle args) {
         ClienteListView fragment = new ClienteListView();
         fragment.setArguments(args);
@@ -65,7 +68,8 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
         clienteListAdapter = new ClienteListAdapter(new ClienteListAdapter.manipularDatos() {
             @Override
             public void miOnLOngClick(int posicion) {
-
+                Log.d("long","Estoy aquui");
+                manipularDatosClienteAddOEdit.fragmentManipularDatosClienteAddOEdit(clienteListAdapter.getItemList(posicion),posicion);
             }
 
             @Override
@@ -89,7 +93,7 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
                                 //Eliminamos el Cliente del adapter y lo guardamos, ya que este que se puede  RESTAURAR antes de 10 segundos con el snackbar
                                 final Cliente c = clienteListAdapter.eliminar(adapterPosition);
 
-                                Log.d("Deshacer",Integer.toString(c.getId()));
+                                Log.d("Deshacer",c.getMatriculaCoche());
                                 //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
                                         .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ c.getNombre() + " Deshacer el borrrado", 10000);
@@ -162,4 +166,15 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
         this.presenter = presenter;
     }
    /**-------------------------------------------------------------------------------*/
+
+   @Override
+   public void onAttach(Context context) {
+       super.onAttach(context);
+       //Inicializamos la interfaz
+       manipularDatosClienteAddOEdit = (manipularDatosClienteAddOEdit) context;
+   }
+   //Esta interfaz nos permite comunicar la clase MainActivity que gestiona los fragment y de este modo enviar informacion entre los distintos fragment haciendo uso de Bundle y la interfaz Parcelable
+   public  interface manipularDatosClienteAddOEdit{
+       void  fragmentManipularDatosClienteAddOEdit(Cliente cliente, int pos); //Pos indica la posicion en la lista de repositorio en la que se debe modificar el objeto
+   }
 }

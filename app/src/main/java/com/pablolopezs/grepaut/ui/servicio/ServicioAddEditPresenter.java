@@ -25,7 +25,7 @@ public class ServicioAddEditPresenter implements ServicioAddEditContract.Present
     }
 
     @Override
-    public boolean validar(Servicio objeto) {
-        return true;
+    public boolean validar() {
+        return view.esValido();
     }
 }

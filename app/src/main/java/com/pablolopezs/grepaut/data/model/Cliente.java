@@ -1,28 +1,22 @@
 package com.pablolopezs.grepaut.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class Cliente {
-
+public class Cliente implements Parcelable {
+    public static final String TAG="Cliente";
     //region campos
-    int id;
-    String matriculaCoche;
-    String nombre;
-    String apellidos;
+    String matriculaCoche;//primary key
+    String nombre;//Nombre y apellidos
     String tlf;
     String email;
     //endregion
 
     //region Propiedades
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getMatriculaCoche() {
         return matriculaCoche;
@@ -38,14 +32,6 @@ public class Cliente {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public String getTlf() {
@@ -66,24 +52,33 @@ public class Cliente {
     //endregion
 
     //region Constructores
-    public Cliente(int id, String matriculaCoche, String nombre, String apellidos, String tlf, String email) {
-        this.id = id;
+    public Cliente( String matriculaCoche, String nombre, String tlf, String email) {
         this.matriculaCoche = matriculaCoche;
         this.nombre = nombre;
-        this.apellidos = apellidos;
         this.tlf = tlf;
         this.email = email;
     }
 
     public  Cliente(int id,String matriculaCoche,String nombre,String apellidos){
-        this.id = id;
         this.matriculaCoche = matriculaCoche;
         this.nombre = nombre;
-        this.apellidos = apellidos;
     }
 
     public  Cliente(){
 
+    }
+
+    //region Interfaz parcelable
+    @Override
+    public int describeContents() {
+        return CONTENTS_FILE_DESCRIPTOR;
+    }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(matriculaCoche);
+        dest.writeString(nombre);
+        dest.writeString(tlf);
+        dest.writeString(email);
     }
     //endregion
 

@@ -13,15 +13,17 @@ public class ClienteAddyEditPresenter  implements ClienteAddyEditContract.Presen
     @Override
     public void anadir(Cliente objeto) {
         ClienteRepositories.getInstance().getList().add(objeto);
+        view.mensaje("Insercion de cliente con matricula "+objeto.getMatriculaCoche());
     }
 
     @Override
     public void modificar(int pos, Cliente objeto) {
         ClienteRepositories.getInstance().getList().add(pos,objeto);
+        view.mensaje("Modificación de cliente "+objeto.getMatriculaCoche());
     }
 
     @Override
-    public boolean validar(Cliente objeto) {
-        return false;
+    public boolean validar() {
+        return view.esValido();
     }
 }

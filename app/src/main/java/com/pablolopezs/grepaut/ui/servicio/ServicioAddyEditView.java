@@ -1,6 +1,7 @@
 package com.pablolopezs.grepaut.ui.servicio;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,7 +83,7 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
             @Override
             public void onClick(View v) {
                 //Validamos el objeto con el presenter
-                if (presenter.validar(getObjeto()))
+                if (presenter.validar())
                 {
                     if (posEditar >= 0)//Si es mayor o igual que 0, es una EDICION O MODIFICACION
                     {
@@ -106,11 +107,8 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
     }
 
     //region Implementado por la interfaz ServicioListContract.View
-    @Override
-    public void Correcto() {
 
-    }
-
+    //Recoge los datos en cada widget de la vista para guardarlos en el objeto y devolverlo
     @Override
     public Servicio getObjeto() {
         Servicio servicio = new Servicio();
@@ -118,6 +116,25 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
         servicio.setPrecio(Double.parseDouble(tePrecioServicioeAddEdit.getText().toString()));
         servicio.setDescripcion(teDescripcionServicioAddEdit.getText().toString());
         return servicio;
+    }
+
+    //Comprueba que los datos introducidos en los widget son validos
+    @Override
+    public boolean esValido() {
+        Log.d("ERROR","FUERA DE IF Aqui toy");
+        if(TextUtils.isEmpty(teNombreServicioAddEdit.getText()))
+        {
+            mostrarError("El nombre del servicio no puede estar vacio.");
+            return false;
+        }
+        if(TextUtils.isEmpty(tePrecioServicioeAddEdit.getText()) || !TextUtils.isDigitsOnly(tePrecioServicioeAddEdit.getText()))
+        {
+            Log.d("ERROR","Aqui toy");
+            mostrarError("El precio del servicio no puede estar vacio, y debe ser de tipo numérico.");
+            return false;
+        }
+
+        return true;
     }
 
     @Override

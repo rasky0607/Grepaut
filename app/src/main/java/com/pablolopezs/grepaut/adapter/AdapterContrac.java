@@ -8,6 +8,7 @@ public class AdapterContrac {
     public interface BaseAdapterContract<T> {
         T eliminar(int position);
         void confirmarBorrado(int adapterPosition);
+        T getItemList(int pos);//Devuelve un objeto de la lista dada una posicion concreta
 
         public interface ContractAdapterReparacion extends BaseAdapterContract {
             boolean estaFacturado(int position);

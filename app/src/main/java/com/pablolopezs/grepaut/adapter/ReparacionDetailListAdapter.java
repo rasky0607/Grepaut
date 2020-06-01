@@ -118,6 +118,13 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
     public boolean estaFacturado(int position) {
         return false;
     }
+
+    //Devuelve un elemento concreto de la lista
+    public Reparacion getItemList(int pos)
+    {
+        Reparacion reparacion= list.get(pos);
+        return reparacion;
+    }
 //----------------FIn implmentacion de interfaz
 //endregion
 

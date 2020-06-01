@@ -152,6 +152,13 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     public boolean estaFacturado(int position) {
         return listReparacion.get(position).getEstadoFacturado();
     }
+
+    //Devuelve un elemento concreto de la lista
+    public Reparacion getItemList(int pos)
+    {
+        Reparacion reparacion= listReparacion.get(pos);
+        return reparacion;
+    }
     /*--------------------------------------------------------------------*/
 
     /*Clase interna en la que definimos nuestro propio ViewHolder*/

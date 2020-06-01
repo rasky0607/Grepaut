@@ -46,7 +46,8 @@
     <string name="menu_compartir">Compartir</string>
     <string name="menu_enviar">Enviar</string>
     <string name="anadir_reparacion">"Añadir Reparación.</string>
-    <string name="anadir_servicios">Añadir/Actualizar Servicios</string>
+    <string name="anadir_servicios">Añadir/Actualizar Servicio</string>
+    <string name="anadir_cliente">Añadir/Actualizar Cliente</string>
     <string name="anadir_clientes">Añadir/Actualizar Clientes</string>
     <string name="nav_header_subtitulo">Developez</string>
     <string name="ajustes">Ajustes</string>
@@ -75,18 +76,18 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Añadir/Editar Cliente-->
-    <string name="tiNombreClienteAddEdit">Nombre:</string>
-    <string name="tiApellidoClienteAddEdit">Apellidos:</string>
-    <string name="tiMatriculaClienteAddEdit">Matícula vehículo:</string>
-    <string name="titlfClienteAddEdit">Teléfono:</string>
-    <string name="tiemailClienteAddEdit">Email:</string>
+    <string name="tiNombreClienteAddEdit">Nombre</string>
+    <string name="tiApellidoClienteAddEdit">Apellidos</string>
+    <string name="tiMatriculaClienteAddEdit">Matícula vehículo</string>
+    <string name="titlfClienteAddEdit">Teléfono</string>
+    <string name="tiemailClienteAddEdit">Email</string>
     <string name="btnGuardarClienteAddEdit">Guardar</string>
     <string name="Loginpassword">Password</string>
 
     <!--Añadir/Editar Servicio-->
-    <string name="tiNombreServicioAddEdit">Nombre:</string>
-    <string name="tiPrecioServicioAddEdit">Precio:</string>
-    <string name="tiDescripciónClienteAddEdit">Descripción:</string>
+    <string name="tiNombreServicioAddEdit">Nombre</string>
+    <string name="tiPrecioServicioAddEdit">Precio</string>
+    <string name="tiDescripciónClienteAddEdit">Descripción</string>
     <string name="btnGuardarServicioAddEdit">Guardar</string>
 
 

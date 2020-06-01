@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 public class Reparacion extends ViewModel {
     //region Campos
-    int idReparacion;
+    //int idReparacion;
     int numeroReparacion;
     String fecha;
     int idCliente;
@@ -34,14 +34,6 @@ public class Reparacion extends ViewModel {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public String getNombreCliente() {
@@ -115,10 +107,9 @@ public class Reparacion extends ViewModel {
     //endregion
 
     //region Constructores
-    public Reparacion(int numeroReparacion, String fecha,int idCliente, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario) {
+    public Reparacion(int numeroReparacion, String fecha, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario) {
         this.numeroReparacion = numeroReparacion;
         this.fecha = fecha;
-        this.idCliente = idCliente;
         this.nombreCliente = nombreCliente;
         this.matriculaCoche = matriculaCoche;
         this.nombreServicio = nombreServicio;
@@ -129,10 +120,9 @@ public class Reparacion extends ViewModel {
     }
 
     //SIN USO ACTUALMENTE por la propiedad nombreEmpresa
-    public Reparacion(int numeroReparacion, String fecha,int idCliente, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario, String nombreEmpresa) {
+    public Reparacion(int numeroReparacion, String fecha, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario, String nombreEmpresa) {
         this.numeroReparacion = numeroReparacion;
         this.fecha = fecha;
-        this.idCliente = idCliente;
         this.nombreCliente = nombreCliente;
         this.matriculaCoche = matriculaCoche;
         this.nombreServicio = nombreServicio;

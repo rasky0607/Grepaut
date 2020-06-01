@@ -100,15 +100,15 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
         return false;
     }
 
-    //----Fin implementacion de la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterServicio---/
-//endregion
-
     //Devuelve un elemento concreto de la lista
     public Servicio getItemList(int pos)
     {
         Servicio servicio= list.get(pos);
         return servicio;
     }
+    //----Fin implementacion de la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterServicio---/
+//endregion
+
     //Cuando se le da a "NO" en el alerDialog, volvemos a reinsertar el elemento en el reciclerView
     public void cancelacionDeBorrado(int position){
         notifyItemChanged(position);//Notificamos el cambio al recicler para que actualice el elemento (que se desplazo hacia el lado ) donde estaba

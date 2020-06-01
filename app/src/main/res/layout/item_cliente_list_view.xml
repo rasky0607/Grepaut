@@ -8,47 +8,32 @@
     android:orientation="vertical"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/tvIdCliente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/circulo_lista_cliente"
-        android:text="@string/tvIdCliente"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/tamnioNumReparacion"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvNombreApellidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/nombretvNombreApellidosCliente"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <TextView
         android:id="@+id/tvMatriculaCoche"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/tvMatriculaCocheCliente"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="18dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNombreApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="12dp"
-        android:text="@string/tvMatriculaCocheCliente"
+        android:text="@string/nombretvNombreApellidosCliente"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/tvNombreApellidos"
-        app:layout_constraintStart_toStartOf="@+id/tvNombreApellidos"
-        app:layout_constraintTop_toBottomOf="@+id/tvNombreApellidos"
+        app:layout_constraintEnd_toEndOf="@+id/tvMatriculaCoche"
+        app:layout_constraintStart_toStartOf="@+id/tvMatriculaCoche"
+        app:layout_constraintTop_toBottomOf="@+id/tvMatriculaCoche"
         app:layout_constraintVertical_bias="0.0" />
 
     <View

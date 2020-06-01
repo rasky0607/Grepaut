@@ -14,7 +14,6 @@ public class Factura {
     String fechaFacturacion;
     boolean estadoFactura;// En funcion de si es true o false se escribira un string determinado u otro (Vigente, Anulada)
     String fechaReparacion;
-    int idClienteRepara;
     String matriculaCocheRepara;
     //TODO PENDIENTES DE APLICAR ESTOS DOS CAMPOS
     String nombreServicio;
@@ -65,14 +64,6 @@ public class Factura {
         this.fechaReparacion = fechaReparacion;
     }
 
-    public int getIdClienteRepara() {
-        return idClienteRepara;
-    }
-
-    public void setIdClienteRepara(int idClienteRepara) {
-        this.idClienteRepara = idClienteRepara;
-    }
-
     public String getMatriculaCocheRepara() {
         return matriculaCocheRepara;
     }
@@ -100,26 +91,24 @@ public class Factura {
     //endregion
 
     //region Constructor
-    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion, int idClienteRepara, String matriculaCocheRepara, String emailUsuario, String numeroFacturaAnulada) {
+    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion, String matriculaCocheRepara, String emailUsuario, String numeroFacturaAnulada) {
         this.numeroFactura = numeroFactura;
         this.lineaFactura = lineaFactura;
         this.fechaFacturacion = fechaFacturacion;
         this.estadoFactura = estadoFactura;
         this.fechaReparacion = fechaReparacion;
-        this.idClienteRepara = idClienteRepara;
         this.matriculaCocheRepara = matriculaCocheRepara;
         this.emailUsuario = emailUsuario;
         this.numeroFacturaAnulada = numeroFacturaAnulada;
     }
 
     //Costructor sin asginar numero de factura anulada, es decir cuando nuestra factura no hace referencia otra que esta anulada
-    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion, int idClienteRepara, String matriculaCocheRepara, String emailUsuario) {
+    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion,  String matriculaCocheRepara, String emailUsuario) {
         this.numeroFactura = numeroFactura;
         this.lineaFactura = lineaFactura;
         this.fechaFacturacion = fechaFacturacion;
         this.estadoFactura = estadoFactura;
         this.fechaReparacion = fechaReparacion;
-        this.idClienteRepara = idClienteRepara;
         this.matriculaCocheRepara = matriculaCocheRepara;
         this.emailUsuario = emailUsuario;
     }

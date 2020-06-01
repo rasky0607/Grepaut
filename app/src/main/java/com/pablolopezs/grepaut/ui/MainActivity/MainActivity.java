@@ -16,7 +16,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
+import com.pablolopezs.grepaut.data.model.Cliente;
 import com.pablolopezs.grepaut.data.model.Servicio;
+import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditPresenter;
+import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditView;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
 import com.pablolopezs.grepaut.ui.factura.FacturaListView;
@@ -39,7 +42,7 @@ import android.widget.Toast;
 
 /**Clase que gestiona las opciones del nuestra barra
  * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener, ServicioListView.manipularDatosServicioAddOEdit {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener, ServicioListView.manipularDatosServicioAddOEdit, ClienteListView.manipularDatosClienteAddOEdit {
 
     //private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fabadd;
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static int idItemNvDrawerSelect =-1;//id de la opciond e menu Drawer selecionada
     private ServicioAddyEditView fragmentServicioAddyEditView;
     private ServicioAddEditPresenter servicioAddEditPresenter;
+    private ClienteAddyEditView fragmentClienteAddyEditView;
+    private ClienteAddyEditPresenter clienteAddyEditPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
                     case "Clientes":
                         //Abrimos fragment añadir de Cliente
+                        fragmentManipularDatosClienteAddOEdit(null,-1);
                         break;
                     case "Servicios":
                         //Abrimos fragment añadir de Servicios
@@ -357,11 +363,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
   //endregion
 
-    //region Intefaz implementada ServicioAddyEditView.addOEditServicio
+    // ### ADD y EDITAR o MODIFICAR ### de las distintos modelos, exceptuando las facturas(sin add ni ediciones) y las reparaciones (las cuales no tienen ediciones)
+
+    //region Intefaz implementada ServicioAddyEditView.addOEditServicio,ClienteListView.manipularDatosClienteAddOEdit
     @Override
     public void fragmentManipularDatosServicioAddOEdit(Servicio servicio,int pos) {
-        //fragmentServicioAddyEditView
-
         Log.d("pulsacionMAIN "," posicion "+ pos);
         fragmentServicioAddyEditView =(ServicioAddyEditView) getSupportFragmentManager().findFragmentByTag(ServicioAddyEditView.TAG);
         if(fragmentServicioAddyEditView==null)
@@ -382,5 +388,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setTitle(R.string.anadir_servicios);
         ocultarMostrarFloatinButtom();
     }
+
+    @Override
+    public void fragmentManipularDatosClienteAddOEdit(Cliente cliente, int pos) {
+        Log.d("pulsacionMAIN "," posicion "+ pos);
+        fragmentClienteAddyEditView =(ClienteAddyEditView) getSupportFragmentManager().findFragmentByTag(ClienteAddyEditView.TAG);
+        if(fragmentClienteAddyEditView==null)
+        {
+            Bundle bundle= null;
+            if(cliente!=null)
+            {
+                bundle=new Bundle();
+                bundle.putParcelable(Cliente.TAG,cliente);
+            }
+            fragmentClienteAddyEditView= ClienteAddyEditView.newInstance(bundle,pos);
+        }
+        clienteAddyEditPresenter= new ClienteAddyEditPresenter(fragmentClienteAddyEditView);
+        fragmentClienteAddyEditView.setPresenter(clienteAddyEditPresenter);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentClienteAddyEditView,ClienteAddyEditView.TAG).addToBackStack(null).commit();
+
+        setTitle(R.string.anadir_cliente);
+        ocultarMostrarFloatinButtom();
+    }
     //endregion
+
+
 }

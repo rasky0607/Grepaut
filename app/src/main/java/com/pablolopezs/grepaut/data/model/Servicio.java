@@ -73,7 +73,7 @@ public class Servicio implements Parcelable {
 
     }
 
-    //Interfaz parcelable
+    //region Interfaz parcelable
     @Override
     public int describeContents() {
         return CONTENTS_FILE_DESCRIPTOR;

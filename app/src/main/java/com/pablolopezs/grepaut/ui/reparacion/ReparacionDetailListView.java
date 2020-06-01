@@ -95,9 +95,9 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
                                     int year = cFechaHoy.get(Calendar.YEAR);
                                     String fechaActualFacturacion = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
                                     for (Reparacion item : listReparSinFacturar) {
-                                        Factura f = new Factura(numeroNuevaFactura, item.getNumeroReparacion(), fechaActualFacturacion, true, item.getFecha(), item.getIdCliente(), item.getMatriculaCoche(), item.getEmailUsuario());
+                                        Factura f = new Factura(numeroNuevaFactura, item.getNumeroReparacion(), fechaActualFacturacion, true, item.getFecha(),  item.getMatriculaCoche(), item.getEmailUsuario());
                                         FacturaRepositories.getInstance().add(f);//Añadimos la factura al repositorio
-                                        Log.d("creacion factura", "Numero factura: " + f.getNumeroFactura() + " linea fac: " + f.getLineaFactura() + " fecha facturacion: " + f.getFechaFacturacion() + " Estado factura: " + f.isEstadoFactura() + " Matricula coche: " + f.getMatriculaCocheRepara() + " Fecha reapracion: " + f.getFechaReparacion() + " Id Cliente: " + f.getIdClienteRepara());
+                                        Log.d("factura", "Numero factura: " + f.getNumeroFactura() + " linea fac: " + f.getLineaFactura() + " fecha facturacion: " + f.getFechaFacturacion() + " Estado factura: " + f.isEstadoFactura() + " Matricula coche: " + f.getMatriculaCocheRepara() + " Fecha reapracion: " + f.getFechaReparacion() );
                                     }
                                     //Marcamos estas reapraciones como facturadas, para que no vuelvan a facturarse
                                     reparacionDetailListAdapter.marcarReparaComoFacturadas();

@@ -44,9 +44,8 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvIdCliente.setText(Integer.toString(listClientes.get(position).getId()));
-        holder.tvNombreApellidos.setText("Nombre: "+ listClientes.get(position).getNombre()+" "+ listClientes.get(position).getApellidos());
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        holder.tvNombreApellidos.setText("Nombre: "+ listClientes.get(position).getNombre());
         holder.tvMatriculaCoche.setText("Matricula: "+ listClientes.get(position).getMatriculaCoche());
 
         //Envento click de  un item del reciclerView
@@ -61,7 +60,8 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                return false;
+                manipularDatos.miOnLOngClick(holder.getAdapterPosition());
+                return true;
             }
         });
     }
@@ -92,12 +92,19 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
         //Buscamos en la lista de reparaciones si ese cliente con ese coche tiene una reparacion ya creada
         for (Reparacion reparacion : ReparacionRepositories.getInstance().getList()){
                 //Si el cliente que intentamos borrar tiene ya creada una reparacion,NO podra ser borrado, en caso contrario si podra
-            if(reparacion.getIdCliente()==cBuscar.getId() && cBuscar.getMatriculaCoche() == reparacion.getMatriculaCoche())
+            if(cBuscar.getMatriculaCoche() == reparacion.getMatriculaCoche())
             {
                 return  true;
             }
         }
         return false;
+    }
+
+    //Devuelve un elemento concreto de la lista
+    public Cliente getItemList(int pos)
+    {
+        Cliente cliente= listClientes.get(pos);
+        return cliente;
     }
 //--------------Fin metodos implementados por la interfaz--------------------//
 //endregion
@@ -110,7 +117,7 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
     //cuando se ha comfirmado el borrado en el alerDialog y se pulsa deshacer desde snackbar
     public void deshacerBorrado(int position, Cliente c){
         Log.d("DeshacerBorrado","tamanio antes de restaurar  "+ listClientes.size());
-        Log.d("DeshacerBorrado","Restaurar posicion "+position+" objeto"+ c.getId());
+        Log.d("DeshacerBorrado","Restaurar posicion "+position+" objeto"+ c.getMatriculaCoche());
         listClientes.add(position,c);
         notifyDataSetChanged();//Arregla el fallo de "notifyItemInserted(position)" de la linea de abajo
         //notifyItemInserted(position);//TODO  ERROR con esta linea Se restaura pero no se notifica en la vista cuando se elemina el 1º elemento
@@ -127,13 +134,11 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
 
     /*Clase interna en la que definimos nuestro propio ViewHolder*/
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvIdCliente;
         TextView tvNombreApellidos;
         TextView tvMatriculaCoche;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvIdCliente = itemView.findViewById(R.id.tvIdCliente);
             tvNombreApellidos = itemView.findViewById(R.id.tvNombreApellidos);
             tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
         }
