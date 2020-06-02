@@ -90,7 +90,6 @@ public class ClienteAddyEditView extends Fragment implements ClienteAddyEditCont
                     posEditar=-1;//reseteamos de nuevo esta variable tras realizar una insercion o modificacion, ya que de otro modo al intentar insertar un nuevo registro tras modificar otro, cogeria los datos del anterior
                     //#####PENDIENTE##### que al validar y realizarla inserción, vuelva al fragmen de ListarServicios osea, volver uno atras en la pila
                 }
-
             }
         });
 

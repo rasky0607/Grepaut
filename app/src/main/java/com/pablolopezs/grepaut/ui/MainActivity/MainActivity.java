@@ -9,10 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
@@ -23,7 +20,8 @@ import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditView;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
 import com.pablolopezs.grepaut.ui.factura.FacturaListView;
-import com.pablolopezs.grepaut.ui.reparacion.ReparacionAdd;
+import com.pablolopezs.grepaut.ui.reparacion.ReparacionAddPresenter;
+import com.pablolopezs.grepaut.ui.reparacion.ReparacionAddView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionDetailListView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListPresenter;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionListView;
@@ -51,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
     private ReparacionDetailListView fragmentReparacionDetailView;//Ver Reparacion
-    private ReparacionAdd fragmentReparacionAdd;
     private ClienteListView fragmentClienteListView;
     private ClienteListPresenter presenterCliente;
     private ServicioListView fragmentServicioListView;
@@ -62,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ServicioAddEditPresenter servicioAddEditPresenter;
     private ClienteAddyEditView fragmentClienteAddyEditView;
     private ClienteAddyEditPresenter clienteAddyEditPresenter;
+    private ReparacionAddView fragmentReparacionAddView;
+    private ReparacionAddPresenter reparacionAddPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,21 +102,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        fabadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"Vista añadir aun sin implementar",Toast.LENGTH_SHORT).show();
                 String titulo = getTitle().toString();
                 switch (titulo)
                 {
                     case "Reparaciones":
-                        fragmentReparacionAdd = (ReparacionAdd) getSupportFragmentManager().findFragmentByTag(fragmentReparacionAdd.TAG);
-                        if(fragmentReparacionAdd ==null)
-                        {
-                            fragmentReparacionAdd = ReparacionAdd.newInstance();
-                        }
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.nav_contenedor_fragment, fragmentReparacionAdd, ReparacionAdd.TAG).addToBackStack(null)
-                                .commit();
-                        setTitle(R.string.anadir_reparacion);
+                        fragmentAnadirReparacionAdd();
                         break;
                     case "Clientes":
                         //Abrimos fragment añadir de Cliente
@@ -412,6 +402,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ocultarMostrarFloatinButtom();
     }
     //endregion
+
+    //Add Reparaciones
+    public void fragmentAnadirReparacionAdd() {
+        fragmentReparacionAddView = (ReparacionAddView) getSupportFragmentManager().findFragmentByTag(fragmentReparacionAddView.TAG);
+        if(fragmentReparacionAddView ==null)
+        {
+            fragmentReparacionAddView = ReparacionAddView.newInstance();
+        }
+        reparacionAddPresenter = new ReparacionAddPresenter(fragmentReparacionAddView);
+        fragmentReparacionAddView.setPresenter(reparacionAddPresenter);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.nav_contenedor_fragment, fragmentReparacionAddView, ReparacionAddView.TAG).addToBackStack(null)
+                .commit();
+        setTitle(R.string.anadir_reparacion);
+        ocultarMostrarFloatinButtom();
+    }
 
 
 }

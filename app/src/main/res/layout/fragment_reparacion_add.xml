@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.reparacion.ReparacionAdd">
+    tools:context=".ui.reparacion.ReparacionAddView"
+    android:padding="@dimen/clReparacionAddPadding">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -57,51 +58,42 @@
             android:layout_marginTop="48dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="@dimen/cabecerasCampos"
-            android:text="@string/tvIdClienteRepaAdd"
+            android:text="@string/tvNomClienteRepaAdd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnDatePicker" />
 
-        <Spinner
-            android:id="@+id/spIdCliente"
-            android:layout_width="117dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="68dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            app:layout_constraintBottom_toBottomOf="@+id/tvNombreCliente"
-            app:layout_constraintStart_toStartOf="parent"
-            />
 
         <TextView
             android:id="@+id/tvNombreCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="72dp"
+            android:background="@color/whiteBrokenEgg"
             android:text="@string/tvNombreClienteRepaAdd"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvIdCliente"
-            android:background="@color/whiteBrokenEgg"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvIdCliente" />
 
         <TextView
             android:id="@+id/tvMatricula"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="44dp"
+            android:text="@string/tvMatriculaRepaAdd"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textSize="@dimen/cabecerasCampos"
-            android:text="@string/tvMatriculaRepaAdd"
-            app:layout_constraintEnd_toEndOf="@+id/tvNombreCliente"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="@+id/spIdCliente"
-            app:layout_constraintTop_toBottomOf="@+id/tvIdCliente" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNombreCliente" />
 
         <Spinner
             android:id="@+id/spMatricula"
-            android:layout_width="346dp"
-            android:layout_height="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvMatricula"
@@ -122,16 +114,17 @@
 
         <Spinner
             android:id="@+id/spServicio"
-            android:layout_width="346dp"
+            android:layout_width="match_parent"
             android:layout_height="25dp"
             android:layout_marginTop="20dp"
             android:backgroundTint="@color/colorPrimaryDark"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvServicio" />
 
         <ImageButton
-            android:id="@+id/btnAnadirServicio"
+            android:id="@+id/ibtnAnadirServicio"
             style="@style/botonesAnadirOtroServicioAlaRepa_FormaYColor"
             android:layout_width="63dp"
             android:layout_height="35dp"
@@ -143,19 +136,19 @@
             app:layout_constraintTop_toBottomOf="@+id/spServicio" />
 
         <ImageButton
-            android:id="@+id/imgbtnInfo"
+            android:id="@+id/ibtnInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:background="@drawable/select_round_btn_sin_fondo"
             android:src="@drawable/ic_info"
-            app:layout_constraintBottom_toBottomOf="@+id/btnAnadirServicio"
-            app:layout_constraintStart_toEndOf="@+id/btnAnadirServicio"
-            app:layout_constraintTop_toTopOf="@+id/btnAnadirServicio"
+            app:layout_constraintBottom_toBottomOf="@+id/ibtnAnadirServicio"
+            app:layout_constraintStart_toEndOf="@+id/ibtnAnadirServicio"
+            app:layout_constraintTop_toTopOf="@+id/ibtnAnadirServicio"
             app:layout_constraintVertical_bias="0.0" />
 
         <Button
-            android:id="@+id/btnInsertarReparacion"
+            android:id="@+id/btnGuardarReparacion"
             style="@style/botonesBase_FormaYColor"
             android:layout_width="113dp"
             android:layout_height="38dp"
@@ -165,7 +158,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAnadirServicio" />
+            app:layout_constraintTop_toBottomOf="@+id/ibtnAnadirServicio" />
 
 
 

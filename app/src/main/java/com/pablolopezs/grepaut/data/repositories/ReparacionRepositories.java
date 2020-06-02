@@ -1,5 +1,7 @@
 package com.pablolopezs.grepaut.data.repositories;
 
+import android.util.Log;
+
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
@@ -84,5 +86,19 @@ public class ReparacionRepositories {
             this.listReparaciones.remove(pos);
     }
 
+    /*Busca reparaciones de un mismo cliente en un mismo dia, para determina el ultimo numero de reparacion de este cliente, para las nuevas reparacioens que se añadan sobre ese dia
+    * Ya que cada reparacion esta representada por un [numero de reparacion, fecha, matricula de vehiculo]
+    * Si no encuentra reparaciones comunes, devuelve -1*/
+    public int buscarReparacionesExistentes(String matricula, String fecha){
+        int numeroReparacion=-1;
+        for(Reparacion item:listReparaciones){
+            if(item.getFecha().equals(fecha) &&item.getMatriculaCoche().equals(matricula)){
+                if(item.getNumeroReparacion()>numeroReparacion) {
+                    numeroReparacion = item.getNumeroReparacion();
+                }
+            }
+        }
+        return numeroReparacion;
+    }
 
 }

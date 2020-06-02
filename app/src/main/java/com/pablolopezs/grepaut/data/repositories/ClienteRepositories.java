@@ -1,6 +1,7 @@
 package com.pablolopezs.grepaut.data.repositories;
 
 import com.pablolopezs.grepaut.data.model.Cliente;
+import com.pablolopezs.grepaut.data.model.Reparacion;
 
 import java.util.ArrayList;
 
@@ -64,5 +65,17 @@ public class ClienteRepositories {
     public void delete(Cliente cliente)
     {
         this.listClientes.remove(cliente);
+    }
+
+    //Dada una Matricula devuelve el nombre del cliente, si devuelve "<Sin nombre>" es que no la encontro
+    public String buscarNobreCliente(String matricula){
+        for(Cliente item:listClientes)
+        {
+            if(item.getMatriculaCoche().equals(matricula))
+            {
+                return item.getNombre();
+            }
+        }
+        return  "<Sin nombre>";
     }
 }

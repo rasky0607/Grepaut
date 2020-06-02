@@ -115,7 +115,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                Log.d("Deshacer",Integer.toString(r.getNumeroReparacion()));
                                 //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
-                                        .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ r.getNombreCliente() + " Deshacer el borrrado", 10000);
+                                        .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del vehiculo: "+ r.getMatriculaCoche() + " Deshacer el borrrado", 8000);
                                 snackbar.setAction("Deshacer", new View.OnClickListener() {
                                     /*Se pulso el boton "Deshacer" del snackbar y
                                      se restaura el elemento de nuevo en la vista del ReciclerView*/

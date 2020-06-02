@@ -63,12 +63,12 @@
     <string name="btnSelectFechaRepaAdd">Modificar fecha</string>
     <string name="tvFechaRepaAdd">Fecha de Reparación:</string>
     <string name="tvFechaSelecioandaRepaAdd">##Sin fecha##</string>
-    <string name="tvIdClienteRepaAdd">ID de Cliente</string>
+    <string name="tvNomClienteRepaAdd">Nombre de Cliente</string>
     <string name="tvNombreClienteRepaAdd">##Nombre Cliente##</string>
     <string name="tvMatriculaRepaAdd">Matricula vehículo:</string>
     <string name="tvServicioRepaAdd">Servicio:</string>
     <string name="btnAnadirOtroServicioRepaAdd">Añadir otro servicio</string>
-    <string name="btnInsertarReparacionRepaAdd">Guardar reparación</string>
+    <string name="btnInsertarReparacionRepaAdd">Guardar reparaciónes</string>
 
     <!--lista de servicios-->
     <string name="tvNombreServicios">Nombre:</string>

@@ -38,5 +38,6 @@
     <dimen name="tamnioNumPrecioServicio">18dp</dimen>
     <dimen name="clClienteAddEditPadding">24dp</dimen>
     <dimen name="clServicioAddEditPadding">24dp</dimen>
+    <dimen name="clReparacionAddPadding">24dp</dimen>
 
 </resources>

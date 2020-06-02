@@ -86,10 +86,10 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
                                 un scankbar a bajo que permite deshacer esta opcion durante un breve periodo de tiempo antes de convertirla en irreversible*/
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //Eliminar el objeto cliente de la lista del Repositiorio a traves del presenter
+                                //Eliminar el objeto servicio de la lista del Repositiorio a traves del presenter
                                 presenter.eliminar(adapterPosition);
 
-                                //Eliminamos el Cliente del adapter y lo guardamos, ya que este que se puede  RESTAURAR antes de 10 segundos con el snackbar
+                                //Eliminamos el Servicio del adapter y lo guardamos, ya que este que se puede  RESTAURAR antes de 10 segundos con el snackbar
                                 final Servicio s =  servicioListAdapter.eliminar(adapterPosition);
                                 Log.d("Deshacer",s.getNombre());
                                 //----------Deshacer/Restaurar eliminacion------------
