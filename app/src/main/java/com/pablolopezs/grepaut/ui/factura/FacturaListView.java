@@ -20,12 +20,9 @@ public class FacturaListView extends Fragment {
         return fragment;
     }
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_factura_list_view, container, false);
-        final TextView textView = view.findViewById(R.id.text_tools);
-        textView.setText("Soy el fragmento Facturas");
 
         return view;
     }
