@@ -19,6 +19,7 @@ import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditView;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListView;
+import com.pablolopezs.grepaut.ui.factura.FacturaListPresenter;
 import com.pablolopezs.grepaut.ui.factura.FacturaListView;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionAddPresenter;
 import com.pablolopezs.grepaut.ui.reparacion.ReparacionAddView;
@@ -53,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ClienteListPresenter presenterCliente;
     private ServicioListView fragmentServicioListView;
     private ServicioListPresenter presenterServicio;
-    private FacturaListView fragmentFacturaListView;
     private static int idItemNvDrawerSelect =-1;//id de la opciond e menu Drawer selecionada
     private ServicioAddyEditView fragmentServicioAddyEditView;
     private ServicioAddEditPresenter servicioAddEditPresenter;
@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ClienteAddyEditPresenter clienteAddyEditPresenter;
     private ReparacionAddView fragmentReparacionAddView;
     private ReparacionAddPresenter reparacionAddPresenter;
+    private FacturaListView fragmentFacturaListView;
+    private FacturaListPresenter facturaListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         /*----------------------------------------------------------------------*/
 //endregion
 
+        //region Evento click del boton de añadir nuevos registros
         /**Abre el fragmento que permite añadir un elemento a la lista, segun en el listado que estamos en este momento*/
        fabadd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,15 +120,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         //Abrimos fragment añadir de Servicios
                         fragmentManipularDatosServicioAddOEdit(null,-1);//Le pasamos -1 ya que no va editar ningune elemento de la lista de repositorie si no que va añadir un elemento nuevo
                         break;
-                    case "Facturas":
-                        //Abrimos fragment añadir de Facturas
-                        break;
 
                 }
                 ocultarMostrarFloatinButtom();
             }
         });
-
+        //endregion
 
         //Nos permite inflar los iconos de cada una de las opciones del menu drawer, aunq ue NO SE USA AHORA MISMO ya que las inflamos desde el XML
         /*mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -231,11 +231,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     fragmentFacturaListView= FacturaListView.newInstance();
                 }
+                facturaListPresenter=new FacturaListPresenter(fragmentFacturaListView);
+                fragmentFacturaListView.setPresenter(facturaListPresenter);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.nav_contenedor_fragment,fragmentFacturaListView, FacturaListView.TAG)
                         .commit();
                 setTitle(R.string.menu_facturas);
+                ocultarMostrarFloatinButtom();
                 break;
             case R.id.nav_compartir:
                 Toast.makeText(MainActivity.this,"Pulsaste compartir!",Toast.LENGTH_SHORT).show();

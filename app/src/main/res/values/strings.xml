@@ -90,5 +90,8 @@
     <string name="tiDescripciónClienteAddEdit">Descripción</string>
     <string name="btnGuardarServicioAddEdit">Guardar</string>
 
+    <!--Listado de Facturas-->
+    <string name="tvFechaReparacionlistFacturas">Fecha reparación:</string>
+    <string name="tvFechaFacturacionlistFacturas">Fecha facturación:</string>
 
 </resources>

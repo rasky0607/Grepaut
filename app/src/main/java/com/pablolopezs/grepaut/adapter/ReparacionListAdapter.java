@@ -18,7 +18,6 @@ import java.util.ArrayList;
 /**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
  *  que se mostrara en ReparacionListView*/
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac.BaseAdapterContract.ContractAdapterReparacion {
-//TODO pendiente de agregar  RecyclerView.ItemDecoration en las clases Adapter, para poder implementar los eventos de arrastrar hacia los laterales los viewHolder de los recycler
     private ArrayList<Reparacion> listReparacion;
     private manipularDatos manipularDatos;
     private ArrayList<Reparacion> listRepaMismoCliyFecha;//Listado de reparacion recibidas por un cliente en una fecha sobre un vehiculo concreto
@@ -30,13 +29,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         this.manipularDatos = manipularDatos;
     }
 
-    public void add(Reparacion reparacion) {
-        this.listReparacion.add(reparacion);
-    }
 
-    public void addAll(ArrayList<Reparacion> list) {
-        this.listReparacion.addAll(list);
-    }
 
     //Inflamos la vista y la convertimos en ViewHolder(Es decir un bloque del listado del recyclerView
     @NonNull
@@ -50,7 +43,6 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     /*Inyectamos los datos a cada ViewHolder*/
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-
         //holder.icon.setLetter(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
         holder.tvNumeroReparacion.setText(Integer.toString(listReparacion.get(position).getNumeroReparacion()));
         holder.tvFecha.setText("Fecha: " + listReparacion.get(position).getFecha());
@@ -158,6 +150,14 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
     {
         Reparacion reparacion= listReparacion.get(pos);
         return reparacion;
+    }
+
+    public void add(Reparacion reparacion) {
+        this.listReparacion.add(reparacion);
+    }
+
+    public void addAll(ArrayList<Reparacion> list) {
+        this.listReparacion.addAll(list);
     }
     /*--------------------------------------------------------------------*/
 

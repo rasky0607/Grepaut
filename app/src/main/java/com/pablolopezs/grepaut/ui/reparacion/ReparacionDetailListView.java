@@ -93,7 +93,7 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
                                     int day = cFechaHoy.get(Calendar.DAY_OF_MONTH);
                                     int month = cFechaHoy.get(Calendar.MONTH);
                                     int year = cFechaHoy.get(Calendar.YEAR);
-                                    String fechaActualFacturacion = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
+                                    String fechaActualFacturacion = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);//el mes mas 1 por que este empieza en 0
                                     for (Reparacion item : listReparSinFacturar) {
                                         Factura f = new Factura(numeroNuevaFactura, item.getNumeroReparacion(), fechaActualFacturacion, true, item.getFecha(),  item.getMatriculaCoche(), item.getEmailUsuario());
                                         FacturaRepositories.getInstance().add(f);//Añadimos la factura al repositorio

@@ -25,18 +25,6 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
         this.manipularDatos=manipularDatos;
     }
 
-
-    public void add(Servicio servicio)
-    {
-        this.list.add(servicio);
-    }
-
-    public void  addAll(ArrayList<Servicio> list)
-    {
-        this.list.addAll(list);
-        Log.d("SERVICIO",this.list.get(0).getNombre());
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -105,6 +93,17 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
     {
         Servicio servicio= list.get(pos);
         return servicio;
+    }
+
+    public void add(Servicio servicio)
+    {
+        this.list.add(servicio);
+    }
+
+    public void  addAll(ArrayList<Servicio> list)
+    {
+        this.list.addAll(list);
+        Log.d("SERVICIO",this.list.get(0).getNombre());
     }
     //----Fin implementacion de la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterServicio---/
 //endregion

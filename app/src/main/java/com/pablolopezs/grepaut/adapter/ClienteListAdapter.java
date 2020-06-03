@@ -25,16 +25,6 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
 
     }
 
-    public void add(Cliente cliente)
-    {
-        this.listClientes.add(cliente);
-    }
-
-    public void  addAll(ArrayList<Cliente> list)
-    {
-        this.listClientes.addAll(list);
-    }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -105,6 +95,16 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
     {
         Cliente cliente= listClientes.get(pos);
         return cliente;
+    }
+
+    public void add(Cliente cliente)
+    {
+        this.listClientes.add(cliente);
+    }
+
+    public void  addAll(ArrayList<Cliente> list)
+    {
+        this.listClientes.addAll(list);
     }
 //--------------Fin metodos implementados por la interfaz--------------------//
 //endregion

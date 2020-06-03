@@ -29,9 +29,6 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
         this.list= new ArrayList<Reparacion>();
     }
 
-    public void addAll(ArrayList<Reparacion> list) {
-        this.list.addAll(list);
-    }
 
     @NonNull
     @Override
@@ -105,7 +102,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
 
 //region Implementado por la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterReparacion
     @Override
-    public Object eliminar(int position) {
+    public Reparacion eliminar(int position) {
         return null;
     }
 
@@ -124,6 +121,15 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
     {
         Reparacion reparacion= list.get(pos);
         return reparacion;
+    }
+
+    @Override
+    public void add(Reparacion objeto) {
+
+    }
+
+    public void addAll(ArrayList<Reparacion> list) {
+        this.list.addAll(list);
     }
 //----------------FIn implmentacion de interfaz
 //endregion
