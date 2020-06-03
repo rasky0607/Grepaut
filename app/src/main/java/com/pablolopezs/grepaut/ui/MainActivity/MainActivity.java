@@ -262,9 +262,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case "Servicios":
                 fabadd.show();
                 break;
-            case "Facturas":
-                fabadd.show();
-                break;
              default:
                  fabadd.hide();
                  break;

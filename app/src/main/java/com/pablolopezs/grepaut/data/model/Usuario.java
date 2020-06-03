@@ -7,7 +7,7 @@ public class Usuario {
     String nombre;
     String tipoUsuario;
     boolean tienePermiso; //Si es de tipo "Administrador", tiene permisos, si es de tipo "Usuario" debe darselo un administrador.(Solo puede haber un administrador en principio)
-    String empresa;//Empresa a la que pertenece este servicio (es una FK de la tabla Empresa)
+    String empresa;//Empresa a la que pertenece este servicio (es una FK de la tabla Empresa)//NO usado actualmente
 
     //region Propiedades
     public String getEmail() {
@@ -42,7 +42,7 @@ public class Usuario {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public boolean isTienePermiso() {
+    public boolean getTienePermiso() {
         return tienePermiso;
     }
 
@@ -62,7 +62,15 @@ public class Usuario {
 
 
     //region Constructores
+    public Usuario(String email, String password, String nombre, String tipoUsuario, boolean tienePermiso) {
+        this.email = email;
+        this.password = password;
+        this.nombre = nombre;
+        this.tipoUsuario = tipoUsuario;
+        this.tienePermiso = tienePermiso;
+    }
 
+    //NO USADO ACTUALMENTE
     public Usuario(String email, String password, String nombre, String tipoUsuario, boolean tienePermiso,String empresa) {
         this.email = email;
         this.password = password;

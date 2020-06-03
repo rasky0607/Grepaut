@@ -38,6 +38,11 @@ public class FacturaListAdapter extends RecyclerView.Adapter<FacturaListAdapter.
         holder.tvFechaFacturacion.setText("Fecha facturación: "+listFacturas.get(position).getFechaFacturacion());
         holder.tvFechaReparacion.setText("Fecha reparación: "+listFacturas.get(position).getFechaReparacion());
         holder.tvMatriculaCoche.setText("Matrícula: "+listFacturas.get(position).getMatriculaCocheRepara());
+        if (listFacturas.get(position).getEstadoFactura()) {
+            holder.tvNumeroFactura.setBackgroundResource(R.drawable.circulo_lista_repa_ok);
+        } else if(!listFacturas.get(position).getEstadoFactura()){
+            holder.tvNumeroFactura.setBackgroundResource(R.drawable.ciruclo_lista_repa_no_ok);
+        }
     }
 
     @Override

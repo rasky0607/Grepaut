@@ -48,7 +48,7 @@ public class Factura {
         this.fechaFacturacion = fechaFacturacion;
     }
 
-    public boolean isEstadoFactura() {
+    public boolean getEstadoFactura() {
         return estadoFactura;
     }
 

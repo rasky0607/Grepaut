@@ -39,7 +39,8 @@
             android:id="@+id/tedpassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/Loginpassword" />
+            android:hint="@string/Loginpassword"
+            android:password="true"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

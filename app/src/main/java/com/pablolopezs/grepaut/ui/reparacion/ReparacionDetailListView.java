@@ -97,7 +97,7 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
                                     for (Reparacion item : listReparSinFacturar) {
                                         Factura f = new Factura(numeroNuevaFactura, item.getNumeroReparacion(), fechaActualFacturacion, true, item.getFecha(),  item.getMatriculaCoche(), item.getEmailUsuario());
                                         FacturaRepositories.getInstance().add(f);//Añadimos la factura al repositorio
-                                        Log.d("factura", "Numero factura: " + f.getNumeroFactura() + " linea fac: " + f.getLineaFactura() + " fecha facturacion: " + f.getFechaFacturacion() + " Estado factura: " + f.isEstadoFactura() + " Matricula coche: " + f.getMatriculaCocheRepara() + " Fecha reapracion: " + f.getFechaReparacion() );
+                                        Log.d("factura", "Numero factura: " + f.getNumeroFactura() + " linea fac: " + f.getLineaFactura() + " fecha facturacion: " + f.getFechaFacturacion() + " Estado factura: " + f.getEstadoFactura() + " Matricula coche: " + f.getMatriculaCocheRepara() + " Fecha reapracion: " + f.getFechaReparacion() );
                                     }
                                     //Marcamos estas reapraciones como facturadas, para que no vuelvan a facturarse
                                     reparacionDetailListAdapter.marcarReparaComoFacturadas();

@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Usuario;
+import com.pablolopezs.grepaut.data.repositories.UsuarioRepositories;
 import com.pablolopezs.grepaut.ui.MainActivity.MainActivity;
 import com.pablolopezs.grepaut.ui.login.register.RegistroActivity;
 
@@ -40,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         //Enlace a componentes de Interfaz
         btnIniciasSesion=findViewById(R.id.btnIniciarSesion);
         btnregistro=findViewById(R.id.btnregistro);
-        chrecordar= findViewById(R.id.chrecordar);//TODO Si este componente esta a marcado, se guardara el email y password en el dispositivo e i niciara sesion de forma automatica.
+        chrecordar= findViewById(R.id.chrecordar);//TODO Si este componente esta a marcado, se guardara el email y password en el dispositivo e iniciara sesion de forma automatica.
         btnGoogle=findViewById(R.id.btnGoogle);
         tilemail=findViewById(R.id.tilemail);
         tilpassword=findViewById(R.id.tilpassword);
@@ -58,14 +60,19 @@ public class LoginActivity extends AppCompatActivity {
 
                 //Guardamos el usuario
                 //TODO si el usuario tiene permiso a true puede ver los registros(si es administrador lo tendra a true desde la creaciom, si es Usuario a false)
-                Usuario miUsuario = new Usuario(tedemail.getText().toString(),tedpassword.getText().toString(),null,null,true,null);
-
+                //Usuario miUsuario = new Usuario(tedemail.getText().toString(),tedpassword.getText().toString(),null,null,true,null);
+                if(UsuarioRepositories.getInstance().buscarUsuario(tedemail.getText().toString(),tedpassword.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Usuario correcto", Toast.LENGTH_SHORT).show();
+                    //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();//Terminamos esta activity, ya que una vez dentro no va voler a Login
+                }
+                else
+                    Toast.makeText(getApplicationContext(), "Usuario o password incorrecto o no tiene permisos, contacta con el administrador", Toast.LENGTH_LONG).show();
                 Log.d("PRUEBA","Datos -> "+tedemail.getText().toString()+" "+tedpassword.getText().toString());
 
-                //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();//Terminamos esta activity, ya que una vez dentro no va voler a Login
+
             }
         });
 
