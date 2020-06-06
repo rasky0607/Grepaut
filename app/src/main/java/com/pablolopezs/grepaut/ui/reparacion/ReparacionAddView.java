@@ -108,8 +108,9 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
         int day= c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
+        String diaYmesCorregido= arreglarNumeroMesYdia(day,month);
         //Rellenamos el tvFecha con la Fecha actual
-        tvFechaSelecionada.setText((day+"/"+(month+1)+"/"+year));//+1 por que los meses empiezan en 0
+        tvFechaSelecionada.setText((diaYmesCorregido+year));//+1 por que los meses empiezan en 0
     }
 
     //Carga los spinner de este fragmen con las distintas claves de los clientes [es decir las matriculas] y las claves de los servicios [los nombres]
@@ -181,6 +182,22 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
         recogerFechaActualParaCalendario();
     }
 
+    private String arreglarNumeroMesYdia(int mday,int mMonth){
+        int mesCorregido=mMonth+1;//por que el mes empieza en 0 con enero, por lo que debemos sumar uno para cuadrarlos
+        String diayMesArreglado="";
+        if(mday<=9)
+            diayMesArreglado+="0"+Integer.toString(mday)+"/";
+        else{
+            diayMesArreglado+=Integer.toString(mday)+"/";
+        }
+        if((mesCorregido)<=9){
+            diayMesArreglado+="0"+Integer.toString(mesCorregido)+"/";
+        }else {
+            diayMesArreglado+=Integer.toString(mesCorregido)+"/";
+        }
+
+        return diayMesArreglado;
+    }
     /**Justo despues de crear la vista*/
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -200,7 +217,8 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
                 dpd=new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int myear, int mMonth, int mday) {
-                        tvFechaSelecionada.setText((mday+"/"+(mMonth+1)+"/"+myear));//+1 por que los meses empiezan en 0
+                           String diaYmesCorregido= arreglarNumeroMesYdia(mday,mMonth);
+                        tvFechaSelecionada.setText((diaYmesCorregido+myear));//+1 por que los meses empiezan en 0
                     }
                 },year,month,day);//Fecha a la que se inicia el calendario
                 dpd.show();//Mostramos el calendario

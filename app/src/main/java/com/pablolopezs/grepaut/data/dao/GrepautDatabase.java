@@ -15,7 +15,7 @@ import com.pablolopezs.grepaut.data.model.Usuario;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 /*Esta calse es la encargada de crear la Base de datos*/
-@Database(entities = {Servicio.class, Reparacion.class, Cliente.class, Factura.class, Usuario.class},version =11,exportSchema = false)
+@Database(entities = {Servicio.class, Reparacion.class, Cliente.class, Factura.class, Usuario.class},version =12,exportSchema = false)
 public abstract class GrepautDatabase extends RoomDatabase {
 
     public abstract DaoContractBase.ServicioDaoContract daoServicio();
