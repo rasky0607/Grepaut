@@ -29,21 +29,21 @@ public class ClienteAddyEditView extends Fragment implements ClienteAddyEditCont
     TextInputEditText tetlfClienteAddEdit;
     TextInputEditText teemailClienteAddEdit;
     Button btnGuardarCliente;
-    static int posEditar=-1;//Posicion del elemento que estamos editando para reiscribirlo en la misma posicion de la lista de repositories
+
     //-----//
 
     //Cuando pos en el construcotr es menor que 0 es que  se  va añadir un nuevo elemento no a modificar u no existente.
-    public static ClienteAddyEditView newInstance(Bundle args, int pos){
+    public static ClienteAddyEditView newInstance(Bundle args){
         ClienteAddyEditView  clienteAddyEditView = new ClienteAddyEditView();
         //Si el args NO es nulo, es edicion y la posicion no es menor que 0
-        if(args!=null && pos>=0)
+        if(args!=null)
         {
             //Recogemos el bundle  creando un nuevo objeto con lo que nos llega
             clienteAddyEditView.setArguments(args);
         }
-        posEditar=pos;//Posicion del elemento que estamos editando para reiscribirlo en la misma posicion de la lista de repositories
         return clienteAddyEditView;
     }
+
 
 
     @Nullable
@@ -57,6 +57,12 @@ public class ClienteAddyEditView extends Fragment implements ClienteAddyEditCont
         teemailClienteAddEdit= view.findViewById(R.id.teemailClienteAddEdit);
         btnGuardarCliente= view.findViewById(R.id.btnGuardarCliente);
         return view;
+    }
+    private void bloquearCamposDeClavesPrimarias(){
+        teMatriculaClienteAddEdit.setEnabled(false);
+    }
+    private void desbloquearCamposDeClavesPrimarias(){
+        teMatriculaClienteAddEdit.setEnabled(true);
     }
 
     @Override
@@ -74,6 +80,7 @@ public class ClienteAddyEditView extends Fragment implements ClienteAddyEditCont
             teMatriculaClienteAddEdit.setText(cliente.getMatriculaCoche());
             tetlfClienteAddEdit.setText(cliente.getTlf());
             teemailClienteAddEdit.setText(cliente.getEmail());
+            bloquearCamposDeClavesPrimarias();
         }
 
         //Guardar/añadir  cambios
@@ -81,19 +88,19 @@ public class ClienteAddyEditView extends Fragment implements ClienteAddyEditCont
             @Override
             public void onClick(View v) {
                 if(presenter.validar()){
-                    if (posEditar >= 0)//Si es mayor o igual que 0, es una EDICION O MODIFICACION
+                    if (getArguments() !=null)//Si es mayor o igual que 0, es una EDICION O MODIFICACION
                     {
-                        presenter.modificar(posEditar, getObjeto());
+                        presenter.modificar(getObjeto());
                     }else{
                         presenter.anadir(getObjeto());
                     }
-                    posEditar=-1;//reseteamos de nuevo esta variable tras realizar una insercion o modificacion, ya que de otro modo al intentar insertar un nuevo registro tras modificar otro, cogeria los datos del anterior
-                    //#####PENDIENTE##### que al validar y realizarla inserción, vuelva al fragmen de ListarServicios osea, volver uno atras en la pila
+                    desbloquearCamposDeClavesPrimarias();
                 }
             }
         });
 
     }
+
 
     //region Implementado por la interfaz ClienteAddyEditContract.View
     @Override
@@ -137,11 +144,12 @@ public class ClienteAddyEditView extends Fragment implements ClienteAddyEditCont
     @Override
     public void mensaje(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro
     }
 
     @Override
     public void mostrarError(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"ERROR: "+msg,Toast.LENGTH_SHORT).show();
     }
 
     @Override

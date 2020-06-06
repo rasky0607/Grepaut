@@ -3,15 +3,26 @@ package com.pablolopezs.grepaut.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity
 public class Cliente implements Parcelable {
     public static final String TAG="Cliente";
     //region campos
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo
     String matriculaCoche;//primary key
+    @NonNull
     String nombre;//Nombre y apellidos
+    @NonNull
     String tlf;
     String email;
     //endregion
@@ -52,18 +63,13 @@ public class Cliente implements Parcelable {
     //endregion
 
     //region Constructores
-    public Cliente( String matriculaCoche, String nombre, String tlf, String email) {
+    public Cliente( String matriculaCoche, String nombre, String tlf ) {
         this.matriculaCoche = matriculaCoche;
         this.nombre = nombre;
         this.tlf = tlf;
-        this.email = email;
     }
 
-    public  Cliente(int id,String matriculaCoche,String nombre,String apellidos){
-        this.matriculaCoche = matriculaCoche;
-        this.nombre = nombre;
-    }
-
+    @Ignore
     public  Cliente(){
 
     }
@@ -80,6 +86,25 @@ public class Cliente implements Parcelable {
         dest.writeString(tlf);
         dest.writeString(email);
     }
+
+    protected Cliente(Parcel in) {
+        matriculaCoche = in.readString();
+        nombre = in.readString();
+        tlf = in.readString();
+        email = in.readString();
+    }
+
+    public static final Creator<Cliente> CREATOR = new Creator<Cliente>() {
+        @Override
+        public Cliente createFromParcel(Parcel in) {
+            return new Cliente(in);
+        }
+
+        @Override
+        public Cliente[] newArray(int size) {
+            return new Cliente[size];
+        }
+    };
     //endregion
 
 }

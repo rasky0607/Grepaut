@@ -1,11 +1,25 @@
 package com.pablolopezs.grepaut.data.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Usuario {
 
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo
     String email;
+    @NonNull
     String password;
+    @NonNull
     String nombre;
+    @NonNull
     String tipoUsuario;
+    @NonNull
     boolean tienePermiso; //Si es de tipo "Administrador", tiene permisos, si es de tipo "Usuario" debe darselo un administrador.(Solo puede haber un administrador en principio)
     String empresa;//Empresa a la que pertenece este servicio (es una FK de la tabla Empresa)//NO usado actualmente
 
@@ -71,6 +85,7 @@ public class Usuario {
     }
 
     //NO USADO ACTUALMENTE
+    @Ignore
     public Usuario(String email, String password, String nombre, String tipoUsuario, boolean tienePermiso,String empresa) {
         this.email = email;
         this.password = password;
@@ -80,6 +95,7 @@ public class Usuario {
         this.empresa = empresa;
     }
 
+    @Ignore
     public Usuario() {
 
     }

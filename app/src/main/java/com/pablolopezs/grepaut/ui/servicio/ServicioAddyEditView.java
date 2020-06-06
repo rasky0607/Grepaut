@@ -33,10 +33,10 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
     TextInputEditText teDescripcionServicioAddEdit;
     Button btnGuardarServicio;
     //-----//
-    static int posEditar=-1;//Posicion del elemento que estamos editando para reiscribirlo en la misma posicion de la lista de repositories
+
 
     //Constructor [Cuando pos en el construcotr es menor que 0 es que  se  va añadir un nuevo elemento no a modificar uno existente.]
-    public static ServicioAddyEditView newInstance(Bundle args,int pos){
+    public static ServicioAddyEditView newInstance(Bundle args){
         ServicioAddyEditView  servicioAddyEditView = new ServicioAddyEditView();
         //Si el args NO es nulo, es edicion
         if(args!=null)
@@ -44,7 +44,6 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
             //Recogemos el bundle  creando un nuevo objeto con lo que nos llega
             servicioAddyEditView.setArguments(args);
         }
-        posEditar=pos;//Posicion del elemento que estamos editando para reiscribirlo en la misma posicion de la lista de repositories
         return servicioAddyEditView;
     }
 
@@ -61,7 +60,12 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
         btnGuardarServicio=view.findViewById(R.id.btnGuardarServicio);
         return view;
     }
-
+    private void bloquearCamposDeClavesPrimarias(){
+        teNombreServicioAddEdit.setEnabled(false);
+    }
+    private void desbloquearCamposDeClavesPrimarias(){
+        teNombreServicioAddEdit.setEnabled(true);
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -71,11 +75,12 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
         //Si getArguments() es distinto de null es por que e suna edicion, algo llego por el bundle
         //Colocamos los datos en los componentes de la vista, para ser listo para editar
         if(getArguments()!=null){
-            Log.d("ServicioAdd","Posicion "+posEditar);
+
             Servicio servicio=  getArguments().getParcelable(Servicio.TAG);
             teNombreServicioAddEdit.setText(servicio.getNombre());
             tePrecioServicioeAddEdit.setText(Double.toString(servicio.getPrecio()));
             teDescripcionServicioAddEdit.setText(servicio.getDescripcion());
+            bloquearCamposDeClavesPrimarias();
         }
 
         //Guardar/añadir  cambios
@@ -85,15 +90,14 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
                 //Validamos el objeto con el presenter
                 if (presenter.validar())
                 {
-                    if (posEditar >= 0)//Si es mayor o igual que 0, es una EDICION O MODIFICACION
+                    if (getArguments()!=null)//Si es distinto de null, es una EDICION O MODIFICACION
                     {
-                        presenter.modificar(posEditar, getObjeto());
+                        presenter.modificar(getObjeto());
                     } else//Si no, es una nueva INSERCION
                     {
                         presenter.anadir(getObjeto());
                     }
-                    posEditar=-1;//reseteamos de nuevo esta variable tras realizar una insercion o modificacion, ya que de otro modo al intentar insertar un nuevo registro tras modificar otro, cogeria los datos del anterior
-                    //#####PENDIENTE##### que al validar y realizarla inserción, vuelva al fragmen de ListarServicios osea, volver uno atras en la pila
+                    desbloquearCamposDeClavesPrimarias();
 
                 }
 
@@ -127,10 +131,10 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
             mostrarError("El nombre del servicio no puede estar vacio.");
             return false;
         }
-        if(TextUtils.isEmpty(tePrecioServicioeAddEdit.getText()) || !TextUtils.isDigitsOnly(tePrecioServicioeAddEdit.getText()))
+        if(TextUtils.isEmpty(tePrecioServicioeAddEdit.getText()))
         {
             Log.d("ERROR","Aqui toy");
-            mostrarError("El precio del servicio no puede estar vacio, y debe ser de tipo numérico.");
+            mostrarError("El precio del servicio no puede estar vacio.");
             return false;
         }
 
@@ -140,11 +144,12 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
     @Override
     public void mensaje(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro
     }
 
     @Override
     public void mostrarError(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(),"ERROR: "+msg,Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -159,9 +164,5 @@ public class ServicioAddyEditView extends Fragment implements ServicioAddEditCon
     private void setPosicionEditar(int pos){
 
     }
-//Interfaqz para realizar ediciones o bien abrir el fragment de añadir, la cual es la misma
-  /*  public  interface addOEditServicio{
-        void  fragmentServicioAddOEdit(Servicio servicio, int pos); //Pos indica la posicion en la lista de repositorio en la que se debe modificar el objeto
-    }*/
 
 }

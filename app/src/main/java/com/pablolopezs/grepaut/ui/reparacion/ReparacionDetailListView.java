@@ -1,13 +1,19 @@
 package com.pablolopezs.grepaut.ui.reparacion;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +28,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.ReparacionDetailListAdapter;
+import com.pablolopezs.grepaut.data.dao.GreapautApplication;
+import com.pablolopezs.grepaut.data.dao.GrepautDatabase;
 import com.pablolopezs.grepaut.data.model.Factura;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.FacturaRepositories;
+import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
 
 public class ReparacionDetailListView extends Fragment implements ReparacionListContract.View {
     public static final String TAG="ReparacionDetailListView";
@@ -70,7 +81,7 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
         inicializarRvReparacionDetail();
         presenter.cargarDatosDeDetallesDeReparacion();
 
-        //Boton de facturar
+        //Boton GENERAR FACTURA
         fbFacturar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,13 +92,12 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //Recogemos todos los elementos de la lista de reparaciones en detalle que estan sin facturar
-                                ArrayList<Reparacion> listReparSinFacturar= reparacionDetailListAdapter.reparacionesSinFacturar();
+                                List<Reparacion> listReparSinFacturar= reparacionDetailListAdapter.reparacionesSinFacturar();
                                 //Si la lista obtenida tiene algun elemento, es que vamos a facturar alguan reparacion
                                 if(listReparSinFacturar.size()>0)
                                 {
                                     //Recogemos el ultimo numero de factura
-                                    int ultimoNumFactura = FacturaRepositories.getInstance().ultimoNumeroFact();
-                                    int numeroNuevaFactura = ultimoNumFactura + 1;//Nuevo nuemero de factura, para la que vamos a crear
+                                    int numeroNuevaFactura = presenter.ultimoNumeroDeFactura()+1;
                                     //Fecha actual en la que creamos la factura en string
                                     Calendar cFechaHoy = Calendar.getInstance();
                                     int day = cFechaHoy.get(Calendar.DAY_OF_MONTH);
@@ -95,12 +105,21 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
                                     int year = cFechaHoy.get(Calendar.YEAR);
                                     String fechaActualFacturacion = Integer.toString(day) + "/" + Integer.toString(month+1) + "/" + Integer.toString(year);//el mes mas 1 por que este empieza en 0
                                     for (Reparacion item : listReparSinFacturar) {
-                                        Factura f = new Factura(numeroNuevaFactura, item.getNumeroReparacion(), fechaActualFacturacion, true, item.getFecha(),  item.getMatriculaCoche(), item.getEmailUsuario());
-                                        FacturaRepositories.getInstance().add(f);//Añadimos la factura al repositorio
+                                        //Generamos la factura
+                                        Factura f = new Factura(numeroNuevaFactura, item.getNumeroReparacion(),fechaActualFacturacion,item.getFecha(),item.getMatriculaCoche(), true,item.getNombreServicio(),item.getPrecioServicio());
+                                        presenter.crearFactura(f);//Añadimos la factura al repositorio
                                         Log.d("factura", "Numero factura: " + f.getNumeroFactura() + " linea fac: " + f.getLineaFactura() + " fecha facturacion: " + f.getFechaFacturacion() + " Estado factura: " + f.getEstadoFactura() + " Matricula coche: " + f.getMatriculaCocheRepara() + " Fecha reapracion: " + f.getFechaReparacion() );
+                                        //Marcar como facturada la reparacion
+                                        item.setEstadoFacturado(true);
+                                        item.setEstadoReparacion(true);
+                                        ReparacionRepositories.getInstance().update(item);
                                     }
                                     //Marcamos estas reapraciones como facturadas, para que no vuelvan a facturarse
                                     reparacionDetailListAdapter.marcarReparaComoFacturadas();
+
+                                    //ENVIAMOS NOTIFICACION
+                                    NotificarNuevaFactura();
+
                                 }else
                                 {
                                     Toast.makeText(getContext(),"Estas reparaciones ya estan facturadas!",Toast.LENGTH_LONG).show();
@@ -117,11 +136,23 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
                 alerta.show();
                 //--------------FIN Ventana de AlerDialog----------
 
-
             }
         });
 
     }
+    //Enviamos una notificacion cuando se creo una nueva factura
+    private void NotificarNuevaFactura(){
+        Notification.Builder builder = new Notification.Builder(getContext(), GreapautApplication.CHANNEL_ID)
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_facturado)
+                .setContentText("Se creo una nueva factura")
+                .setContentTitle("Facturacion");
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getContext());
+
+        notificationManagerCompat.notify(new Random().nextInt(100), builder.build());
+    }
+
 
     public  void inicializarRvReparacionDetail(){
         rvReparacionDetail.setAdapter(reparacionDetailListAdapter);
@@ -129,7 +160,7 @@ public class ReparacionDetailListView extends Fragment implements ReparacionList
     }
 
     @Override
-    public void hayDatos(ArrayList<Reparacion> list) {
+    public void hayDatos(List<Reparacion> list) {
         reparacionDetailListAdapter.addAll(list);
         reparacionDetailListAdapter.notifyDataSetChanged();
     }

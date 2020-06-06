@@ -14,6 +14,7 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.ViewHolder> implements AdapterContrac.BaseAdapterContract.ContractAdapterCliente {
     private ArrayList<Cliente> listClientes;
@@ -37,7 +38,7 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.tvNombreApellidos.setText("Nombre: "+ listClientes.get(position).getNombre());
         holder.tvMatriculaCoche.setText("Matricula: "+ listClientes.get(position).getMatriculaCoche());
-
+        holder.tvTlf.setText("Tlf:"+listClientes.get(position).getTlf());
         //Envento click de  un item del reciclerView
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +83,7 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
         //Buscamos en la lista de reparaciones si ese cliente con ese coche tiene una reparacion ya creada
         for (Reparacion reparacion : ReparacionRepositories.getInstance().getList()){
                 //Si el cliente que intentamos borrar tiene ya creada una reparacion,NO podra ser borrado, en caso contrario si podra
-            if(cBuscar.getMatriculaCoche() == reparacion.getMatriculaCoche())
+            if(cBuscar.getMatriculaCoche().equals(reparacion.getMatriculaCoche()))
             {
                 return  true;
             }
@@ -102,7 +103,7 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
         this.listClientes.add(cliente);
     }
 
-    public void  addAll(ArrayList<Cliente> list)
+    public void  addAll(List<Cliente> list)
     {
         this.listClientes.addAll(list);
     }
@@ -136,11 +137,13 @@ public class ClienteListAdapter extends RecyclerView.Adapter<ClienteListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombreApellidos;
         TextView tvMatriculaCoche;
+        TextView tvTlf;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombreApellidos = itemView.findViewById(R.id.tvNombreApellidos);
             tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
+            tvTlf=itemView.findViewById(R.id.tvtlf);
         }
     }
 

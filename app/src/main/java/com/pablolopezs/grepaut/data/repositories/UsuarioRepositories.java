@@ -50,4 +50,13 @@ public class UsuarioRepositories {
     {
         this.listusuario.remove(usuario);
     }
+
+    public Usuario getUsuario(String email, String password){
+        Usuario u = new Usuario();
+        for(Usuario item: listusuario){
+            if(item.getEmail().equals(email) && item.getPassword().equals(password))
+                u=item;
+        }
+        return  u;
+    }
 }

@@ -15,12 +15,14 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
 import java.util.ArrayList;
+import java.util.List;
+
 /**clase Adapter que gestiona la lista general y eventos generados en dicha lista,
  *  que se mostrara en ReparacionListView*/
 public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAdapter.ViewHolder> implements AdapterContrac.BaseAdapterContract.ContractAdapterReparacion {
-    private ArrayList<Reparacion> listReparacion;
+    private List<Reparacion> listReparacion;
     private manipularDatos manipularDatos;
-    private ArrayList<Reparacion> listRepaMismoCliyFecha;//Listado de reparacion recibidas por un cliente en una fecha sobre un vehiculo concreto
+    private List<Reparacion> listRepaMismoCliyFecha;//Listado de reparacion recibidas por un cliente en una fecha sobre un vehiculo concreto
 
     //Constructor
     public ReparacionListAdapter(manipularDatos manipularDatos) {
@@ -73,17 +75,22 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
             public void onClick(View v) {
                 int posReparacionSelecionada = holder.getAdapterPosition();
                 Reparacion reparacionBuscada = listReparacion.get(posReparacionSelecionada);
-                listRepaMismoCliyFecha = new ArrayList<Reparacion>();
+                //ROOM
+                ReparacionRepositories.getInstance().setListReparacionesComunes(reparacionBuscada.getFecha(),reparacionBuscada.getMatriculaCoche());
+                //region NO ROOOM
+                //listRepaMismoCliyFecha = new ArrayList<Reparacion>();
                 //Buscamos elementos de la lista con el  mismo Cliente,fecha y matricula de reparacion.
-                for (Reparacion item : listReparacion) {
+                /*for (Reparacion item : listReparacion) {
                     if (item.getNombreCliente() == reparacionBuscada.getNombreCliente() && item.getFecha().equals(reparacionBuscada.getFecha()) && item.getMatriculaCoche().equals(reparacionBuscada.getMatriculaCoche())) {
                         listRepaMismoCliyFecha.add(item);//Lista de reparaciones con mismo cliente en una misma fecha con una misma matricula(es decir reparacion sobre la que mas tarde se emitira una factura)
                     }
                 }
                 if(listRepaMismoCliyFecha.size()>0) {
                     //Cargamos en el repositorio esta lista de reparaciones concretas de un cliente en una determinada fecha sobre un mismo vehiculo en repository para recogerla conReparacionDetailListAdapter
-                    ReparacionRepositories.getInstance().setListReparacionesComunes(listRepaMismoCliyFecha);
-                }
+                    //ReparacionRepositories.getInstance().setListReparacionesComunes(listRepaMismoCliyFecha);
+
+                }*/
+                //endregion
                 manipularDatos.miClick();
             }
         });
@@ -119,7 +126,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         return repaBorrar;
 
     }
-    //Una vez confirmada la eliminacion desde el la ventana que m uestra el alert dialog
+    //Una vez confirmada la eliminacion desde el la ventana que muestra el alert dialog
     @Override
     public void confirmarBorrado(int position){
         manipularDatos.confirmarBorrado(position);//Este informa a la vista de que se confirman el borrado
@@ -156,7 +163,7 @@ public class ReparacionListAdapter extends RecyclerView.Adapter<ReparacionListAd
         this.listReparacion.add(reparacion);
     }
 
-    public void addAll(ArrayList<Reparacion> list) {
+    public void addAll(List<Reparacion> list) {
         this.listReparacion.addAll(list);
     }
     /*--------------------------------------------------------------------*/

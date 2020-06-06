@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +24,7 @@ import com.pablolopezs.grepaut.adapter.ServicioListAdapter;
 import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Servicio;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServicioListView extends Fragment implements ServicioListContract.View {
 
@@ -68,7 +67,7 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
         servicioListAdapter=new ServicioListAdapter(new ServicioListAdapter.manipularDatos() {
             @Override
             public void miOnLOngClick(int posicion) {
-                manipularDatosServicioAddOEdit.fragmentManipularDatosServicioAddOEdit(servicioListAdapter.getItemList(posicion),posicion);
+                manipularDatosServicioAddOEdit.fragmentManipularDatosServicioAddOEdit(servicioListAdapter.getItemList(posicion));
             }
 
             @Override
@@ -86,12 +85,13 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
                                 un scankbar a bajo que permite deshacer esta opcion durante un breve periodo de tiempo antes de convertirla en irreversible*/
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //Eliminar el objeto servicio de la lista del Repositiorio a traves del presenter
-                                presenter.eliminar(adapterPosition);
-
                                 //Eliminamos el Servicio del adapter y lo guardamos, ya que este que se puede  RESTAURAR antes de 10 segundos con el snackbar
                                 final Servicio s =  servicioListAdapter.eliminar(adapterPosition);
                                 Log.d("Deshacer",s.getNombre());
+                                //Eliminar el objeto servicio de la lista del Repositiorio a traves del presenter
+                                presenter.eliminar(adapterPosition,s);
+
+
                                 //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
                                         .make(getActivity().findViewById(R.id.contenedorPadre),"Servicio: "+ s.getNombre()+" borrado. " + " Deshacer el borrrado", 10000);
@@ -102,22 +102,21 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
                                     public void onClick(View view) {
                                         servicioListAdapter.deshacerBorrado(adapterPosition,  s);
                                         //Añadimos el objeto de nuevo en su posicion original en el repositiorio
-                                        presenter.anadirPorPos(adapterPosition,s);
+                                        presenter.anadir(s);
                                     }
                                 });
                                 snackbar.setActionTextColor(Color.WHITE);
                                 snackbar.show();
                                 //---------Fin de barra de Deshacer------------
                             }
-                        }).
-                        setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //Negativo
                                 servicioListAdapter.cancelacionDeBorrado(adapterPosition);
                             }
-                        }).create();
-                alerta.show();
+                        }).show();
+                //alerta.show();
             }
         });
 
@@ -137,8 +136,8 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
 
     //region Metodos implementados por la interfaz ServicioListContract.View
     @Override
-    public void hayDatos(ArrayList<Servicio> list) {
-        servicioListAdapter.addAll(list);
+    public void hayDatos(List<Servicio> list) {
+        servicioListAdapter.miaddAll(list);
         servicioListAdapter.notifyDataSetChanged();
     }
 
@@ -176,6 +175,6 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
 
     //Esta interfaz nos permite comunicar la clase MainActivity que gestiona los fragment y de este modo enviar informacion entre los distintos fragment haciendo uso de Bundle y la interfaz Parcelable
     public  interface manipularDatosServicioAddOEdit{
-        void  fragmentManipularDatosServicioAddOEdit(Servicio servicio, int pos); //Pos indica la posicion en la lista de repositorio en la que se debe modificar el objeto
+        void  fragmentManipularDatosServicioAddOEdit(Servicio servicio);
     }
 }

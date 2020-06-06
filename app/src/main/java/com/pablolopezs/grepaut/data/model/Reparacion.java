@@ -1,23 +1,32 @@
 package com.pablolopezs.grepaut.data.model;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
-public class Reparacion extends ViewModel {
+@Entity(primaryKeys = {"numeroReparacion", "fecha", "matriculaCoche"})
+public class Reparacion {
     //region Campos
-    //int idReparacion;
+
+    @NonNull
     int numeroReparacion;
+    @NonNull
     String fecha;
-    int idCliente;
-    String nombreCliente;
+    @NonNull
     String matriculaCoche;
+    @NonNull
+    String nombreCliente;
+    @NonNull
     String nombreServicio;
-    boolean estadoReparacion;// En funcion de si es true o false se escribira un string determinado u otro (En curso, Finalizada)
-    boolean estadoFacturado;// En funcion de si es true o false se escribira un string determinado u otro (Facturado, No Facturado)
-    String emailUsuario;
-    String nombreUsuario;
-    //SIN USO ACTUALMENTE
-    String nombreEmpresa;
-    //endregion
+    @NonNull
+    Double precioServicio;
+    @NonNull
+    Boolean estadoReparacion;// En funcion de si es true o false se escribira un string determinado u otro (En curso, Finalizada)
+    @NonNull
+    Boolean estadoFacturado;// En funcion de si es true o false se escribira un string determinado u otro (Facturado, No Facturado)
 
     //region Propiedades
     public int getNumeroReparacion() {
@@ -60,83 +69,52 @@ public class Reparacion extends ViewModel {
         this.nombreServicio = nombreServicio;
     }
 
-    public boolean getEstadoReparacion() {
+    public Double getPrecioServicio() {
+        return precioServicio;
+    }
+
+    public void setPrecioServicio(Double precioServicio) {
+        this.precioServicio = precioServicio;
+    }
+
+    public Boolean getEstadoReparacion() {
         return estadoReparacion;
     }
 
-    public void setEstadoReparacion(boolean estadoReparacion) {
+    public void setEstadoReparacion(Boolean estadoReparacion) {
         this.estadoReparacion = estadoReparacion;
     }
 
-    public boolean getEstadoFacturado() {
+    public Boolean getEstadoFacturado() {
         return estadoFacturado;
     }
 
-    public void setEstadoFacturado(boolean estadoFacturado) {
+    public void setEstadoFacturado(Boolean estadoFacturado) {
         this.estadoFacturado = estadoFacturado;
     }
-
-    public String getEmailUsuario() {
-        return emailUsuario;
-    }
-
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
-    }
-
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
-
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    //SIN USO ACTUALMENTE
-    public String getNombreEmpresa() {
-        return nombreEmpresa;
-    }
-    //SIN USO ACTUALMENTE
-    public void setNombreEmpresa(String nombreEmpresa) {
-        this.nombreEmpresa = nombreEmpresa;
-    }
-
-
-
 
     //endregion
 
     //region Constructores
-    public Reparacion(int numeroReparacion, String fecha, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario) {
-        this.numeroReparacion = numeroReparacion;
-        this.fecha = fecha;
-        this.nombreCliente = nombreCliente;
-        this.matriculaCoche = matriculaCoche;
-        this.nombreServicio = nombreServicio;
-        this.estadoReparacion = estadoReparacion;
-        this.estadoFacturado = estadoFacturacdo;
-        this.emailUsuario = emailUsuario;
-        this.nombreUsuario=nombreUsuario;
-    }
-
-    //SIN USO ACTUALMENTE por la propiedad nombreEmpresa
-    public Reparacion(int numeroReparacion, String fecha, String nombreCliente, String matriculaCoche, String nombreServicio, boolean estadoReparacion, boolean estadoFacturacdo, String emailUsuario,String nombreUsuario, String nombreEmpresa) {
-        this.numeroReparacion = numeroReparacion;
-        this.fecha = fecha;
-        this.nombreCliente = nombreCliente;
-        this.matriculaCoche = matriculaCoche;
-        this.nombreServicio = nombreServicio;
-        this.estadoReparacion = estadoReparacion;
-        this.estadoFacturado = estadoFacturacdo;
-        this.emailUsuario = emailUsuario;
-        this.nombreEmpresa = nombreEmpresa;
-        this.nombreUsuario=nombreUsuario;
-    }
 
 
+    @Ignore
     public  Reparacion() {
 
     }
+
+    public Reparacion(int numeroReparacion, String fecha, String matriculaCoche, String nombreCliente,  String nombreServicio,Double precioServicio, Boolean estadoReparacion, Boolean estadoFacturado) {
+        this.numeroReparacion = numeroReparacion;
+        this.fecha = fecha;
+        this.matriculaCoche=matriculaCoche;
+        this.nombreCliente = nombreCliente;
+        this.nombreServicio = nombreServicio;
+        this.precioServicio=precioServicio;
+        this.estadoReparacion = estadoReparacion;
+        this.estadoFacturado = estadoFacturado;
+    }
+
+
     //endregion
 
 

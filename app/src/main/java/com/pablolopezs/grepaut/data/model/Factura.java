@@ -1,26 +1,42 @@
 package com.pablolopezs.grepaut.data.model;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.util.Date;
-
+@Entity(primaryKeys = {"numeroFactura", "lineaFactura"})
 public class Factura {
 
     //region Campos
+    @NonNull
+    @ColumnInfo
     int numeroFactura;
+    @NonNull
     int lineaFactura; //Suele coincidir con el numero numeroReparacion de la clase Reparacion, pero realmente es el numero de reparaciones asignadas a un mismo numero de factura
+    @NonNull
     String fechaFacturacion;
-    boolean estadoFactura;// En funcion de si es true o false se escribira un string determinado u otro (Vigente, Anulada)
+    @NonNull
     String fechaReparacion;
+    @NonNull
     String matriculaCocheRepara;
-    //TODO PENDIENTES DE APLICAR ESTOS DOS CAMPOS
+    @NonNull
+    boolean estadoFactura;// En funcion de si es true o false se escribira un string determinado u otro (Vigente, Anulada)
+
+    @NonNull
     String nombreServicio;
+    @NonNull
     double precioServicio;
-    //---------------------------//
-    String emailUsuario;
+
     String numeroFacturaAnulada;//Si se crea una nueva factura a raiz de la anulacion de otra, en este campo se hara referencia a la factura anulada a partir de la que se creo la nueva.
+    //---------------------------//
+    //String emailUsuario;
+
     //endregion
 
     //region Propiedades
@@ -72,13 +88,30 @@ public class Factura {
         this.matriculaCocheRepara = matriculaCocheRepara;
     }
 
-    public String getEmailUsuario() {
+    @NonNull
+    public String getNombreServicio() {
+        return nombreServicio;
+    }
+
+    public void setNombreServicio(@NonNull String nombreServicio) {
+        this.nombreServicio = nombreServicio;
+    }
+
+    public double getPrecioServicio() {
+        return precioServicio;
+    }
+
+    public void setPrecioServicio(double precioServicio) {
+        this.precioServicio = precioServicio;
+    }
+
+    /*public String getEmailUsuario() {
         return emailUsuario;
     }
 
     public void setEmailUsuario(String emailUsuario) {
         this.emailUsuario = emailUsuario;
-    }
+    }*/
 
     public String getNumeroFacturaAnulada() {
         return numeroFacturaAnulada;
@@ -91,27 +124,29 @@ public class Factura {
     //endregion
 
     //region Constructor
-    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion, String matriculaCocheRepara, String emailUsuario, String numeroFacturaAnulada) {
+    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion,String fechaReparacion,String matriculaCocheRepara, boolean estadoFactura,String nombreServicio,Double precioServicio ) {
         this.numeroFactura = numeroFactura;
         this.lineaFactura = lineaFactura;
         this.fechaFacturacion = fechaFacturacion;
-        this.estadoFactura = estadoFactura;
-        this.fechaReparacion = fechaReparacion;
+        this.fechaReparacion=fechaReparacion;
         this.matriculaCocheRepara = matriculaCocheRepara;
-        this.emailUsuario = emailUsuario;
-        this.numeroFacturaAnulada = numeroFacturaAnulada;
+        this.estadoFactura = estadoFactura;
+        this.nombreServicio=nombreServicio;
+        this.precioServicio=precioServicio;
     }
 
     //Costructor sin asginar numero de factura anulada, es decir cuando nuestra factura no hace referencia otra que esta anulada
-    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion,  String matriculaCocheRepara, String emailUsuario) {
+    @Ignore
+    public Factura(int numeroFactura, int lineaFactura, String fechaFacturacion, boolean estadoFactura, String fechaReparacion,  String matriculaCocheRepara) {
         this.numeroFactura = numeroFactura;
         this.lineaFactura = lineaFactura;
         this.fechaFacturacion = fechaFacturacion;
         this.estadoFactura = estadoFactura;
         this.fechaReparacion = fechaReparacion;
         this.matriculaCocheRepara = matriculaCocheRepara;
-        this.emailUsuario = emailUsuario;
+        //this.emailUsuario = emailUsuario;
     }
+    @Ignore
     public Factura(){
 
     }

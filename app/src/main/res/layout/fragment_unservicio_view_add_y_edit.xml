@@ -39,7 +39,8 @@
             android:id="@+id/tePrecioServicioeAddEdit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/tiPrecioServicioAddEdit" />
+            android:hint="@string/tiPrecioServicioAddEdit"
+            android:inputType="numberDecimal|number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

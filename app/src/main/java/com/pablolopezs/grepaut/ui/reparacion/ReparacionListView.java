@@ -23,7 +23,8 @@ import com.pablolopezs.grepaut.adapter.ReparacionListAdapter;
 import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import androidx.appcompat.app.AlertDialog;
 
 
@@ -107,12 +108,12 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                 un scankbar a bajo que permite deshacer esta opcion durante un breve periodo de tiempo antes de convertirla en irreversible*/
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //Eliminar el objeto reparacion de la lista del Repositiorio a traves del presenter
-                                presenter.eliminar(adapterPosition);
-
                                 //Eliminamos la Reparacion y la guardamos, ya que se puede RESTAURAR antes de 10 segundos con el snackbar
-                               final Reparacion r = reparacionListAdapter.eliminar(adapterPosition);
-                               Log.d("Deshacer",Integer.toString(r.getNumeroReparacion()));
+                                final Reparacion r = reparacionListAdapter.eliminar(adapterPosition);
+                                Log.d("Deshacer",Integer.toString(r.getNumeroReparacion()));
+                                //Eliminar el objeto reparacion de la lista del Repositiorio a traves del presenter
+                                presenter.eliminar(adapterPosition,r);
+
                                 //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
                                         .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del vehiculo: "+ r.getMatriculaCoche() + " Deshacer el borrrado", 8000);
@@ -123,7 +124,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
                                     public void onClick(View view) {
                                         reparacionListAdapter.deshacerBorrado(adapterPosition,  r);
                                         //Añadimos el objeto de nuevo en su posicion original en el repositiorio
-                                        presenter.anadirPorPos(adapterPosition,r);
+                                        presenter.anadir(r);
                                     }
                                 });
                                 snackbar.setActionTextColor(Color.WHITE);
@@ -175,7 +176,7 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
 
     //region Metodos implementados por la interfaz View
     @Override
-    public void hayDatos(ArrayList<Reparacion> list) {
+    public void hayDatos(List<Reparacion> list) {
         reparacionListAdapter.addAll(list);
         reparacionListAdapter.notifyDataSetChanged();//Para que actualice los datos
     }

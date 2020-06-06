@@ -3,18 +3,28 @@ package com.pablolopezs.grepaut.data.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+//Room
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+@Entity
 public class Servicio implements Parcelable {
+    @Ignore
     public static final String TAG="Servicio";
+
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo
     String nombre;//Clave primaria, es decir el nombre es unico
+    @NonNull
     double precio;
-    //SIN USO ACTUALMENTE
     String descripcion;
-    //SIN USO ACTUALMENTE
-    String empresa;//Empresa a la que pertenece este servicio (es una FK de la tabla Empresa)
 
     //region Propiedades
     public String getNombre() {
@@ -41,34 +51,23 @@ public class Servicio implements Parcelable {
         this.descripcion = descripcion;
     }
 
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
     //endregion
 
     //region Constructores
 
+    @Ignore
     public Servicio(String nombre, double precio ) {
         this.nombre = nombre;
         this.precio = precio;
     }
-    //SIN USO ACTUALMENTE
-    public Servicio(String nombre, double precio, String descripcion,String empresa) {
-        this.nombre = nombre;
-        this.precio = precio;
-        this.descripcion = descripcion;
-        this.empresa = empresa;
-    }
-    //SIN USO ACTUALMENTE
+
     public Servicio(String nombre, double precio, String descripcion ) {
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
     }
+
+    @Ignore
     public Servicio(){
 
     }
@@ -86,6 +85,25 @@ public class Servicio implements Parcelable {
         dest.writeString(descripcion);
         //dest.writeString(empresa); //SIN USO ACTUALMENTE
     }
+
+
+    protected Servicio(Parcel in) {
+        nombre = in.readString();
+        precio = in.readDouble();
+        descripcion = in.readString();
+    }
+
+    public static final Creator<Servicio> CREATOR = new Creator<Servicio>() {
+        @Override
+        public Servicio createFromParcel(Parcel in) {
+            return new Servicio(in);
+        }
+
+        @Override
+        public Servicio[] newArray(int size) {
+            return new Servicio[size];
+        }
+    };
     //endregion
 
 }

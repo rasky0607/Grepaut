@@ -48,7 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         tilpassword=findViewById(R.id.tilpassword);
         tedemail=findViewById(R.id.tedemail);
         tedpassword=findViewById(R.id.tedpassword);
-
+        //Para testear
+        tedemail.setText("email1@gmail.com");
 
 
 
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(UsuarioRepositories.getInstance().buscarUsuario(tedemail.getText().toString(),tedpassword.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "Usuario correcto", Toast.LENGTH_SHORT).show();
                     //Nos dirigimos a la Activity del menu Navegation Drawer llamada--> (MainActivity)
+                   // MainActivity.nombreUsuario=UsuarioRepositories.getInstance().getUsuario(tedemail.getText().toString(),tedpassword.getText().toString()).getNombre();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();//Terminamos esta activity, ya que una vez dentro no va voler a Login

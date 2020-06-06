@@ -14,11 +14,13 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.model.Servicio;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapter.ViewHolder>implements AdapterContrac.BaseAdapterContract.ContractAdapterServicio {
 
-    private ArrayList<Servicio> list;
+    private List<Servicio> list;
     private manipularDatos manipularDatos;
     public ServicioListAdapter(manipularDatos manipularDatos){
         this.list=new ArrayList<Servicio>();
@@ -80,7 +82,8 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
         Servicio s = list.get(position);
         for(Reparacion r : ReparacionRepositories.getInstance().getList())
         {
-            if(s.getNombre()==r.getNombreServicio())//Si encuntre que este servicio esta dado de alta en una reparación, este no podra ser borrado
+            Log.d("borrado",s.getNombre()+" "+r.getNombreServicio());
+            if(s.getNombre().equals(r.getNombreServicio()))//Si encuntre que este servicio esta dado de alta en una reparación, este no podra ser borrado
             {
                 return true;
             }
@@ -100,10 +103,14 @@ public class ServicioListAdapter extends RecyclerView.Adapter<ServicioListAdapte
         this.list.add(servicio);
     }
 
-    public void  addAll(ArrayList<Servicio> list)
+    @Override
+    public void addAll(List<Servicio> list) {
+
+    }
+
+    public void  miaddAll(List<Servicio> list)
     {
         this.list.addAll(list);
-        Log.d("SERVICIO",this.list.get(0).getNombre());
     }
     //----Fin implementacion de la interfaz AdapterContrac.BaseAdapterContract.ContractAdapterServicio---/
 //endregion

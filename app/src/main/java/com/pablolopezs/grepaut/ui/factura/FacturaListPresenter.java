@@ -34,17 +34,12 @@ public class FacturaListPresenter implements FacturaListContract.Presenter {
     }
 
     @Override
-    public void anadirPorPos(int pos, Factura objeto) {
+    public void actualizar(int pos, Factura objeto) {
 
     }
 
     @Override
-    public void editar(int pos, Factura objeto) {
-
-    }
-
-    @Override
-    public boolean eliminar(int posicion) {
+    public boolean eliminar(int posicion,Factura objeto) {
         return false;
     }
 

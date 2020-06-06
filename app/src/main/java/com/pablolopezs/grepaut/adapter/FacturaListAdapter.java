@@ -13,6 +13,7 @@ import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Factura;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FacturaListAdapter extends RecyclerView.Adapter<FacturaListAdapter.ViewHolder> implements AdapterContrac.BaseAdapterContract.ContractAdapterFactura {
 
@@ -71,7 +72,7 @@ public class FacturaListAdapter extends RecyclerView.Adapter<FacturaListAdapter.
     }
 
     @Override
-    public void addAll(ArrayList<Factura> list) {
+    public void addAll(List<Factura> list) {
         this.listFacturas.addAll(list);
     }
 

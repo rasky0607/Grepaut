@@ -37,11 +37,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**Clase que gestiona las opciones del nuestra barra
  * de navegacion Navigation Drawer y el cocntrol de los fragmnet que se crean o destruyen*/
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ReparacionListView.clickVerReparacionListener, ServicioListView.manipularDatosServicioAddOEdit, ClienteListView.manipularDatosClienteAddOEdit {
+
+    //Nombre del usuario que se logeo
+    //public static String nombreUsuario;
+    //private TextView tvemailUser;
 
     //private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fabadd;
@@ -74,10 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Final DrawerLayout drawer drawer = findViewById(R.id.drawer_layout);
          drawer = findViewById(R.id.drawer_layout);
          navigationView = findViewById(R.id.nav_view);
-
         setSupportActionBar(toolbar);// Seteamos/Cargamos la toolbar
 
-//region Basura que puede que podamos eliminar más tarde
+        //region Basura que puede que podamos eliminar más tarde
         /*Consejo de Niko a la solucion que tenia aplicada yo respecto al inflado de los fragment de forma manual en el (fragment_content_main),
         Inflando el boton que desplega el menu lateral (conocido como hamburguer)*/
         /*----------------------------------------------------------------------*/
@@ -114,11 +118,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         break;
                     case "Clientes":
                         //Abrimos fragment añadir de Cliente
-                        fragmentManipularDatosClienteAddOEdit(null,-1);
+                        fragmentManipularDatosClienteAddOEdit(null);
                         break;
                     case "Servicios":
                         //Abrimos fragment añadir de Servicios
-                        fragmentManipularDatosServicioAddOEdit(null,-1);//Le pasamos -1 ya que no va editar ningune elemento de la lista de repositorie si no que va añadir un elemento nuevo
+                        fragmentManipularDatosServicioAddOEdit(null);//Le pasamos -1 ya que no va editar ningune elemento de la lista de repositorie si no que va añadir un elemento nuevo
                         break;
 
                 }
@@ -143,6 +147,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         /*----------------------------------------------------------------------*/
 
+    }
+
+    //Para notificaciones que abren de nuevo el fragment de las facturas
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
     }
 
     @Override
@@ -270,6 +280,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+
     /**Infla las opciones del menu superior derechod e la toolbar*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -357,8 +368,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //region Intefaz implementada ServicioAddyEditView.addOEditServicio,ClienteListView.manipularDatosClienteAddOEdit
     @Override
-    public void fragmentManipularDatosServicioAddOEdit(Servicio servicio,int pos) {
-        Log.d("pulsacionMAIN "," posicion "+ pos);
+    public void fragmentManipularDatosServicioAddOEdit(Servicio servicio) {
         fragmentServicioAddyEditView =(ServicioAddyEditView) getSupportFragmentManager().findFragmentByTag(ServicioAddyEditView.TAG);
         if(fragmentServicioAddyEditView==null)
         {
@@ -368,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                bundle=new Bundle();
                bundle.putParcelable(Servicio.TAG,servicio);
            }
-           fragmentServicioAddyEditView= ServicioAddyEditView.newInstance(bundle,pos);
+           fragmentServicioAddyEditView= ServicioAddyEditView.newInstance(bundle);
         }
         servicioAddEditPresenter= new ServicioAddEditPresenter(fragmentServicioAddyEditView);
         fragmentServicioAddyEditView.setPresenter(servicioAddEditPresenter);
@@ -380,8 +390,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void fragmentManipularDatosClienteAddOEdit(Cliente cliente, int pos) {
-        Log.d("pulsacionMAIN "," posicion "+ pos);
+    public void fragmentManipularDatosClienteAddOEdit(Cliente cliente) {
+
         fragmentClienteAddyEditView =(ClienteAddyEditView) getSupportFragmentManager().findFragmentByTag(ClienteAddyEditView.TAG);
         if(fragmentClienteAddyEditView==null)
         {
@@ -391,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bundle=new Bundle();
                 bundle.putParcelable(Cliente.TAG,cliente);
             }
-            fragmentClienteAddyEditView= ClienteAddyEditView.newInstance(bundle,pos);
+            fragmentClienteAddyEditView= ClienteAddyEditView.newInstance(bundle);
         }
         clienteAddyEditPresenter= new ClienteAddyEditPresenter(fragmentClienteAddyEditView);
         fragmentClienteAddyEditView.setPresenter(clienteAddyEditPresenter);

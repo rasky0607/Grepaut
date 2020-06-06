@@ -8,5 +8,6 @@ public class ReparacionAddContract {
         void setPresenter(Presenter presenter);
     }
     public interface Presenter extends BaseAddEdit.Presenter<Reparacion> {
+        int getNumeroUltimaReparacion(Reparacion reparacion);
     }
 }

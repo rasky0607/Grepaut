@@ -10,7 +10,7 @@ public class BaseAddEdit {
     }
     public interface Presenter<T>{
         void anadir(T objeto);
-        void modificar(int pos,T objeto);
+        void modificar(T objeto);
         boolean validar();//Indica a la vista si los datos a introducir son validos
     }
 }

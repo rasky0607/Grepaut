@@ -94,4 +94,7 @@
     <string name="tvFechaReparacionlistFacturas">Fecha reparación:</string>
     <string name="tvFechaFacturacionlistFacturas">Fecha facturación:</string>
 
+    <!--Notificaciones-->
+    <string name="nombreCanalNotificaciones">Grepaut</string>
+    <string name="descripcionCanalNotificaciones">Canal de notificaciones de Grepaut</string>
 </resources>

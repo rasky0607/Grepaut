@@ -22,24 +22,25 @@ public class ClienteListPresenter implements ClienteListContract.Presenter {
     }
 
     @Override
-    public boolean eliminar(int posicion) {
-        ClienteRepositories.getInstance().getList().remove(posicion);
+    public boolean eliminar(int posicion,Cliente objeto) {
+        //ClienteRepositories.getInstance().getList().remove(posicion);
+        //ROOM
+        ClienteRepositories.getInstance().delete(objeto);
         return true;
-    }
-
-    @Override
-    public void editar(int pos, Cliente cliente) {
-        ClienteRepositories.getInstance().getList().add(pos, cliente);
-    }
-
-    @Override
-    public void anadir(Cliente cliente) {
-
     }
 
     //Añadimos el elmento pasado en una posicion concreta, como cuando deshacemos un borrado con el snakbar<
     @Override
-    public void anadirPorPos(int pos, Cliente objeto) {
+    public void anadir(Cliente cliente) {
+        //ROOM
+        ClienteRepositories.getInstance().insert(cliente);
+    }
+
+
+    @Override
+    public void actualizar(int pos, Cliente objeto) {
         ClienteRepositories.getInstance().getList().add(pos,objeto);
+        //ROOM
+        ClienteRepositories.getInstance().update(objeto);
     }
 }

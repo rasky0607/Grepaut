@@ -18,6 +18,7 @@ import com.pablolopezs.grepaut.adapter.FacturaListAdapter;
 import com.pablolopezs.grepaut.data.model.Factura;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*Muestra un listado de las facturas existentes, tanto anuladas como vigentes, y estas no puden ser editadas ni borradas, solo anuladas para crear otra factura nueva que referencie a la anulada*/
 public class FacturaListView extends Fragment implements FacturaListContract.View {
@@ -62,7 +63,7 @@ public class FacturaListView extends Fragment implements FacturaListContract.Vie
 
     //region implementacion de la interfaz FacturaListContract.View
     @Override
-    public void hayDatos(ArrayList<Factura> list) {
+    public void hayDatos(List<Factura> list) {
         facturaListAdapter.addAll(list);
         facturaListAdapter.notifyDataSetChanged();//Para que actualice los datos
     }

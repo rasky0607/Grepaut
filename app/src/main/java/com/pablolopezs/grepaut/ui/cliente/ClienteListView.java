@@ -24,7 +24,7 @@ import com.pablolopezs.grepaut.adapter.ClienteListAdapter;
 import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Cliente;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteListView extends Fragment implements ClienteListContract.View {
 
@@ -69,7 +69,7 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
             @Override
             public void miOnLOngClick(int posicion) {
                 Log.d("long","Estoy aquui");
-                manipularDatosClienteAddOEdit.fragmentManipularDatosClienteAddOEdit(clienteListAdapter.getItemList(posicion),posicion);
+                manipularDatosClienteAddOEdit.fragmentManipularDatosClienteAddOEdit(clienteListAdapter.getItemList(posicion));
             }
 
             @Override
@@ -87,13 +87,14 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
                                 un scankbar a bajo que permite deshacer esta opcion durante un breve periodo de tiempo antes de convertirla en irreversible*/
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //Eliminar el objeto cliente de la lista del Repositiorio a traves del presenter
-                                presenter.eliminar(adapterPosition);
 
                                 //Eliminamos el Cliente del adapter y lo guardamos, ya que este que se puede  RESTAURAR antes de 10 segundos con el snackbar
                                 final Cliente c = clienteListAdapter.eliminar(adapterPosition);
 
                                 Log.d("Deshacer",c.getMatriculaCoche());
+                                //Eliminar el objeto cliente de la lista del Repositiorio a traves del presenter
+                                presenter.eliminar(adapterPosition,c);
+
                                 //----------Deshacer/Restaurar eliminacion------------
                                 Snackbar snackbar = Snackbar
                                         .make(getActivity().findViewById(R.id.contenedorPadre),"Reparación del cliente: "+ c.getNombre() + " Deshacer el borrrado", 10000);
@@ -104,7 +105,7 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
                                     public void onClick(View view) {
                                         clienteListAdapter.deshacerBorrado(adapterPosition,  c);
                                         //Añadimos el objeto de nuevo en su posicion original en el repositiorio
-                                        presenter.anadirPorPos(adapterPosition,c);
+                                        presenter.anadir(c);
                                     }
                                 });
                                 snackbar.setActionTextColor(Color.WHITE);
@@ -140,7 +141,7 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
     /**Implementados por la interfaz*/
 
     @Override
-    public void hayDatos(ArrayList<Cliente> list) {
+    public void hayDatos(List<Cliente> list) {
         clienteListAdapter.addAll(list);
         clienteListAdapter.notifyDataSetChanged();
     }
@@ -175,6 +176,6 @@ public class ClienteListView extends Fragment implements ClienteListContract.Vie
    }
    //Esta interfaz nos permite comunicar la clase MainActivity que gestiona los fragment y de este modo enviar informacion entre los distintos fragment haciendo uso de Bundle y la interfaz Parcelable
    public  interface manipularDatosClienteAddOEdit{
-       void  fragmentManipularDatosClienteAddOEdit(Cliente cliente, int pos); //Pos indica la posicion en la lista de repositorio en la que se debe modificar el objeto
+       void  fragmentManipularDatosClienteAddOEdit(Cliente cliente);
    }
 }

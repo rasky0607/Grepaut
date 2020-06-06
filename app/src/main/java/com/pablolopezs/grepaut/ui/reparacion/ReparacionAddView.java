@@ -1,6 +1,7 @@
 package com.pablolopezs.grepaut.ui.reparacion;
 
 import android.app.DatePickerDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -37,6 +38,7 @@ import com.pablolopezs.grepaut.data.repositories.ServicioRepositories;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 //Importada de arsenal android
 
 public class ReparacionAddView extends Fragment implements ReparacionAddContract.View{
@@ -63,7 +65,7 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
     /*Esta variable nos indica el numero de reparacion que vamos a asignar a las nuevas reapraciones que el usuario añada en funcion de las que ya hay guardadas
     * de forma que si ya hay una reparacion  para una matricula en un dia concreto con el numero de reparacion por ejemplo 2,
     *  la siguiente que sea insertada para esa matricula en ese mismo dia, tendra el numero de reparacion3*/
-     private static int numReparacion;
+
     public static ReparacionAddView newInstance() {
         ReparacionAddView fragment = new ReparacionAddView();
         return fragment;
@@ -105,14 +107,14 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
         int month = c.get(Calendar.MONTH);
         int year = c.get(Calendar.YEAR);
         //Rellenamos el tvFecha con la Fecha actual
-        tvFechaSelecionada.setText((day+"-"+(month+1)+"-"+year));//+1 por que los meses empiezan en 0
+        tvFechaSelecionada.setText((day+"/"+(month+1)+"/"+year));//+1 por que los meses empiezan en 0
     }
 
     //Carga los spinner de este fragmen con las distintas claves de los clientes [es decir las matriculas] y las claves de los servicios [los nombres]
     private void cargarSpinners(){
 
         //region Matriculas de coches de clientes
-        ArrayList<Cliente>listMatriculas= ClienteRepositories.getInstance().getList();
+        List<Cliente>listMatriculas= ClienteRepositories.getInstance().getList();
         String[] matriculaCochesClientes= new String[listMatriculas.size()+1];//+1 para añadir a la lista un elemento en primera posicion que sea un elemento "no selecionado" para a la hora de cargar el spinner sin seleccion por defecto
         for (int i =0; i<listMatriculas.size()+1;i++)
         {
@@ -127,7 +129,7 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
         //endregion
 
         //region Nombre de Servicios
-        ArrayList<Servicio>listServicio= ServicioRepositories.getInstance().getList();
+        List<Servicio> listServicio= ServicioRepositories.getInstance().getList();
         String[] nombreServicios= new String[listServicio.size()+1];//+1 para añadir a la lista un elemento en primera posicion que sea un elemento "no selecionado" para a la hora de cargar el spinner sin seleccion por defecto
         for (int i =0; i<listServicio.size()+1;i++)
         {
@@ -208,26 +210,14 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
         btnGuardarReparacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int contador=1;//usado para asignar un numero de reparacion, a reparaciones que no coinciden en matricula y fecha con otras existentes
-                    for (Reparacion item:listaReparacionAanadir){
-                        numReparacion= ReparacionRepositories.getInstance().buscarReparacionesExistentes(item.getMatriculaCoche(),item.getFecha());
-                        Log.d("num","numero antes "+numReparacion);
-                        if(numReparacion>0) {//si es mayor que 0, es que encontro alguna reparacion existente y devolvio el numero de esta, por lo que la nueva sera igual a este numero +1
-                            item.setNumeroReparacion(numReparacion + 1);
-                            Log.d("num","numero despues "+numReparacion);
-                        }
-                        else {//Si no, es que no hay ninguna reparacion existente, por lo que se le asigna el numero de reparacion 1
-                            Log.d("num","numero antes de falso "+contador);
-                            item.setNumeroReparacion(contador);
-                            contador++;
-                            Log.d("num","numero despues de falso "+contador);
-                        }
 
-                        presenter.anadir(item);//añadimos los elementos a repositories
-                    }
-                    //realizamos la insercion de cada uno de los objetos reparacion de la lista
+                int numReparacion=presenter.getNumeroUltimaReparacion(listaReparacionAanadir.get(0));
+                for ( Reparacion reparacion : listaReparacionAanadir) {
+                    reparacion.setNumeroReparacion(++numReparacion);
+                    presenter.anadir(reparacion);
+                }
                     resetarElementos();
-
+                getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro **PROVISIONAL**
             }
         });
         //endregion-----//
@@ -306,6 +296,7 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
         r.setFecha(tvFechaSelecionada.getText().toString());
         r.setMatriculaCoche(spMatricula.getSelectedItem().toString());
         r.setNombreServicio(spServicio.getSelectedItem().toString());
+        r.setPrecioServicio(ServicioRepositories.getInstance().precioServicio(r.getNombreServicio()));//POR PROBAR
         r.setEstadoReparacion(false);
         r.setEstadoFacturado(false);
         r.setNombreCliente(tvNombreCliente.getText().toString());
@@ -316,12 +307,12 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
     public boolean esValido() {
         if(spMatricula.getSelectedItem().toString().equals(marcaSpMatricula))
         {
-            mostrarError("ERROR: Debes selecionar una matricula.");
+            mostrarError("Debes selecionar una matricula.");
             return false;
         }
         if(spServicio.getSelectedItem().toString().equals(marcaSpServicio))
         {
-            mostrarError("ERROR: Debes selecionar un servicio.");
+            mostrarError("Debes selecionar un servicio.");
             return false;
         }
 
@@ -330,12 +321,13 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
 
     @Override
     public void mensaje(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+        getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro
     }
 
     @Override
     public void mostrarError(String msg) {
-        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+       Toast.makeText(getContext(),"ERROR: "+msg,Toast.LENGTH_SHORT).show();
     }
 
     @Override

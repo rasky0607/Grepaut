@@ -14,14 +14,21 @@ public class ServicioAddEditPresenter implements ServicioAddEditContract.Present
 
     @Override
     public void anadir(Servicio objeto) {
-        ServicioRepositories.getInstance().getList().add(objeto);
-        view.mensaje("Insercion de servicio "+objeto.getNombre());
+        //ServicioRepositories.getInstance().getList().add(objeto);
+        if(ServicioRepositories.getInstance().insert(objeto))
+            view.mensaje("Insercion de servicio "+objeto.getNombre());
+        else
+            view.mostrarError("No se pudo insertar el servicio "+objeto.getNombre());
+
     }
 
     @Override
-    public void modificar(int pos, Servicio objeto) {
-        ServicioRepositories.getInstance().getList().add(pos,objeto);
-        view.mensaje("Modificación de servicio "+objeto.getNombre());
+    public void modificar(Servicio objeto) {
+        //ServicioRepositories.getInstance().getList().add(pos,objeto);
+        if(ServicioRepositories.getInstance().update(objeto))
+            view.mensaje("Modificación de servicio "+objeto.getNombre());
+        else
+            view.mostrarError("No se pudo modificar el registro "+objeto.getNombre());
     }
 
     @Override

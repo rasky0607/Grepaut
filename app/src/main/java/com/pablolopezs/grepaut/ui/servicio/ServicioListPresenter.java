@@ -12,7 +12,7 @@ public class ServicioListPresenter implements ServicioListContract.Presenter {
 
     @Override
     public void cargarDatos() {
-        if(ServicioRepositories.getInstance().getList().isEmpty()){
+        if(ServicioRepositories.getInstance().getList()== null){
             view.noDatos();
         } else{
             view.hayDatos(ServicioRepositories.getInstance().getList());
@@ -20,25 +20,25 @@ public class ServicioListPresenter implements ServicioListContract.Presenter {
         }
     }
 
+    //para cuando se deshace un borraddo, volvermos a insertarlo
     @Override
     public void anadir(Servicio objeto) {
+        ServicioRepositories.getInstance().insert(objeto);
+    }
 
+
+    @Override
+    public void actualizar(int pos, Servicio objeto) {
+        //ServicioRepositories.getInstance().getList().add(pos,objeto);
+        ServicioRepositories.getInstance().update(objeto);
     }
 
     @Override
-    public void anadirPorPos(int pos, Servicio objeto) {
-        ServicioRepositories.getInstance().getList().add(pos,objeto);
-    }
+    public boolean eliminar(int posicion,Servicio objeto) {
+        //ServicioRepositories.getInstance().getList().remove(posicion);
+        ServicioRepositories.getInstance().delete(objeto);
 
-    @Override
-    public void editar(int pos, Servicio objeto) {
 
-    }
-
-    //Añadimos el elmento pasado en una posicion concreta, como cuando deshacemos un borrado con el snakbar<
-    @Override
-    public boolean eliminar(int posicion) {
-        ServicioRepositories.getInstance().getList().remove(posicion);
         return true;
     }
 }

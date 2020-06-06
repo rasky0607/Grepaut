@@ -44,7 +44,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
         holder.tvMatriculaCoche.setText("Matricula: "+list.get(position).getMatriculaCoche());
         holder.tvNomCliente.setText("Cliente: "+list.get(position).getNombreCliente());
         holder.tvNomServicio.setText("Servicio: "+list.get(position).getNombreServicio());
-        holder.tvNombreUsuarioMecanico.setText("Técnico: "+list.get(position).getNombreUsuario());
+
 
          /*Segun si esta factura o no, el fondo tendra ImagenButtom visible o invisible
          facturada= true -> visible
@@ -80,7 +80,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
 
     /*Recorre la lista de reparaciones que se estan mostrando en detalle y recoge solo las que NO estan facturadas
     * Para crear una factura con todas estas reaparaciones*/
-    public ArrayList<Reparacion> reparacionesSinFacturar(){
+    public List<Reparacion> reparacionesSinFacturar(){
         ArrayList<Reparacion> listRepaSinFacturar =new ArrayList<Reparacion>();//Lista de reparaciones sin facturar
         for(Reparacion item:list){
             if(!item.getEstadoFacturado())
@@ -128,7 +128,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
 
     }
 
-    public void addAll(ArrayList<Reparacion> list) {
+    public void addAll(List<Reparacion> list) {
         this.list.addAll(list);
     }
 //----------------FIn implmentacion de interfaz
@@ -141,7 +141,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
         TextView tvMatriculaCoche;
         TextView tvNomCliente;
         TextView tvNomServicio;
-        TextView tvNombreUsuarioMecanico;
+        //TextView tvNombreUsuarioMecanico;
 
 
 
@@ -153,7 +153,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
             tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
             tvNomCliente = itemView.findViewById(R.id.tvNomCliente);
             tvNomServicio = itemView.findViewById(R.id.tvNomServicio);
-            tvNombreUsuarioMecanico = itemView.findViewById(R.id.tvNombreUsuarioMecanico);
+            //tvNombreUsuarioMecanico = itemView.findViewById(R.id.tvNombreUsuarioMecanico);
         }
     }
 }

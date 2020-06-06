@@ -6,6 +6,7 @@ import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.model.Servicio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /*Esta clase contiene todos los interfaz o contratos que tienen cada uno de los adapter
 * Tanto los que tiene en comun en "BaseAdapterContract" como por separado cada uno en concreto*/
@@ -17,7 +18,7 @@ public class AdapterContrac {
         void confirmarBorrado(int adapterPosition);
         T getItemList(int pos);//Devuelve un objeto de la lista dada una posicion concreta
         void add(T objeto);
-        void addAll(ArrayList<T> list);
+        void addAll(List<T> list);
 
         public interface ContractAdapterReparacion extends BaseAdapterContract<Reparacion> {
             boolean estaFacturado(int position);
