@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 
 import com.pablolopezs.grepaut.R;
+import com.pablolopezs.grepaut.broadcast.MyBroadcastReceiver;
 
 /*Encargada de crear la base de datos*/
 public class GreapautApplication extends Application {
@@ -15,8 +16,9 @@ public class GreapautApplication extends Application {
         super.onCreate();
         GrepautDatabase.create(this);
         createNotificationChannel();
+        MyBroadcastReceiver b = new MyBroadcastReceiver();
     }
-    //Notificaciones
+    //Crea el canal de las notificaciones
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library

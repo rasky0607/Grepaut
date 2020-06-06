@@ -1,42 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pablolopezs.grepaut">
-
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <application
+        android:name=".data.dao.GreapautApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.SplashTheme"
-        android:name=".data.dao.GreapautApplication">
+        android:theme="@style/AppTheme.SplashTheme">
+        <receiver
+            android:name=".broadcast.MyBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <!--A lo que mira mi broadcastreciver-->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
 
-        <activity android:name=".ui.login.SplashActivity" >
+        <service
+            android:name=".broadcast.MyService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".ui.login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".ui.login.register.RegistroActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.register.RegistroActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.MainActivity.MainActivity"
             android:label="@string/title_activity_manager"
-            android:theme="@style/AppTheme.SplashTheme.NoActionBar"
-            android:screenOrientation="portrait"><!--Bloqueo de girado de pantalla-->
-
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.SplashTheme.NoActionBar"> <!-- Bloqueo de girado de pantalla -->
 
         </activity>
-
     </application>
 
 </manifest>
