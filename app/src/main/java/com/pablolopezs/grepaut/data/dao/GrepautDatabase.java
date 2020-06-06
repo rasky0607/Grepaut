@@ -10,19 +10,19 @@ import com.pablolopezs.grepaut.data.model.Cliente;
 import com.pablolopezs.grepaut.data.model.Factura;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.model.Servicio;
+import com.pablolopezs.grepaut.data.model.Usuario;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 /*Esta calse es la encargada de crear la Base de datos*/
-@Database(entities = {Servicio.class, Reparacion.class, Cliente.class, Factura.class},version =9,exportSchema = false)
+@Database(entities = {Servicio.class, Reparacion.class, Cliente.class, Factura.class, Usuario.class},version =11,exportSchema = false)
 public abstract class GrepautDatabase extends RoomDatabase {
 
     public abstract DaoContractBase.ServicioDaoContract daoServicio();
     public abstract DaoContractBase.ClienteDaoContract daoCliente();
     public abstract DaoContractBase.ReparacionDaoContract daoReparacion();
     public abstract DaoContractBase.FacturaDaoContract daoFactura();
-
-
+    public abstract DaoContractBase.UsarioDaoContract daoUsuario();
 
     private static volatile GrepautDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;

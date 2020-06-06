@@ -15,15 +15,15 @@ public class ReparacionAddPresenter implements ReparacionAddContract.Presenter {
 
     @Override
     public void anadir(Reparacion objeto) {
-        ReparacionRepositories.getInstance().insert(objeto);
+        //ReparacionRepositories.getInstance().insert(objeto);
         //view.mensaje("Añadida Reparación con Fecha: " + objeto.getFecha() + ", para vehiculo con matricula: " + objeto.getMatriculaCoche());
         //ReparacionRepositories.getInstance().getList().add(objeto);
-        /*if(ReparacionRepositories.getInstance().insert(objeto)) {
+        if(ReparacionRepositories.getInstance().insert(objeto)) {
             //ReparacionRepositories.getInstance().insert(objeto);
             view.mensaje("Añadida Reparación con Fecha: " + objeto.getFecha() + ", para vehiculo con matricula: " + objeto.getMatriculaCoche());
         }
         else
-            view.mostrarError("No se puedo añadir la reparacion numero "+objeto.getNumeroReparacion()+ " con Fecha "+objeto.getFecha()+", para vehiculo con matricula: "+objeto.getMatriculaCoche());*/
+            view.mostrarError("No se puedo añadir la reparacion numero "+objeto.getNumeroReparacion()+ " con Fecha "+objeto.getFecha()+", para vehiculo con matricula: "+objeto.getMatriculaCoche());
     }
 
     @Override

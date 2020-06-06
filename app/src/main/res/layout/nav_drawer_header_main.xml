@@ -32,13 +32,13 @@
         android:textColor="@color/white"/>
 
     <TextView
-        android:id="@+id/tvCorreo"
+        android:id="@+id/tvCorreoDrawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:layout_marginLeft="15dp"
         android:text="@string/nav_header_subtitulo"
-        android:textSize="10dp"
+        android:textSize="12dp"
         android:textColor="@color/white"/>
 
 </LinearLayout>

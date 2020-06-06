@@ -41,7 +41,7 @@ public class RegistroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//Para evitar que concretamente esta activity se gire
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//Para evitar que concretamente esta activity se gire
         setContentView(R.layout.activity_registro);
 
         //Enlace a componentes de Interfaz
@@ -67,7 +67,7 @@ public class RegistroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(validar()) {
                     //Guardar datos
-                    UsuarioRepositories.getInstance().getList().add(getObjeto());
+                    UsuarioRepositories.getInstance().insert(getObjeto());
                     Toast.makeText(getApplicationContext(), "¡Registro realizado con exito!.", Toast.LENGTH_SHORT).show();
                     //Dirigirse al Login de nuevo
                     Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);

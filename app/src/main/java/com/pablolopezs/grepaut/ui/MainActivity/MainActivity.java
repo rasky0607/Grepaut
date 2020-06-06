@@ -15,6 +15,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Cliente;
 import com.pablolopezs.grepaut.data.model.Servicio;
+import com.pablolopezs.grepaut.data.model.Usuario;
+import com.pablolopezs.grepaut.data.repositories.UsuarioRepositories;
 import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditPresenter;
 import com.pablolopezs.grepaut.ui.cliente.ClienteAddyEditView;
 import com.pablolopezs.grepaut.ui.cliente.ClienteListPresenter;
@@ -46,12 +48,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     //Nombre del usuario que se logeo
     //public static String nombreUsuario;
-    //private TextView tvemailUser;
+    private String name;
+    private  String email;
+    Usuario usuario;
 
     //private AppBarConfiguration mAppBarConfiguration;
     private FloatingActionButton fabadd;
     private  DrawerLayout drawer=null;
-    private NavigationView navigationView;
+    public NavigationView navigationView;
     private ReparacionListView fragmentReparacionListView;
     private ReparacionListPresenter presenterReparacion;
     private ReparacionDetailListView fragmentReparacionDetailView;//Ver Reparacion
@@ -80,6 +84,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          drawer = findViewById(R.id.drawer_layout);
          navigationView = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);// Seteamos/Cargamos la toolbar
+        //Asginamos el nombre y email del usuario al menuDrawer
+        usuario= UsuarioRepositories.getInstance().getUsuarioActual();
+        TextView tvNombreUserDrawer;
+        TextView tvCorreoDrawer;
+        tvNombreUserDrawer=navigationView.getHeaderView(0).findViewById(R.id.tvNombreUserDrawer);
+        tvCorreoDrawer=navigationView.getHeaderView(0).findViewById(R.id.tvCorreoDrawer);
+        tvNombreUserDrawer.setText(usuario.getNombre());
+        tvCorreoDrawer.setText(usuario.getEmail());
+
+
 
         //region Basura que puede que podamos eliminar más tarde
         /*Consejo de Niko a la solucion que tenia aplicada yo respecto al inflado de los fragment de forma manual en el (fragment_content_main),
@@ -149,7 +163,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    //Para notificaciones que abren de nuevo el fragment de las facturas
     @Override
     protected void onPostResume() {
         super.onPostResume();
@@ -186,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                  /*fragmentTransaction.replace(R.id.nav_contenedor_fragment, new ReparacionListView());
                 fragmentTransaction.commit();*/
         setTitle(R.string.menu_reparaciones);
+        navigationView.setCheckedItem(R.id.nav_reparaciones);
 
     }
 
@@ -198,7 +212,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     fragmentReparacionListView= ReparacionListView.newInstance(null);
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_contenedor_fragment,fragmentReparacionListView,ReparacionListView.TAG).addToBackStack(null).commit();
                 presenterReparacion= new ReparacionListPresenter(fragmentReparacionListView);
                 fragmentReparacionListView.setPresenter(presenterReparacion);
                 setTitle(R.string.menu_reparaciones);
@@ -212,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.nav_contenedor_fragment, fragmentClienteListView, ClienteListView.TAG)
+                        .replace(R.id.nav_contenedor_fragment, fragmentClienteListView, ClienteListView.TAG).addToBackStack(null)
                         .commit();
                 presenterCliente = new ClienteListPresenter(fragmentClienteListView);
                 fragmentClienteListView.setPresenter(presenterCliente);
@@ -228,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.nav_contenedor_fragment,fragmentServicioListView, ServicioListView.TAG)
+                        .replace(R.id.nav_contenedor_fragment,fragmentServicioListView, ServicioListView.TAG).addToBackStack(null)
                         .commit();
                 presenterServicio=new ServicioListPresenter(fragmentServicioListView);
                 fragmentServicioListView.setPresenter(presenterServicio);
@@ -245,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 fragmentFacturaListView.setPresenter(facturaListPresenter);
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.nav_contenedor_fragment,fragmentFacturaListView, FacturaListView.TAG)
+                        .replace(R.id.nav_contenedor_fragment,fragmentFacturaListView, FacturaListView.TAG).addToBackStack(null)
                         .commit();
                 setTitle(R.string.menu_facturas);
                 ocultarMostrarFloatinButtom();
@@ -259,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     /**Muestra o oculta el boton flotante de añadir,
      *  segun en el titulo de la toolbar el cual identifica el fragmento*/
-    private void ocultarMostrarFloatinButtom(){
+    public void ocultarMostrarFloatinButtom(){
         String titulo = getTitle().toString();
         switch (titulo)
         {
@@ -318,31 +332,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
    @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //Todo no me gusta ese numero magico getSupportFragmentManager().getFragments().get(0).getTag()
-        /**Segun el fragmento al que vamos a volver en la pila,
-         *  renombramos el titulo de la toolbar, con el que controlamos el FloatingActionButton de añadir,
-         *  de este modo según en el fragmento de listado que nos encontremos, como ReparacionListView,
-         *  mostraremos un fragmento de añadir o otro.
-         *  Tambien volveremos a mostrar o ocultar el boton de añadir,
-         *  segun si esta en uno de estos listados generales como el anteriormente mencionado o no*/
-        if(getSupportFragmentManager().getFragments()!=null) {
-            switch (getSupportFragmentManager().getFragments().get(0).getTag()) {
-                case ReparacionListView.TAG:
-                    setTitle(R.string.menu_reparaciones);
-                    break;
-                case ClienteListView.TAG:
-                    setTitle(R.string.menu_clientes);
-                    break;
-                case ServicioListView.TAG:
-                    setTitle(R.string.menu_servicios);
-                    break;
-                case FacturaListView.TAG:
-                    setTitle(R.string.menu_facturas);
-                    break;
-
-            }
-            ocultarMostrarFloatinButtom();
-        }
     }
 
     //region Implementado por la interfaz ReparacionListView.clickVerReparacionListener

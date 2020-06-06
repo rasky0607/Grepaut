@@ -44,7 +44,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
         holder.tvMatriculaCoche.setText("Matricula: "+list.get(position).getMatriculaCoche());
         holder.tvNomCliente.setText("Cliente: "+list.get(position).getNombreCliente());
         holder.tvNomServicio.setText("Servicio: "+list.get(position).getNombreServicio());
-
+        holder.tvNombreUsuarioMecanico.setText("Tecnico:"+list.get(position).getTecnico());
 
          /*Segun si esta factura o no, el fondo tendra ImagenButtom visible o invisible
          facturada= true -> visible
@@ -141,7 +141,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
         TextView tvMatriculaCoche;
         TextView tvNomCliente;
         TextView tvNomServicio;
-        //TextView tvNombreUsuarioMecanico;
+        TextView tvNombreUsuarioMecanico;
 
 
 
@@ -153,7 +153,7 @@ public class ReparacionDetailListAdapter extends RecyclerView.Adapter<Reparacion
             tvMatriculaCoche = itemView.findViewById(R.id.tvMatriculaCoche);
             tvNomCliente = itemView.findViewById(R.id.tvNomCliente);
             tvNomServicio = itemView.findViewById(R.id.tvNomServicio);
-            //tvNombreUsuarioMecanico = itemView.findViewById(R.id.tvNombreUsuarioMecanico);
+            tvNombreUsuarioMecanico = itemView.findViewById(R.id.tvNombreUsuarioMecanico);
         }
     }
 }

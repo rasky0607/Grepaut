@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.FacturaListAdapter;
 import com.pablolopezs.grepaut.data.model.Factura;
+import com.pablolopezs.grepaut.ui.MainActivity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,17 @@ public class FacturaListView extends Fragment implements FacturaListContract.Vie
         return fragment;
     }
 
+    //Para mantener la selecion de las opciones Drawer
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(((MainActivity)getActivity()).navigationView.getCheckedItem().getItemId()==R.id.nav_facturas)
+        {
+            ((MainActivity)getActivity()).navigationView.setCheckedItem(R.id.nav_facturas);
+            (getActivity()).setTitle(R.string.menu_facturas);
+            ((MainActivity)getActivity()).ocultarMostrarFloatinButtom();
+        }
+    }
     /*Crea/Infla la vista*/
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_factura_list_view, container, false);

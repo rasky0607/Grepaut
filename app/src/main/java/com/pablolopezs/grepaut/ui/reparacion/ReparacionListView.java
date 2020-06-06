@@ -22,6 +22,7 @@ import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.ReparacionListAdapter;
 import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Reparacion;
+import com.pablolopezs.grepaut.ui.MainActivity.MainActivity;
 
 import java.util.List;
 
@@ -50,6 +51,18 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
         return fragment;
     }
 
+    //Para mantener la selecion de las opciones Drawer
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(((MainActivity)getActivity()).navigationView.getCheckedItem().getItemId()!=R.id.nav_reparaciones)
+        {
+            ((MainActivity)getActivity()).navigationView.setCheckedItem(R.id.nav_reparaciones);
+            (getActivity()).setTitle(R.string.menu_reparaciones);
+            ((MainActivity)getActivity()).ocultarMostrarFloatinButtom();
+        }
+    }
+
     /*Crea/iInfla la vista*/
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,15 +74,15 @@ public class ReparacionListView extends Fragment implements ReparacionListContra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //Para mantener los datos o estado al girar la actividad
+        setRetainInstance(true);
     }
 
     /*Justo despues de crear la vista*/
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Para mantener los datos o estado al girar la actividad
-        setRetainInstance(true);
+
         rvReparacion = view.findViewById(R.id.rvReparacion);
         inicializarRvReparacion();
         presenter.cargarDatos();

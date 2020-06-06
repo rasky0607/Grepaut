@@ -18,6 +18,8 @@ public class Reparacion {
     @NonNull
     String matriculaCoche;
     @NonNull
+    String tecnico;
+    @NonNull
     String nombreCliente;
     @NonNull
     String nombreServicio;
@@ -59,6 +61,14 @@ public class Reparacion {
 
     public void setMatriculaCoche(String matriculaCoche) {
         this.matriculaCoche = matriculaCoche;
+    }
+
+    public String getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(@NonNull String tecnico) {
+        this.tecnico = tecnico;
     }
 
     public String getNombreServicio() {
@@ -103,10 +113,11 @@ public class Reparacion {
 
     }
 
-    public Reparacion(int numeroReparacion, String fecha, String matriculaCoche, String nombreCliente,  String nombreServicio,Double precioServicio, Boolean estadoReparacion, Boolean estadoFacturado) {
+    public Reparacion(int numeroReparacion, String fecha, String matriculaCoche,String tecnico, String nombreCliente,  String nombreServicio,Double precioServicio, Boolean estadoReparacion, Boolean estadoFacturado) {
         this.numeroReparacion = numeroReparacion;
         this.fecha = fecha;
         this.matriculaCoche=matriculaCoche;
+        this.tecnico=tecnico;
         this.nombreCliente = nombreCliente;
         this.nombreServicio = nombreServicio;
         this.precioServicio=precioServicio;

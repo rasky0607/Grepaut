@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -31,9 +32,11 @@ import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.data.model.Cliente;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.model.Servicio;
+import com.pablolopezs.grepaut.data.model.Usuario;
 import com.pablolopezs.grepaut.data.repositories.ClienteRepositories;
 import com.pablolopezs.grepaut.data.repositories.ReparacionRepositories;
 import com.pablolopezs.grepaut.data.repositories.ServicioRepositories;
+import com.pablolopezs.grepaut.data.repositories.UsuarioRepositories;
 
 
 import java.util.ArrayList;
@@ -65,7 +68,7 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
     /*Esta variable nos indica el numero de reparacion que vamos a asignar a las nuevas reapraciones que el usuario añada en funcion de las que ya hay guardadas
     * de forma que si ya hay una reparacion  para una matricula en un dia concreto con el numero de reparacion por ejemplo 2,
     *  la siguiente que sea insertada para esa matricula en ese mismo dia, tendra el numero de reparacion3*/
-
+    Context micontext;
     public static ReparacionAddView newInstance() {
         ReparacionAddView fragment = new ReparacionAddView();
         return fragment;
@@ -74,7 +77,6 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     //Inflamos la vista
@@ -216,8 +218,8 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
                     reparacion.setNumeroReparacion(++numReparacion);
                     presenter.anadir(reparacion);
                 }
-                    resetarElementos();
-                getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro **PROVISIONAL**
+                resetarElementos();
+                volver();
             }
         });
         //endregion-----//
@@ -279,6 +281,7 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        micontext=context;
 
     }
 
@@ -290,16 +293,20 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
 
 //region Implementado por la interfaz
 
+    private void volver(){
+        getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro **PROVISIONAL**
+    }
     @Override
     public Reparacion getObjeto() {
         Reparacion r = new Reparacion();
         r.setFecha(tvFechaSelecionada.getText().toString());
         r.setMatriculaCoche(spMatricula.getSelectedItem().toString());
         r.setNombreServicio(spServicio.getSelectedItem().toString());
-        r.setPrecioServicio(ServicioRepositories.getInstance().precioServicio(r.getNombreServicio()));//POR PROBAR
+        r.setPrecioServicio(ServicioRepositories.getInstance().precioServicio(r.getNombreServicio()));
         r.setEstadoReparacion(false);
         r.setEstadoFacturado(false);
         r.setNombreCliente(tvNombreCliente.getText().toString());
+        r.setTecnico(UsuarioRepositories.getInstance().getUsuarioActual().getNombre());//Nombre de tecnico
         return r;
     }
 
@@ -322,7 +329,7 @@ public class ReparacionAddView extends Fragment implements ReparacionAddContract
     @Override
     public void mensaje(String msg) {
         Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
-        getActivity().onBackPressed();//Vuelve al fragment anterior tras insertar el registro
+
     }
 
     @Override

@@ -1,12 +1,19 @@
 package com.pablolopezs.grepaut.data.repositories;
 
+import com.pablolopezs.grepaut.data.dao.DaoContractBase;
+import com.pablolopezs.grepaut.data.dao.GrepautDatabase;
 import com.pablolopezs.grepaut.data.model.Usuario;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class UsuarioRepositories {
+    Usuario usuarioActual;
+    //ROOM
+    private DaoContractBase.UsarioDaoContract dao;
 
-    private ArrayList<Usuario> listusuario;
+    private List<Usuario> listusuario;
 
     //Unica instancia de esta clase
     static UsuarioRepositories INSTANCE;
@@ -20,7 +27,8 @@ public class UsuarioRepositories {
 
     public UsuarioRepositories() {
         listusuario = new ArrayList<Usuario>();
-        inicializa();
+        //inicializa();
+        dao= GrepautDatabase.getDatabase().daoUsuario();//Obteine la tabla de la BD
     }
 
     private void inicializa(){
@@ -28,35 +36,56 @@ public class UsuarioRepositories {
         this.listusuario.add(new Usuario("email2@gmail.com","1234","Maria","User",true));
     }
 
-    public ArrayList<Usuario> getList(){
-        return this.listusuario;
+    public List<Usuario> getList(){
+        //return this.listusuario;
+        //ROOM
+        try {
+            return GrepautDatabase.databaseWriteExecutor.submit(() -> dao.getAll()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return  null;
     }
 
-    public void add(Usuario usuario)
-    {
-        this.listusuario.add(usuario);
-    }
-
-    //comprueba si el usuario indicado existe o es correcto y tiene permisos
-    public boolean buscarUsuario(String email, String passwrord){
-        for(Usuario item: listusuario)
-        {
-            if(item.getEmail().equals(email)&&item.getPassword().equals(passwrord) && item.getTienePermiso())
-                return true;
+    public boolean validarLoginUsuario(String email, String password){
+        try {
+            Usuario u= GrepautDatabase.databaseWriteExecutor.submit(() -> dao.getUnUsuario(email,password)).get();
+            if(u!=null) {
+                if (u.getEmail().equals(email) && u.getPassword().equals(password)){
+                    usuarioActual=u;
+                    return true;
+                }
+            }
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         return false;
     }
-    public void delete(Usuario usuario)
-    {
-        this.listusuario.remove(usuario);
+    //ROOM
+    public boolean insert(final Usuario usuario){
+        GrepautDatabase.databaseWriteExecutor.execute(() -> dao.insertDao(usuario));
+        return true;
     }
 
-    public Usuario getUsuario(String email, String password){
-        Usuario u = new Usuario();
-        for(Usuario item: listusuario){
-            if(item.getEmail().equals(email) && item.getPassword().equals(password))
-                u=item;
-        }
-        return  u;
+    public boolean update(final Usuario usuario){
+        GrepautDatabase.databaseWriteExecutor.execute(() -> dao.updateDao(usuario));
+        return true;
     }
+
+    public boolean delete(final Usuario usuario){
+        GrepautDatabase.databaseWriteExecutor.execute(() -> dao.deleteDao(usuario));
+        return true;
+    }
+
+    //Devuelve el usuario que inicio sesion
+    public Usuario getUsuarioActual(){
+        if(usuarioActual!=null)
+            return usuarioActual;
+        return null;
+    }
+
 }

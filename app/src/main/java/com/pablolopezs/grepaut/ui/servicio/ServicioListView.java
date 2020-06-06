@@ -23,6 +23,7 @@ import com.pablolopezs.grepaut.R;
 import com.pablolopezs.grepaut.adapter.ServicioListAdapter;
 import com.pablolopezs.grepaut.adapter.TouchCallback;
 import com.pablolopezs.grepaut.data.model.Servicio;
+import com.pablolopezs.grepaut.ui.MainActivity.MainActivity;
 
 import java.util.List;
 
@@ -43,6 +44,17 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
         return fragment;
     }
 
+    //Para mantener la selecion de las opciones Drawer
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(((MainActivity)getActivity()).navigationView.getCheckedItem().getItemId()==R.id.nav_servicios)
+        {
+            ((MainActivity)getActivity()).navigationView.setCheckedItem(R.id.nav_servicios);
+            (getActivity()).setTitle(R.string.menu_servicios);
+            ((MainActivity)getActivity()).ocultarMostrarFloatinButtom();
+        }
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_servicio_list_view, container, false);
         return view;
@@ -51,13 +63,14 @@ public class ServicioListView extends Fragment implements ServicioListContract.V
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Para mantener los datos o estado al girar la actividad
+        setRetainInstance(true);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Para mantener los datos o estado al girar la actividad
-        setRetainInstance(true);
+
         rvServicio=view.findViewById(R.id.rvServicio);
         inicializaRvServicio();
         presenter.cargarDatos();

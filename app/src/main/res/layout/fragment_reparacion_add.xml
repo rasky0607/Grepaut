@@ -13,153 +13,182 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tvFechaReparacion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/cabecerasCampos"
-            android:text="@string/tvFechaRepaAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvFechaSelecionada"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/tvFechaSelecioandaRepaAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFechaReparacion"
-            android:background="@color/whiteBrokenEgg"/>
-
-        <Button
-            android:id="@+id/btnDatePicker"
-            style="@style/botonesSelecionarFechaAlaRepa_FormaYColor"
-            android:layout_width="95dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/btnSelectFechaRepaAdd"
-            android:textSize="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFechaSelecionada" />
-
-        <TextView
-            android:id="@+id/tvIdCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/cabecerasCampos"
-            android:text="@string/tvNomClienteRepaAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnDatePicker" />
-
-
-        <TextView
-            android:id="@+id/tvNombreCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/whiteBrokenEgg"
-            android:text="@string/tvNombreClienteRepaAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvIdCliente" />
-
-        <TextView
-            android:id="@+id/tvMatricula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:text="@string/tvMatriculaRepaAdd"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/cabecerasCampos"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNombreCliente" />
-
-        <Spinner
-            android:id="@+id/spMatricula"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvMatricula"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvServicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="@dimen/cabecerasCampos"
-            android:text="@string/tvServicioRepaAdd"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spMatricula" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/spServicio"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvServicio" />
+                <TextView
+                    android:id="@+id/tvFechaReparacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="28dp"
+                    android:text="@string/tvFechaRepaAdd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/cabecerasCampos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/ibtnAnadirServicio"
-            style="@style/botonesAnadirOtroServicioAlaRepa_FormaYColor"
-            android:layout_width="63dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="44dp"
-            android:src="@drawable/ic_otro_servicio_repa_add"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spServicio" />
+                <TextView
+                    android:id="@+id/tvFechaSelecionada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/whiteBrokenEgg"
+                    android:text="@string/tvFechaSelecioandaRepaAdd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.504"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFechaReparacion" />
 
-        <ImageButton
-            android:id="@+id/ibtnInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:background="@drawable/select_round_btn_sin_fondo"
-            android:src="@drawable/ic_info"
-            app:layout_constraintBottom_toBottomOf="@+id/ibtnAnadirServicio"
-            app:layout_constraintStart_toEndOf="@+id/ibtnAnadirServicio"
-            app:layout_constraintTop_toTopOf="@+id/ibtnAnadirServicio"
-            app:layout_constraintVertical_bias="0.0" />
+                <Button
+                    android:id="@+id/btnDatePicker"
+                    style="@style/botonesSelecionarFechaAlaRepa_FormaYColor"
+                    android:layout_width="95dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/btnSelectFechaRepaAdd"
+                    android:textSize="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.506"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFechaSelecionada" />
 
-        <Button
-            android:id="@+id/btnGuardarReparacion"
-            style="@style/botonesBase_FormaYColor"
-            android:layout_width="113dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/btnInsertarReparacionRepaAdd"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.503"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ibtnAnadirServicio" />
+                <TextView
+                    android:id="@+id/tvIdCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="48dp"
+                    android:text="@string/tvNomClienteRepaAdd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/cabecerasCampos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnDatePicker" />
 
+
+                <TextView
+                    android:id="@+id/tvNombreCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/whiteBrokenEgg"
+                    android:text="@string/tvNombreClienteRepaAdd"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvIdCliente" />
+
+                <TextView
+                    android:id="@+id/tvMatricula"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="44dp"
+                    android:text="@string/tvMatriculaRepaAdd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/cabecerasCampos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvNombreCliente" />
+
+                <Spinner
+                    android:id="@+id/spMatricula"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMatricula" />
+
+                <TextView
+                    android:id="@+id/tvServicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="36dp"
+                    android:text="@string/tvServicioRepaAdd"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textSize="@dimen/cabecerasCampos"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spMatricula" />
+
+                <Spinner
+                    android:id="@+id/spServicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvServicio" />
+
+                <ImageButton
+                    android:id="@+id/ibtnAnadirServicio"
+                    style="@style/botonesAnadirOtroServicioAlaRepa_FormaYColor"
+                    android:layout_width="63dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="44dp"
+                    android:src="@drawable/ic_otro_servicio_repa_add"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spServicio" />
+
+                <ImageButton
+                    android:id="@+id/ibtnInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="15dp"
+                    android:layout_marginStart="28dp"
+                    android:background="@drawable/select_round_btn_sin_fondo"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toBottomOf="@+id/ibtnAnadirServicio"
+                    app:layout_constraintStart_toEndOf="@+id/ibtnAnadirServicio"
+                    app:layout_constraintTop_toTopOf="@+id/ibtnAnadirServicio"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/btnGuardarReparacion"
+                    style="@style/botonesBase_FormaYColor"
+                    android:layout_width="113dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="30dp"
+                    android:layout_marginTop="32dp"
+                    android:text="@string/btnInsertarReparacionRepaAdd"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.503"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ibtnAnadirServicio" />
+            </LinearLayout>
+
+        </ScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

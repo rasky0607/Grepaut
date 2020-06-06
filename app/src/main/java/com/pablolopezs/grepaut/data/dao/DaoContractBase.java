@@ -10,6 +10,7 @@ import com.pablolopezs.grepaut.data.model.Cliente;
 import com.pablolopezs.grepaut.data.model.Factura;
 import com.pablolopezs.grepaut.data.model.Reparacion;
 import com.pablolopezs.grepaut.data.model.Servicio;
+import com.pablolopezs.grepaut.data.model.Usuario;
 
 import java.util.List;
 
@@ -62,6 +63,15 @@ public class DaoContractBase {
         List<Factura> getAll();
         @Query("SELECT MAX(numeroFactura)as numeroFactura FROM FACTURA")
         int getNumeroUltimaFacturasExistente();
+
+    }
+    @Dao
+    public interface UsarioDaoContract extends ContractDao<Usuario>
+    {
+        @Query("SELECT * FROM USUARIO")
+        List<Usuario> getAll();
+        @Query("SELECT * FROM USUARIO WHERE email= :email and password= :password")
+        Usuario getUnUsuario(String email, String password);
 
     }
 
