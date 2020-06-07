@@ -73,7 +73,10 @@ public class RegistroActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegistroActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();//Esta activity quedara finalizada al guaradar, ya que no se volvera esta de nuevo(como norma general).
+                }else {
+                    Toast.makeText(getApplicationContext(),"ERROR: es posible que el correo indicado en el registro ya existe",Toast.LENGTH_LONG).show();
                 }
+
             }
         });
 
@@ -109,6 +112,9 @@ public class RegistroActivity extends AppCompatActivity {
         }
         if(!rbAdministrador.isChecked() && !rbUsuario.isChecked()){
             Toast.makeText(getApplicationContext(), "Debes selecionar un rol [Administrador o Usuario]", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(UsuarioRepositories.getInstance().existeemail(tedemail.getText().toString())==1){
             return false;
         }
         return true;

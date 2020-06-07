@@ -88,4 +88,15 @@ public class UsuarioRepositories {
         return null;
     }
 
+    public  int existeemail(String email){
+        int n=-1;
+        try {
+            n=GrepautDatabase.databaseWriteExecutor.submit(() -> dao.existeemail(email)).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return n;
+    }
 }

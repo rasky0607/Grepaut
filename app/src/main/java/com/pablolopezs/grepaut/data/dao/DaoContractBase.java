@@ -72,6 +72,8 @@ public class DaoContractBase {
         List<Usuario> getAll();
         @Query("SELECT * FROM USUARIO WHERE email= :email and password= :password")
         Usuario getUnUsuario(String email, String password);
+        @Query("SELECT count(*) FROM USUARIO where email= :email")
+        int existeemail(String email);
 
     }
 
