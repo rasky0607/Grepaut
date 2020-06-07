@@ -10,7 +10,7 @@ import com.pablolopezs.grepaut.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private  static  final long WAIT_TIME=2000;//tiempo de espera
+    private  static  final long WAIT_TIME=3000;//tiempo de espera
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
